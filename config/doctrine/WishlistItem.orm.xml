@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                                         http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <mapped-superclass name="Malina141\SyliusWishlistPlugin\Entity\WishlistItem" table="malina141_wishlist_item">
+
+        <unique-constraints>
+            <unique-constraint columns="wishlist_id,product_variant_id" name="malina141_wishlist_item_unique_variant_idx" />
+        </unique-constraints>
+
+        <id name="id" column="id" type="integer">
+            <generator strategy="AUTO" />
+        </id>
+
+        <many-to-one field="wishlist" target-entity="Malina141\SyliusWishlistPlugin\Entity\WishlistInterface" inversed-by="items">
+            <join-column name="wishlist_id" referenced-column-name="id" nullable="false" on-delete="CASCADE" />
+        </many-to-one>
+
+        <many-to-one field="productVariant" target-entity="Sylius\Component\Core\Model\ProductVariantInterface">
+            <join-column name="product_variant_id" referenced-column-name="id" nullable="false" on-delete="CASCADE" />
+        </many-to-one>
+
+    </mapped-superclass>
+</doctrine-mapping>

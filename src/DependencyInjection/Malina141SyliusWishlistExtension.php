@@ -6,6 +6,7 @@ namespace Malina141\SyliusWishlistPlugin\DependencyInjection;
 
 use Sylius\Bundle\CoreBundle\DependencyInjection\PrependDoctrineMigrationsTrait;
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
+use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
@@ -26,11 +27,14 @@ final class Malina141SyliusWishlistExtension extends AbstractResourceExtension i
     public function prepend(ContainerBuilder $container): void
     {
         $this->prependDoctrineMigrations($container);
+
+        $config = $this->getCurrentConfiguration($container);
+        $this->registerResources('malina141_sylius_wishlist', 'doctrine/orm', $config['resources'], $container);
     }
 
     protected function getMigrationsNamespace(): string
     {
-        return 'DoctrineMigrations';
+        return 'Malina141\SyliusWishlistPlugin\Migrations';
     }
 
     protected function getMigrationsDirectory(): string
@@ -43,5 +47,14 @@ final class Malina141SyliusWishlistExtension extends AbstractResourceExtension i
         return [
             'Sylius\Bundle\CoreBundle\Migrations',
         ];
+    }
+
+    private function getCurrentConfiguration(ContainerBuilder $container): array
+    {
+        /** @var ConfigurationInterface $configuration */
+        $configuration = $this->getConfiguration([], $container);
+        $configs = $container->getExtensionConfig($this->getAlias());
+
+        return $this->processConfiguration($configuration, $configs);
     }
 }
