@@ -36,7 +36,6 @@
         <service id="malina141_sylius_wishlist.modifier.wishlist"
                  class="Malina141\SyliusWishlistPlugin\Modifier\WishlistModifier">
             <argument type="service" id="malina141_sylius_wishlist.factory.wishlist_item"/>
-            <argument type="service" id="malina141_sylius_wishlist.manager.wishlist"/>
         </service>
 
         <service id="Malina141\SyliusWishlistPlugin\Context\WishlistContextInterface"
