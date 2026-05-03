@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Malina141\SyliusWishlistPlugin\Repository;
 
 use Malina141\SyliusWishlistPlugin\Entity\WishlistInterface;
+use Sylius\Component\Channel\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 
@@ -13,5 +14,5 @@ use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
  */
 interface WishlistRepositoryInterface extends RepositoryInterface
 {
-    public function findOneByOwner(ShopUserInterface $owner): ?WishlistInterface;
+    public function findOneByOwnerAndChannel(ShopUserInterface $owner, ChannelInterface $channel): ?WishlistInterface;
 }

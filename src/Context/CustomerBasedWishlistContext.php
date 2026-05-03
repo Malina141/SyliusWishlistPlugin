@@ -7,6 +7,7 @@ namespace Malina141\SyliusWishlistPlugin\Context;
 use Malina141\SyliusWishlistPlugin\Entity\WishlistInterface;
 use Malina141\SyliusWishlistPlugin\Exception\WishlistNotFoundException;
 use Malina141\SyliusWishlistPlugin\Repository\WishlistRepositoryInterface;
+use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Customer\Context\CustomerContextInterface;
@@ -16,6 +17,7 @@ final readonly class CustomerBasedWishlistContext implements WishlistContextInte
     public function __construct(
         private CustomerContextInterface    $customerContext,
         private WishlistRepositoryInterface $wishlistRepository,
+        private ChannelContextInterface   $channelContext,
     )
     {
     }
@@ -32,7 +34,9 @@ final readonly class CustomerBasedWishlistContext implements WishlistContextInte
             throw new WishlistNotFoundException();
         }
 
-        $wishlist = $this->wishlistRepository->findOneByOwner($user);
+        $channel = $this->channelContext->getChannel();
+
+        $wishlist = $this->wishlistRepository->findOneByOwnerAndChannel($user, $channel);
         if ($wishlist instanceof WishlistInterface) {
             return $wishlist;
         }

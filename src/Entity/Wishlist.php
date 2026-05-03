@@ -6,6 +6,7 @@ namespace Malina141\SyliusWishlistPlugin\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Channel\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 
@@ -17,6 +18,8 @@ class Wishlist implements WishlistInterface
 
     /** @var Collection <int, WishlistItemInterface> */
     private Collection $items;
+
+    private ?ChannelInterface $channel = null;
 
     public function __construct()
     {
@@ -42,6 +45,16 @@ class Wishlist implements WishlistInterface
     public function getItems(): Collection
     {
         return $this->items;
+    }
+
+    public function getChannel(): ?ChannelInterface
+    {
+        return $this->channel;
+    }
+
+    public function setChannel(?ChannelInterface $channel): void
+    {
+        $this->channel = $channel;
     }
 
     public function addItem(WishlistItemInterface $item): void

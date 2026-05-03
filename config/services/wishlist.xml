@@ -11,6 +11,7 @@
             <argument type="service" id="sylius.context.customer"/>
             <argument type="service" id="malina141_sylius_wishlist.repository.wishlist"/>
             <tag name="malina141_sylius_wishlist.wishlist_context" priority="10"/>
+            <argument type="service" id="sylius.context.channel"/>
         </service>
 
         <service id="malina141_sylius_wishlist.context.wishlist.new"
@@ -18,6 +19,7 @@
             <argument type="service" id="malina141_sylius_wishlist.factory.wishlist"/>
             <argument type="service" id="sylius.context.customer"/>
             <tag name="malina141_sylius_wishlist.wishlist_context" priority="-10"/>
+            <argument type="service" id="sylius.context.channel"/>
         </service>
 
         <service id="malina141_sylius_wishlist.context.wishlist"

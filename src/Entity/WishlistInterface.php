@@ -5,11 +5,12 @@ declare(strict_types=1);
 namespace Malina141\SyliusWishlistPlugin\Entity;
 
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Channel\Model\ChannelAwareInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Resource\Model\ResourceInterface;
 
-interface WishlistInterface extends ResourceInterface
+interface WishlistInterface extends ResourceInterface, ChannelAwareInterface
 {
     public function getId(): ?int;
 
