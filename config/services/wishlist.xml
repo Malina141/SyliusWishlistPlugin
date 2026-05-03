@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<container
+    xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+>
+    <services>
+        <service id="malina141_sylius_wishlist.context.wishlist.customer_based"
+                 class="Malina141\SyliusWishlistPlugin\Context\CustomerBasedWishlistContext">
+            <argument type="service" id="sylius.context.customer"/>
+            <argument type="service" id="malina141_sylius_wishlist.repository.wishlist"/>
+            <tag name="malina141_sylius_wishlist.wishlist_context" priority="10"/>
+        </service>
+
+        <service id="malina141_sylius_wishlist.context.wishlist.new"
+                 class="Malina141\SyliusWishlistPlugin\Context\NewWishlistContext">
+            <argument type="service" id="malina141_sylius_wishlist.factory.wishlist"/>
+            <argument type="service" id="sylius.context.customer"/>
+            <tag name="malina141_sylius_wishlist.wishlist_context" priority="-10"/>
+        </service>
+
+        <service id="malina141_sylius_wishlist.context.wishlist"
+                 class="Malina141\SyliusWishlistPlugin\Context\CompositeWishlistContext">
+            <argument type="tagged_iterator" tag="malina141_sylius_wishlist.wishlist_context"/>
+        </service>
+
+        <service id="malina141_sylius_wishlist.custom_factory.wishlist_item"
+                 class="Malina141\SyliusWishlistPlugin\Factory\WishlistItemFactory"
+                 decorates="malina141_sylius_wishlist.factory.wishlist_item" public="false">
+            <argument type="service" id="malina141_sylius_wishlist.custom_factory.wishlist_item.inner"/>
+        </service>
+
+        <service id="malina141_sylius_wishlist.modifier.wishlist"
+                 class="Malina141\SyliusWishlistPlugin\Modifier\WishlistModifier">
+            <argument type="service" id="malina141_sylius_wishlist.factory.wishlist_item"/>
+            <argument type="service" id="malina141_sylius_wishlist.manager.wishlist"/>
+        </service>
+
+        <service id="Malina141\SyliusWishlistPlugin\Context\WishlistContextInterface"
+                 alias="malina141_sylius_wishlist.context.wishlist" public="true"/>
+        <service id="Malina141\SyliusWishlistPlugin\Modifier\WishlistModifierInterface"
+                 alias="malina141_sylius_wishlist.modifier.wishlist"/>
+        <service id="Malina141\SyliusWishlistPlugin\Factory\WishlistItemFactoryInterface"
+                 alias="malina141_sylius_wishlist.factory.wishlist_item"/>
+    </services>
+</container>
