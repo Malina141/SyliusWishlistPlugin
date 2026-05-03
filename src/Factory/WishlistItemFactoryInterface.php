@@ -6,8 +6,9 @@ namespace Malina141\SyliusWishlistPlugin\Factory;
 
 use Malina141\SyliusWishlistPlugin\Entity\WishlistItemInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
+use Sylius\Resource\Factory\FactoryInterface;
 
-interface WishlistItemFactoryInterface
+interface WishlistItemFactoryInterface extends FactoryInterface
 {
     public function createNew(): WishlistItemInterface;
 
