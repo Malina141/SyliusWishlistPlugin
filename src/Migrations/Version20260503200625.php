@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Malina141\SyliusWishlistPlugin\Migrations;
 
 use Doctrine\DBAL\Schema\Schema;
-use Doctrine\Migrations\AbstractMigration;
+use Sylius\Bundle\CoreBundle\Doctrine\Migrations\AbstractMigration;
 
 final class Version20260503200625 extends AbstractMigration
 {
