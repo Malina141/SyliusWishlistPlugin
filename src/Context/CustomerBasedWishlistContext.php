@@ -15,17 +15,16 @@ use Sylius\Component\Customer\Context\CustomerContextInterface;
 final readonly class CustomerBasedWishlistContext implements WishlistContextInterface
 {
     public function __construct(
-        private CustomerContextInterface    $customerContext,
+        private CustomerContextInterface $customerContext,
         private WishlistRepositoryInterface $wishlistRepository,
-        private ChannelContextInterface   $channelContext,
-    )
-    {
+        private ChannelContextInterface $channelContext,
+    ) {
     }
 
     public function getWishlist(): WishlistInterface
     {
         $customer = $this->customerContext->getCustomer();
-        if(!$customer instanceof CustomerInterface){
+        if (!$customer instanceof CustomerInterface) {
             throw new WishlistNotFoundException();
         }
 

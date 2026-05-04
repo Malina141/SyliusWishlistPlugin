@@ -15,8 +15,7 @@ final readonly class WishlistItemFactory implements WishlistItemFactoryInterface
      */
     public function __construct(
         private FactoryInterface $innerFactory,
-    )
-    {
+    ) {
     }
 
     public function createNew(): WishlistItemInterface

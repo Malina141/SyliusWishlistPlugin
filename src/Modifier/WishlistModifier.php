@@ -12,8 +12,7 @@ final readonly class WishlistModifier implements WishlistModifierInterface
 {
     public function __construct(
         private WishlistItemFactoryInterface $itemFactory,
-    )
-    {
+    ) {
     }
 
     public function addVariant(WishlistInterface $wishlist, ProductVariantInterface $variant): void

@@ -10,9 +10,8 @@ use Malina141\SyliusWishlistPlugin\Exception\WishlistNotFoundException;
 final readonly class CompositeWishlistContext implements WishlistContextInterface
 {
     public function __construct(
-        private iterable $wishlistContexts
-    )
-    {
+        private iterable $wishlistContexts,
+    ) {
     }
 
     public function getWishlist(): WishlistInterface

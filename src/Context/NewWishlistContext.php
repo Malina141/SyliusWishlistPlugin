@@ -17,11 +17,10 @@ final readonly class NewWishlistContext implements WishlistContextInterface
      * @param FactoryInterface<WishlistInterface> $wishlistFactory
      */
     public function __construct(
-        private FactoryInterface         $wishlistFactory,
+        private FactoryInterface $wishlistFactory,
         private CustomerContextInterface $customerContext,
         private ChannelContextInterface $channelContext,
-    )
-    {
+    ) {
     }
 
     public function getWishlist(): WishlistInterface
@@ -33,7 +32,7 @@ final readonly class NewWishlistContext implements WishlistContextInterface
         $wishlist->setChannel($channel);
 
         $customer = $this->customerContext->getCustomer();
-        if(!$customer instanceof CustomerInterface){
+        if (!$customer instanceof CustomerInterface) {
             return $wishlist;
         }
 
@@ -41,6 +40,7 @@ final readonly class NewWishlistContext implements WishlistContextInterface
 
         if ($user instanceof ShopUserInterface) {
             $wishlist->setOwner($user);
+
             return $wishlist;
         }
 

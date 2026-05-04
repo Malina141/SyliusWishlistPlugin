@@ -14,14 +14,14 @@ class WishlistRepository extends EntityRepository implements WishlistRepositoryI
     public function findOneByOwnerAndChannel(ShopUserInterface $owner, ChannelInterface $channel): ?WishlistInterface
     {
         /** @var WishlistInterface|null $wishlist */
-        $wishlist =  $this->createQueryBuilder('w')
+        $wishlist = $this->createQueryBuilder('w')
             ->andWhere('w.owner = :owner')
             ->andWhere('w.channel = :channel')
             ->setParameter('owner', $owner)
             ->setParameter('channel', $channel)
             ->getQuery()
             ->getOneOrNullResult()
-            ;
+        ;
 
         return $wishlist;
     }
