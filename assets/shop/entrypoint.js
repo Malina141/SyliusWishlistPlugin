@@ -1,1 +1,1 @@
-import './js/greetings';
+// Add your shop JavaScript imports here

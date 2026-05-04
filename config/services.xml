@@ -10,7 +10,6 @@
     </imports>
 
     <services>
-        <service id="Malina141\SyliusWishlistPlugin\Controller\GreetingController" autowire="true" autoconfigure="true" public="true" />
         <!-- Put your services here -->
     </services>
 </container>
