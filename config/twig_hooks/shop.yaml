@@ -1,0 +1,19 @@
+sylius_twig_hooks:
+    hooks:
+        'sylius_shop.base.header.content':
+            wishlist_widget:
+                component: 'sylius_shop:wishlist:widget'
+                props:
+                    template: '@Malina141SyliusWishlistPlugin/shop/components/wishlist/widget.html.twig'
+        'sylius_shop.product.index.content.body.main.card':
+            wishlist_add_button:
+                component: 'sylius_shop:wishlist:add_to_wishlist'
+                props:
+                    product: '@=_context.product'
+                    template: '@Malina141SyliusWishlistPlugin/shop/components/wishlist/add_to_wishlist_plp_button.html.twig'
+        'sylius_shop.product.show.content.info.summary.add_to_cart':
+            wishlist_add_button:
+                component: 'sylius_shop:wishlist:add_to_wishlist'
+                props:
+                    product: '@=_context.product'
+                    template: '@Malina141SyliusWishlistPlugin/shop/components/wishlist/add_to_wishlist_button.html.twig'

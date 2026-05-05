@@ -1,0 +1,13 @@
+<div {{ attributes }}>
+    {% if this.isInWishlist %}
+        <button type="button" class="btn btn-danger" data-action="live#action" data-live-action-param="remove">
+            {{ ux_icon('tabler:heart-filled') }}
+            {{ 'sylius_wishlist.ui.remove_from_wishlist'|trans }}
+        </button>
+    {% else %}
+        <button type="button" class="btn btn-outline-primary" data-action="live#action" data-live-action-param="add">
+            {{ ux_icon('tabler:heart') }}
+            {{ 'sylius_wishlist.ui.add_to_wishlist'|trans }}
+        </button>
+    {% endif %}
+</div>

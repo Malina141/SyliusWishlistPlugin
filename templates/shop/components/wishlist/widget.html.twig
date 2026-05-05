@@ -1,0 +1,10 @@
+<div class="col-auto position-relative" {{ attributes }}>
+    <button type="button" class="btn btn-icon btn-transparent px-0 position-relative" aria-label="wishlist">
+        {{ ux_icon('tabler:heart') }}
+        {% if this.wishlistCount > 0 %}
+            <span class="position-absolute top-0 start-0 badge rounded-pill bg-primary">
+                {{ this.wishlistCount }}
+            </span>
+        {% endif %}
+    </button>
+</div>

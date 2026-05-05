@@ -1,0 +1,23 @@
+<div {{ attributes }} class="d-flex justify-content-end mt-2">
+    {% if this.isInWishlist %}
+        <button
+            type="button"
+            class="btn btn-sm btn-icon btn-danger"
+            data-action="live#action"
+            data-live-action-param="remove"
+            title="{{ 'sylius_wishlist.ui.remove_from_wishlist'|trans }}"
+        >
+            {{ ux_icon('tabler:heart-filled') }}
+        </button>
+    {% else %}
+        <button
+            type="button"
+            class="btn btn-sm btn-icon btn-outline-gray"
+            data-action="live#action"
+            data-live-action-param="add"
+            title="{{ 'sylius_wishlist.ui.add_to_wishlist'|trans }}"
+        >
+            {{ ux_icon('tabler:heart') }}
+        </button>
+    {% endif %}
+</div>

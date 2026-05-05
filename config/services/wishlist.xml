@@ -10,16 +10,18 @@
                  class="Malina141\SyliusWishlistPlugin\Context\CustomerBasedWishlistContext">
             <argument type="service" id="sylius.context.customer"/>
             <argument type="service" id="malina141_sylius_wishlist.repository.wishlist"/>
-            <tag name="malina141_sylius_wishlist.wishlist_context" priority="10"/>
             <argument type="service" id="sylius.context.channel"/>
+
+            <tag name="malina141_sylius_wishlist.wishlist_context" priority="10"/>
         </service>
 
         <service id="malina141_sylius_wishlist.context.wishlist.new"
                  class="Malina141\SyliusWishlistPlugin\Context\NewWishlistContext">
             <argument type="service" id="malina141_sylius_wishlist.factory.wishlist"/>
             <argument type="service" id="sylius.context.customer"/>
-            <tag name="malina141_sylius_wishlist.wishlist_context" priority="-10"/>
             <argument type="service" id="sylius.context.channel"/>
+
+            <tag name="malina141_sylius_wishlist.wishlist_context" priority="-10"/>
         </service>
 
         <service id="malina141_sylius_wishlist.context.wishlist"
@@ -36,6 +38,30 @@
         <service id="malina141_sylius_wishlist.modifier.wishlist"
                  class="Malina141\SyliusWishlistPlugin\Modifier\WishlistModifier">
             <argument type="service" id="malina141_sylius_wishlist.factory.wishlist_item"/>
+        </service>
+
+        <service id="malina141_sylius_wishlist.twig.component.wishlist.add_to_wishlist"
+                 class="Malina141\SyliusWishlistPlugin\Twig\Component\Wishlist\AddToWishlistComponent"
+        >
+            <argument type="service" id="malina141_sylius_wishlist.context.wishlist"/>
+            <argument type="service" id="malina141_sylius_wishlist.modifier.wishlist"/>
+            <argument type="service" id="malina141_sylius_wishlist.manager.wishlist"/>
+            <argument type="service" id="sylius.repository.product"/>
+            <argument type="service" id="sylius.repository.product_variant"/>
+
+            <call method="setLiveResponder">
+                <argument type="service" id="ux.live_component.live_responder"/>
+            </call>
+
+            <tag name="sylius.live_component.shop" key="sylius_shop:wishlist:add_to_wishlist"/>
+        </service>
+
+        <service id="malina141_sylius_wishlist.twig.component.wishlist.widget"
+                 class="Malina141\SyliusWishlistPlugin\Twig\Component\Wishlist\WishlistWidgetComponent"
+        >
+            <argument type="service" id="malina141_sylius_wishlist.context.wishlist"/>
+
+            <tag name="sylius.live_component.shop" key="sylius_shop:wishlist:widget"/>
         </service>
 
         <service id="Malina141\SyliusWishlistPlugin\Context\WishlistContextInterface"
