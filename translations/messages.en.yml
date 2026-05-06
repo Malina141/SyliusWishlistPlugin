@@ -1,4 +1,5 @@
 sylius_wishlist:
     ui:
+        title: 'Wishlist'
         add_to_wishlist: 'Add to wishlist'
         remove_from_wishlist: 'Remove from wishlist'

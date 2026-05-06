@@ -1,0 +1,47 @@
+sylius_grid:
+    templates:
+        bulk_action:
+            malina141_bulk_delete: '@Malina141SyliusWishlistPlugin/shop/account/wishlist/grid/bulk_action/malina141_bulk_delete.html.twig'
+    grids:
+        sylius_shop_wishlist:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%malina141_sylius_wishlist.model.wishlist_item.class%"
+                    repository:
+                        method: createShopWishlistItemQueryBuilder
+                        arguments:
+                            wishlistId: expr:service('malina141_sylius_wishlist.context.wishlist').getWishlist().getId()
+            fields:
+                productVariant.product.name:
+                    type: twig
+                    path: .
+                    label: sylius.ui.product
+                    options:
+                        template: '@Malina141SyliusWishlistPlugin/shop/account/wishlist/grid/field/product_name.html.twig'
+                productVariant.optionValues:
+                    type: twig
+                    path: .
+                    label: sylius.ui.options
+                    options:
+                        template: '@Malina141SyliusWishlistPlugin/shop/account/wishlist/grid/field/options.html.twig'
+                price:
+                    type: twig
+                    path: .
+                    label: sylius.ui.price
+                    options:
+                        template: '@Malina141SyliusWishlistPlugin/shop/account/wishlist/grid/field/price.html.twig'
+            actions:
+                item:
+                    delete:
+                        type: shop_delete
+                        options:
+                            link:
+                                route: malina141_sylius_wishlist_shop_item_delete
+                bulk:
+                    malina141_bulk_delete:
+                        type: malina141_bulk_delete
+                        label: sylius.ui.delete
+                        options:
+                            link:
+                                route: malina141_sylius_wishlist_shop_item_bulk_delete

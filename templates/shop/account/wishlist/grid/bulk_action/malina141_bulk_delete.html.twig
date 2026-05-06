@@ -1,0 +1,15 @@
+{% set url = path(options.link.route, options.link.parameters|default({})) %}
+<form
+    method="POST"
+    action="{{ url }}"
+    class="m-0"
+    data-controller="malina141--sylius-wishlist-plugin--wishlist-bulk-actions"
+>
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token('bulk_delete') }}">
+    <input type="hidden" name="_method" value="DELETE">
+
+    <button type="submit" class="btn btn-outline-danger d-flex align-items-center gap-2" disabled {{ sylius_test_html_attribute('bulk-delete-button') }}>
+        {{ ux_icon('tabler:trash', { class: 'icon' }) }}
+        {{ action.label|default('sylius.ui.delete')|trans }}
+    </button>
+</form>

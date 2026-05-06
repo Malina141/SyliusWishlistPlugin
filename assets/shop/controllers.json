@@ -1,4 +1,11 @@
 {
-  "controllers": [],
-  "entrypoints": []
+    "controllers": {
+        "@malina141/sylius-wishlist-plugin": {
+            "wishlist-bulk-actions": {
+                "enabled": true,
+                "fetch": "eager"
+            }
+        }
+    },
+    "entrypoints": []
 }

@@ -25,7 +25,8 @@
         </service>
 
         <service id="malina141_sylius_wishlist.context.wishlist"
-                 class="Malina141\SyliusWishlistPlugin\Context\CompositeWishlistContext">
+                 class="Malina141\SyliusWishlistPlugin\Context\CompositeWishlistContext"
+                 public="true">
             <argument type="tagged_iterator" tag="malina141_sylius_wishlist.wishlist_context"/>
         </service>
 
@@ -64,11 +65,5 @@
             <tag name="sylius.live_component.shop" key="sylius_shop:wishlist:widget"/>
         </service>
 
-        <service id="Malina141\SyliusWishlistPlugin\Context\WishlistContextInterface"
-                 alias="malina141_sylius_wishlist.context.wishlist" public="true"/>
-        <service id="Malina141\SyliusWishlistPlugin\Modifier\WishlistModifierInterface"
-                 alias="malina141_sylius_wishlist.modifier.wishlist"/>
-        <service id="Malina141\SyliusWishlistPlugin\Factory\WishlistItemFactoryInterface"
-                 alias="malina141_sylius_wishlist.factory.wishlist_item"/>
     </services>
 </container>

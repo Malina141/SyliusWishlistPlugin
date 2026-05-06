@@ -1,0 +1,30 @@
+{
+    "name": "@malina141/sylius-wishlist-plugin",
+    "license": "MIT",
+    "version": "2.0.0",
+    "description": "Frontend assets for Malina141 Sylius Wishlist Plugin",
+    "keywords": [
+        "symfony-ux"
+    ],
+    "files": [
+        "admin",
+        "shop",
+        "controllers.json",
+        "package.json"
+    ],
+    "symfony": {
+        "controllers": {
+            "wishlist-bulk-actions": {
+                "main": "shop/controllers/wishlist_bulk_actions_controller.js",
+                "webpackMode": "eager",
+                "fetch": "eager"
+            }
+        }
+    },
+    "peerDependencies": {
+        "@hotwired/stimulus": "^3.0.0"
+    },
+    "devDependencies": {
+        "@hotwired/stimulus": "^3.0.0"
+    }
+}

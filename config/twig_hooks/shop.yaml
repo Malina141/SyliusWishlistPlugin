@@ -17,3 +17,18 @@ sylius_twig_hooks:
                 props:
                     product: '@=_context.product'
                     template: '@Malina141SyliusWishlistPlugin/shop/components/wishlist/add_to_wishlist_button.html.twig'
+
+        'sylius_shop.account.wishlist.index.content.main':
+            grid:
+                template: '@SyliusShop/shared/grid.html.twig'
+                priority: 0
+
+        'sylius_shop.account.wishlist.index.content.main.header':
+            title:
+                template: '@Malina141SyliusWishlistPlugin/shop/account/wishlist/index/content/main/header/title.html.twig'
+                priority: 100
+
+        'sylius_shop.account.wishlist.index.content.main.grid':
+            data_table:
+                template: '@Malina141SyliusWishlistPlugin/shop/account/wishlist/grid/data_table.html.twig'
+                priority: 200

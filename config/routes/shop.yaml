@@ -1,1 +1,37 @@
-# Define your own shop routes here
+malina141_sylius_wishlist_shop_index:
+    path: /{_locale}/wishlist
+    methods: [GET]
+    controller: malina141_sylius_wishlist.controller.wishlist_item::indexAction
+    defaults:
+        _sylius:
+            section: shop_account
+            template: '@Malina141SyliusWishlistPlugin/shop/account/wishlist/index.html.twig'
+            grid: sylius_shop_wishlist
+
+malina141_sylius_wishlist_shop_item_delete:
+    path: /{_locale}/wishlist/item/{id}
+    methods: [DELETE]
+    controller: malina141_sylius_wishlist.controller.wishlist_item::deleteAction
+    defaults:
+        _sylius:
+            repository:
+                method: findOneByIdAndWishlist
+                arguments:
+                    - $id
+                    - expr:service('malina141_sylius_wishlist.context.wishlist').getWishlist()
+            redirect:
+                route: malina141_sylius_wishlist_shop_index
+
+malina141_sylius_wishlist_shop_item_bulk_delete:
+    path: /{_locale}/wishlist/item-bulk-delete
+    methods: [DELETE]
+    controller: malina141_sylius_wishlist.controller.wishlist_item::bulkDeleteAction
+    defaults:
+        _sylius:
+            repository:
+                method: findByIdsAndWishlist
+                arguments:
+                    - $ids
+                    - expr:service('malina141_sylius_wishlist.context.wishlist').getWishlist()
+            redirect:
+                route: malina141_sylius_wishlist_shop_index

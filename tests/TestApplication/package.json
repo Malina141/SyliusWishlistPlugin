@@ -1,0 +1,5 @@
+{
+    "dependencies": {
+        "@malina141/sylius-wishlist-plugin": "file:../../../assets"
+    }
+}

@@ -1,0 +1,9 @@
+{% if data.productVariant.optionValues|length > 0 %}
+    {% for optionValue in data.productVariant.optionValues %}
+        <div class="small text-body-tertiary">
+            {{ optionValue.name }}: {{ optionValue.value }}
+        </div>
+    {% endfor %}
+{% else %}
+    <span class="text-body-tertiary">-</span>
+{% endif %}

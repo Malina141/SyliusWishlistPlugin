@@ -8,9 +8,9 @@ use Malina141\SyliusWishlistPlugin\Entity\Wishlist;
 use Malina141\SyliusWishlistPlugin\Entity\WishlistInterface;
 use Malina141\SyliusWishlistPlugin\Entity\WishlistItem;
 use Malina141\SyliusWishlistPlugin\Entity\WishlistItemInterface;
+use Malina141\SyliusWishlistPlugin\Repository\WishlistItemRepository;
 use Malina141\SyliusWishlistPlugin\Repository\WishlistRepository;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
-use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Resource\Factory\Factory;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -55,7 +55,7 @@ final class Configuration implements ConfigurationInterface
                                     ->children()
                                         ->scalarNode('model')->defaultValue(WishlistItem::class)->cannotBeEmpty()->end()
                                         ->scalarNode('interface')->defaultValue(WishlistItemInterface::class)->cannotBeEmpty()->end()
-                                        ->scalarNode('repository')->defaultValue(EntityRepository::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('repository')->defaultValue(WishlistItemRepository::class)->cannotBeEmpty()->end()
                                         ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
                                         ->scalarNode('factory')->defaultValue(Factory::class)->cannotBeEmpty()->end()
                                     ->end()
