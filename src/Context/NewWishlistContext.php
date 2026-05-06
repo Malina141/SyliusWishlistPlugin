@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Malina141\SyliusWishlistPlugin\Context;
 
 use Malina141\SyliusWishlistPlugin\Entity\WishlistInterface;
+use Malina141\SyliusWishlistPlugin\Provider\WishlistTokenProviderInterface;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
@@ -20,6 +21,7 @@ final readonly class NewWishlistContext implements WishlistContextInterface
         private FactoryInterface $wishlistFactory,
         private CustomerContextInterface $customerContext,
         private ChannelContextInterface $channelContext,
+        private WishlistTokenProviderInterface $wishlistTokenProvider,
     ) {
     }
 
@@ -33,6 +35,9 @@ final readonly class NewWishlistContext implements WishlistContextInterface
 
         $customer = $this->customerContext->getCustomer();
         if (!$customer instanceof CustomerInterface) {
+            $token = $this->wishlistTokenProvider->provideToken();
+            $wishlist->setToken($token);
+
             return $wishlist;
         }
 
@@ -43,6 +48,9 @@ final readonly class NewWishlistContext implements WishlistContextInterface
 
             return $wishlist;
         }
+
+        $token = $this->wishlistTokenProvider->provideToken();
+        $wishlist->setToken($token);
 
         return $wishlist;
     }

@@ -28,4 +28,8 @@ interface WishlistInterface extends ResourceInterface, ChannelAwareInterface
     public function hasProductVariant(ProductVariantInterface $productVariant): bool;
 
     public function getItemByProductVariant(ProductVariantInterface $productVariant): ?WishlistItemInterface;
+
+    public function getToken(): ?string;
+
+    public function setToken(?string $token): void;
 }

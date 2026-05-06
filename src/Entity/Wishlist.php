@@ -21,6 +21,8 @@ class Wishlist implements WishlistInterface
 
     private ?ChannelInterface $channel = null;
 
+    private ?string $token = null;
+
     public function __construct()
     {
         $this->items = new ArrayCollection();
@@ -88,5 +90,15 @@ class Wishlist implements WishlistInterface
         }
 
         return null;
+    }
+
+    public function getToken(): ?string
+    {
+        return $this->token;
+    }
+
+    public function setToken(?string $token): void
+    {
+        $this->token = $token;
     }
 }

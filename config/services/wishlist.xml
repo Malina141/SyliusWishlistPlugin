@@ -6,6 +6,30 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
+        <service id="malina141_sylius_wishlist.options.wishlist_cookie"
+                 class="Malina141\SyliusWishlistPlugin\Options\WishlistCookieOptions">
+            <argument>%malina141_sylius_wishlist.cookie.name%</argument>
+            <argument>%malina141_sylius_wishlist.cookie.lifetime%</argument>
+            <argument>%malina141_sylius_wishlist.cookie.path%</argument>
+            <argument>%malina141_sylius_wishlist.cookie.secure%</argument>
+            <argument>%malina141_sylius_wishlist.cookie.http_only%</argument>
+            <argument>%malina141_sylius_wishlist.cookie.same_site%</argument>
+        </service>
+
+        <service id="malina141_sylius_wishlist.factory.wishlist_cookie"
+                 class="Malina141\SyliusWishlistPlugin\Factory\WishlistCookieFactory">
+            <argument type="service" id="malina141_sylius_wishlist.options.wishlist_cookie"/>
+            <argument type="service" id="clock"/>
+        </service>
+
+        <service id="malina141_sylius_wishlist.provider.wishlist_token"
+                 class="Malina141\SyliusWishlistPlugin\Provider\WishlistCookieTokenProvider">
+            <argument type="service" id="request_stack"/>
+            <argument>%malina141_sylius_wishlist.cookie.name%</argument>
+            <argument type="service" id="Sylius\Resource\Generator\RandomnessGeneratorInterface"/>
+            <argument>%malina141_sylius_wishlist.token.length%</argument>
+        </service>
+
         <service id="malina141_sylius_wishlist.context.wishlist.customer_based"
                  class="Malina141\SyliusWishlistPlugin\Context\CustomerBasedWishlistContext">
             <argument type="service" id="sylius.context.customer"/>
@@ -15,11 +39,21 @@
             <tag name="malina141_sylius_wishlist.wishlist_context" priority="10"/>
         </service>
 
+        <service id="malina141_sylius_wishlist.context.wishlist.token_and_channel_based"
+                 class="Malina141\SyliusWishlistPlugin\Context\TokenAndChannelBasedWishlistContext">
+            <argument type="service" id="malina141_sylius_wishlist.provider.wishlist_token"/>
+            <argument type="service" id="sylius.context.channel"/>
+            <argument type="service" id="malina141_sylius_wishlist.repository.wishlist"/>
+
+            <tag name="malina141_sylius_wishlist.wishlist_context" priority="0"/>
+        </service>
+
         <service id="malina141_sylius_wishlist.context.wishlist.new"
                  class="Malina141\SyliusWishlistPlugin\Context\NewWishlistContext">
             <argument type="service" id="malina141_sylius_wishlist.factory.wishlist"/>
             <argument type="service" id="sylius.context.customer"/>
             <argument type="service" id="sylius.context.channel"/>
+            <argument type="service" id="malina141_sylius_wishlist.provider.wishlist_token"/>
 
             <tag name="malina141_sylius_wishlist.wishlist_context" priority="-10"/>
         </service>
@@ -28,6 +62,29 @@
                  class="Malina141\SyliusWishlistPlugin\Context\CompositeWishlistContext"
                  public="true">
             <argument type="tagged_iterator" tag="malina141_sylius_wishlist.wishlist_context"/>
+        </service>
+
+        <service id="malina141_sylius_wishlist.merger.wishlist"
+                 class="Malina141\SyliusWishlistPlugin\Merger\WishlistMerger">
+            <argument type="service" id="malina141_sylius_wishlist.repository.wishlist"/>
+            <argument type="service" id="malina141_sylius_wishlist.manager.wishlist"/>
+        </service>
+
+        <service id="malina141_sylius_wishlist.event_subscriber.attach_wishlist_cookie_token"
+                 class="Malina141\SyliusWishlistPlugin\EventSubscriber\AttachWishlistCookieTokenSubscriber">
+            <argument type="service" id="malina141_sylius_wishlist.factory.wishlist_cookie"/>
+            <argument>%malina141_sylius_wishlist.cookie.name%</argument>
+            <tag name="kernel.event_subscriber"/>
+        </service>
+
+        <service id="malina141_sylius_wishlist.event_subscriber.merge_wishlist_on_login"
+                 class="Malina141\SyliusWishlistPlugin\EventSubscriber\MergeWishlistOnLoginSubscriber">
+            <argument type="service" id="malina141_sylius_wishlist.options.wishlist_cookie"/>
+            <argument type="service" id="malina141_sylius_wishlist.repository.wishlist"/>
+            <argument type="service" id="malina141_sylius_wishlist.manager.wishlist"/>
+            <argument type="service" id="sylius.context.channel"/>
+            <argument type="service" id="malina141_sylius_wishlist.merger.wishlist"/>
+            <tag name="kernel.event_subscriber"/>
         </service>
 
         <service id="malina141_sylius_wishlist.custom_factory.wishlist_item"

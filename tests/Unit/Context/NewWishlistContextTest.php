@@ -6,6 +6,7 @@ namespace Tests\Malina141\SyliusWishlistPlugin\Unit\Context;
 
 use Malina141\SyliusWishlistPlugin\Context\NewWishlistContext;
 use Malina141\SyliusWishlistPlugin\Entity\WishlistInterface;
+use Malina141\SyliusWishlistPlugin\Provider\WishlistTokenProviderInterface;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
@@ -20,6 +21,7 @@ final class NewWishlistContextTest extends TestCase
     private FactoryInterface&MockObject $wishlistFactory;
     private CustomerContextInterface&MockObject $customerContext;
     private ChannelContextInterface&MockObject $channelContext;
+    private WishlistTokenProviderInterface&MockObject $wishlistTokenProvider;
     private NewWishlistContext $context;
 
     protected function setUp(): void
@@ -27,11 +29,13 @@ final class NewWishlistContextTest extends TestCase
         $this->wishlistFactory = $this->createMock(FactoryInterface::class);
         $this->customerContext = $this->createMock(CustomerContextInterface::class);
         $this->channelContext = $this->createMock(ChannelContextInterface::class);
+        $this->wishlistTokenProvider = $this->createMock(WishlistTokenProviderInterface::class);
 
         $this->context = new NewWishlistContext(
             $this->wishlistFactory,
             $this->customerContext,
-            $this->channelContext
+            $this->channelContext,
+            $this->wishlistTokenProvider,
         );
     }
 
@@ -46,6 +50,8 @@ final class NewWishlistContextTest extends TestCase
         $wishlist->expects($this->once())->method('setChannel')->with($channel);
         $this->customerContext->expects($this->once())->method('getCustomer')->willReturn(null);
         $wishlist->expects($this->never())->method('setOwner');
+        $this->wishlistTokenProvider->expects($this->once())->method('provideToken')->willReturn('test-token');
+        $wishlist->expects($this->once())->method('setToken')->with('test-token');
 
         $this->assertSame($wishlist, $this->context->getWishlist());
     }

@@ -15,4 +15,6 @@ use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 interface WishlistRepositoryInterface extends RepositoryInterface
 {
     public function findOneByOwnerAndChannel(ShopUserInterface $owner, ChannelInterface $channel): ?WishlistInterface;
+
+    public function findOneByTokenAndChannel(string $token, ChannelInterface $channel): ?WishlistInterface;
 }

@@ -25,4 +25,19 @@ class WishlistRepository extends EntityRepository implements WishlistRepositoryI
 
         return $wishlist;
     }
+
+    public function findOneByTokenAndChannel(string $token, ChannelInterface $channel): ?WishlistInterface
+    {
+        /** @var WishlistInterface|null $wishlist */
+        $wishlist = $this->createQueryBuilder('w')
+            ->andWhere('w.token = :token')
+            ->andWhere('w.channel = :channel')
+            ->setParameter('token', $token)
+            ->setParameter('channel', $channel)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+
+        return $wishlist;
+    }
 }

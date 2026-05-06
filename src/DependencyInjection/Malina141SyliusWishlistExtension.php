@@ -19,6 +19,16 @@ final class Malina141SyliusWishlistExtension extends AbstractResourceExtension i
     /** @psalm-suppress UnusedVariable */
     public function load(array $configs, ContainerBuilder $container): void
     {
+        $config = $this->processConfiguration($this->getConfiguration([], $container), $configs);
+
+        $container->setParameter('malina141_sylius_wishlist.cookie.name', $config['cookie']['name']);
+        $container->setParameter('malina141_sylius_wishlist.cookie.lifetime', $config['cookie']['lifetime']);
+        $container->setParameter('malina141_sylius_wishlist.cookie.path', $config['cookie']['path']);
+        $container->setParameter('malina141_sylius_wishlist.cookie.secure', $config['cookie']['secure']);
+        $container->setParameter('malina141_sylius_wishlist.cookie.http_only', $config['cookie']['http_only']);
+        $container->setParameter('malina141_sylius_wishlist.cookie.same_site', $config['cookie']['same_site']);
+        $container->setParameter('malina141_sylius_wishlist.token.length', $config['token']['length']);
+
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../../config'));
 
         $loader->load('services.xml');
