@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Malina141\SyliusWishlistPlugin\DependencyInjection;
 
+use Malina141\SyliusWishlistPlugin\Controller\WishlistItemController;
 use Malina141\SyliusWishlistPlugin\Entity\Wishlist;
 use Malina141\SyliusWishlistPlugin\Entity\WishlistInterface;
 use Malina141\SyliusWishlistPlugin\Entity\WishlistItem;
@@ -73,7 +74,7 @@ final class Configuration implements ConfigurationInterface
                                         ->scalarNode('model')->defaultValue(WishlistItem::class)->cannotBeEmpty()->end()
                                         ->scalarNode('interface')->defaultValue(WishlistItemInterface::class)->cannotBeEmpty()->end()
                                         ->scalarNode('repository')->defaultValue(WishlistItemRepository::class)->cannotBeEmpty()->end()
-                                        ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('controller')->defaultValue(WishlistItemController::class)->cannotBeEmpty()->end()
                                         ->scalarNode('factory')->defaultValue(Factory::class)->cannotBeEmpty()->end()
                                     ->end()
                                 ->end()

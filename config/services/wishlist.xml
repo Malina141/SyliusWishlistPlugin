@@ -122,5 +122,34 @@
             <tag name="sylius.live_component.shop" key="sylius_shop:wishlist:widget"/>
         </service>
 
+        <service id="malina141_sylius_wishlist.adder.wishlist_items_to_cart"
+                 class="Malina141\SyliusWishlistPlugin\Adder\WishlistItemsToCartAdder">
+            <argument type="service" id="sylius.factory.order_item"/>
+            <argument type="service" id="sylius.modifier.order_item_quantity"/>
+            <argument type="service" id="sylius.modifier.order"/>
+            <argument type="service" id="sylius.manager.order"/>
+            <argument type="service" id="sylius.factory.add_to_cart_command"/>
+            <argument type="service" id="malina141_sylius_wishlist.validator.add_to_cart_command"/>
+        </service>
+
+        <service id="Malina141\SyliusWishlistPlugin\Adder\WishlistItemsToCartAdderInterface"
+                 alias="malina141_sylius_wishlist.adder.wishlist_items_to_cart"
+                 public="true"/>
+
+        <service id="malina141_sylius_wishlist.validator.add_to_cart_command"
+                 class="Malina141\SyliusWishlistPlugin\Validator\AddToCartCommandValidator">
+            <argument type="service" id="validator"/>
+            <argument type="collection">
+                <argument>sylius</argument>
+            </argument>
+        </service>
+
+        <service id="Malina141\SyliusWishlistPlugin\Validator\AddToCartCommandValidatorInterface"
+                 alias="malina141_sylius_wishlist.validator.add_to_cart_command"
+                 public="true"/>
+
+        <service id="Malina141\SyliusWishlistPlugin\Context\WishlistContextInterface"
+                 alias="malina141_sylius_wishlist.context.wishlist"/>
+
     </services>
 </container>

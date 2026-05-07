@@ -2,6 +2,7 @@ sylius_grid:
     templates:
         bulk_action:
             malina141_bulk_delete: '@Malina141SyliusWishlistPlugin/shop/account/wishlist/grid/bulk_action/malina141_bulk_delete.html.twig'
+            shop_bulk_add_to_cart: '@Malina141SyliusWishlistPlugin/shop/account/wishlist/grid/bulk_action/shop_bulk_add_to_cart.html.twig'
     grids:
         sylius_shop_wishlist:
             driver:
@@ -45,3 +46,9 @@ sylius_grid:
                         options:
                             link:
                                 route: malina141_sylius_wishlist_shop_item_bulk_delete
+                    shop_bulk_add_to_cart:
+                        type: shop_bulk_add_to_cart
+                        label: sylius.ui.add_to_cart
+                        options:
+                            link:
+                                route: malina141_sylius_wishlist_shop_item_bulk_add_to_cart

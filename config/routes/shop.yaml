@@ -35,3 +35,8 @@ malina141_sylius_wishlist_shop_item_bulk_delete:
                     - expr:service('malina141_sylius_wishlist.context.wishlist').getWishlist()
             redirect:
                 route: malina141_sylius_wishlist_shop_index
+
+malina141_sylius_wishlist_shop_item_bulk_add_to_cart:
+    path: /{_locale}/wishlist/item-add-to-cart
+    methods: [POST]
+    controller: malina141_sylius_wishlist.controller.wishlist_item::addItemsToCartAction
