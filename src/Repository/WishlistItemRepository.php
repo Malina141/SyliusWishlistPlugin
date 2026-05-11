@@ -14,7 +14,7 @@ class WishlistItemRepository extends EntityRepository implements WishlistItemRep
 {
     public function createShopWishlistItemQueryBuilder(Wishlist $wishlist): QueryBuilder
     {
-        if(null === $wishlist->getId()){
+        if (null === $wishlist->getId()) {
             return $this->createQueryBuilder('wi');
         }
 
