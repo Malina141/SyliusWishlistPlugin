@@ -1,0 +1,51 @@
+<div {{ attributes }}>
+    {% if flashMessage %}
+        <div class="alert alert-success">{{ flashMessage|trans }}</div>
+    {% endif %}
+
+    <div class="d-inline-flex">
+        {% if isEditing %}
+            {{ form_start(form, {'attr': {'data-action': 'live#action:prevent', 'data-live-action-param': 'save'}}) }}
+                <div class="row g-2 align-items-start">
+                    <div class="col">
+                        <div class="form-floating">
+                            {{ form_widget(form.name, {
+                                'attr': {
+                                    'class': 'form-control form-control-lg' ~ (form.name.vars.errors|length > 0 ? ' is-invalid' : ''),
+                                    'placeholder': ('sylius_wishlist.ui.name'|trans),
+                                    'autofocus': true
+                                }
+                            }) }}
+                            {{ form_label(form.name) }}
+
+                            {% if form.name.vars.errors|length > 0 %}
+                                <div class="invalid-feedback d-block">
+                                    {{ form_errors(form.name) }}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="col-auto">
+                        <button
+                            type="submit"
+                            class="btn btn-outline-{{ form.name.vars.errors|length > 0 ? 'danger' : 'secondary' }} h-100"
+                        >
+                            {{ 'sylius_wishlist.ui.save'|trans }}
+                        </button>
+                    </div>
+                </div>
+            {{ form_end(form) }}
+        {% else %}
+            <h2>{{ wishlist.name ?: ('sylius_wishlist.ui.default_name'|trans) }}</h2>
+            <button
+                data-action="live#action"
+                data-live-action-param="activateEditing"
+                class="btn btn-link"
+                title="{{ 'sylius_wishlist.ui.edit_name'|trans }}"
+            >
+                {{ ux_icon('tabler:edit') }}
+            </button>
+        {% endif %}
+    </div>
+</div>

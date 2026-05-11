@@ -28,6 +28,8 @@ class Wishlist implements WishlistInterface
 
     private string $shareState = WishlistShareStates::STATE_UNSHARED;
 
+    private ?string $name = null;
+
     public function __construct()
     {
         $this->items = new ArrayCollection();
@@ -130,5 +132,15 @@ class Wishlist implements WishlistInterface
     public function isShared(): bool
     {
         return $this->shareState === WishlistShareStates::STATE_SHARED;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(?string $name): void
+    {
+        $this->name = $name;
     }
 }

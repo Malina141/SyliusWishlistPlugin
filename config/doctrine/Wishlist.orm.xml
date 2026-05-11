@@ -26,6 +26,7 @@
         <field name="token" column="token" type="string" length="32" nullable="true" />
         <field name="shareToken" column="share_token" type="string" length="32" nullable="true" />
         <field name="shareState" column="share_state" type="string" length="255" nullable="false" />
+        <field name="name" column="name" type="string" length="255" nullable="true" />
 
         <one-to-many field="items" target-entity="Malina141\SyliusWishlistPlugin\Entity\WishlistItemInterface" mapped-by="wishlist" orphan-removal="true">
             <cascade>

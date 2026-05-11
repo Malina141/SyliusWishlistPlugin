@@ -122,6 +122,21 @@
             <tag name="sylius.live_component.shop" key="sylius_shop:wishlist:widget"/>
         </service>
 
+        <service id="malina141_sylius_wishlist.form.type.wishlist_name"
+                 class="Malina141\SyliusWishlistPlugin\Form\Type\WishlistNameType">
+            <tag name="form.type"/>
+        </service>
+
+        <service id="malina141_sylius_wishlist.twig.component.wishlist.name_editor"
+                 class="Malina141\SyliusWishlistPlugin\Twig\Component\Wishlist\WishlistNameEditor"
+        >
+            <argument type="service" id="malina141_sylius_wishlist.context.wishlist"/>
+            <argument type="service" id="malina141_sylius_wishlist.manager.wishlist"/>
+            <argument type="service" id="form.factory"/>
+
+            <tag name="sylius.live_component.shop" key="sylius_shop:wishlist:name_editor"/>
+        </service>
+
         <service id="malina141_sylius_wishlist.adder.wishlist_items_to_cart"
                  class="Malina141\SyliusWishlistPlugin\Adder\WishlistItemsToCartAdder">
             <argument type="service" id="sylius.factory.order_item"/>

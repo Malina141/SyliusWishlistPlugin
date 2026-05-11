@@ -13,3 +13,8 @@ sylius_wishlist:
         link_copied: 'Link copied!'
         unshare: 'Unshare'
         items: 'Items'
+        name: 'Wishlist name'
+        default_name: 'My Wishlist'
+        save: 'Save'
+        edit_name: 'Edit wishlist name'
+        saved: 'Wishlist name saved!'

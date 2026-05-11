@@ -42,4 +42,8 @@ interface WishlistInterface extends ResourceInterface, ChannelAwareInterface
     public function setShareState(string $shareState): void;
 
     public function isShared(): bool;
+
+    public function getName(): ?string;
+
+    public function setName(?string $name): void;
 }
