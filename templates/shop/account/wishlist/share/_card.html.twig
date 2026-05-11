@@ -1,0 +1,32 @@
+{% import '@SyliusShop/shared/macro/money.html.twig' as money %}
+
+{% set product_variant = item.productVariant %}
+{% set product = product_variant.product %}
+
+<div class="card h-100">
+    <a href="{{ path('sylius_shop_product_show', {slug: product.slug, _locale: app.request.locale}) }}">
+        <div class="overflow-auto bg-light rounded-3" style="aspect-ratio: 3/4;">
+            {{ component('sylius_shop:main_image', { product: product, class: "w-100 h-100 object-fit-cover" }) }}
+        </div>
+    </a>
+
+    <div class="card-body">
+        <a class="link-reset" href="{{ path('sylius_shop_product_show', {slug: product.slug, _locale: app.request.locale}) }}">
+            <h5 class="card-title h6 text-break">{{ product.name }}</h5>
+        </a>
+
+        {% if product_variant.optionValues|length > 0 %}
+            <div class="mb-2">
+                {% for option_value in product_variant.optionValues %}
+                    <div class="small text-body-tertiary">
+                        {{ option_value.name }}: {{ option_value.value }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <div class="fw-semibold">
+            {{ money.calculatePrice(product_variant) }}
+        </div>
+    </div>
+</div>

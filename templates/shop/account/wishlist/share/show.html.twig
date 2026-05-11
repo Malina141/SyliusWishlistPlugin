@@ -1,0 +1,21 @@
+{% extends '@SyliusShop/shared/layout/base.html.twig' %}
+
+{% block title %}{{ 'sylius_wishlist.ui.shared_title'|trans }} | {{ parent() }}{% endblock %}
+
+{% block content %}
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="mb-4">{{ 'sylius_wishlist.ui.shared_title'|trans }}</h1>
+
+                {% if wishlist.items|length > 0 %}
+                    {% include '@Malina141SyliusWishlistPlugin/shop/account/wishlist/share/_list.html.twig' with {items: wishlist.items} %}
+                {% else %}
+                    <div class="alert alert-info" role="alert">
+                        {{ 'sylius_wishlist.ui.shared_empty'|trans }}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

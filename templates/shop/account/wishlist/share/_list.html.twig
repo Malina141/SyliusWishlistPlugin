@@ -1,0 +1,7 @@
+{% import '@SyliusShop/shared/macro/money.html.twig' as money %}
+
+<div class="products-grid">
+    {% for item in items %}
+        {% include '@Malina141SyliusWishlistPlugin/shop/account/wishlist/share/_card.html.twig' with {item: item} %}
+    {% endfor %}
+</div>

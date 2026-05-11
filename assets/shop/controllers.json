@@ -1,6 +1,10 @@
 {
     "controllers": {
         "@malina141/sylius-wishlist-plugin": {
+            "clipboard-copy": {
+                "enabled": true,
+                "fetch": "eager"
+            },
             "wishlist-bulk-actions": {
                 "enabled": true,
                 "fetch": "eager"

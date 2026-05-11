@@ -40,3 +40,51 @@ malina141_sylius_wishlist_shop_item_bulk_add_to_cart:
     path: /{_locale}/wishlist/item-add-to-cart
     methods: [POST]
     controller: malina141_sylius_wishlist.controller.wishlist_item::addItemsToCartAction
+
+malina141_sylius_wishlist_shop_share:
+    path: /{_locale}/wishlist/share
+    methods: [POST]
+    controller: malina141_sylius_wishlist.controller.wishlist::applyStateMachineTransitionAction
+    defaults:
+        _sylius:
+            repository:
+                method: find
+                arguments:
+                    - expr:service('malina141_sylius_wishlist.context.wishlist').getWishlist().getId()
+            state_machine:
+                graph: sylius_wishlist
+                transition: share
+            redirect:
+                route: malina141_sylius_wishlist_shop_index
+            flash: sylius_wishlist.ui.shared_successfully
+
+malina141_sylius_wishlist_shop_unshare:
+    path: /{_locale}/wishlist/unshare
+    methods: [POST]
+    controller: malina141_sylius_wishlist.controller.wishlist::applyStateMachineTransitionAction
+    defaults:
+        _sylius:
+            repository:
+                method: find
+                arguments:
+                    - expr:service('malina141_sylius_wishlist.context.wishlist').getWishlist().getId()
+            state_machine:
+                graph: sylius_wishlist
+                transition: unshare
+            redirect:
+                route: malina141_sylius_wishlist_shop_index
+            flash: sylius_wishlist.ui.unshared_successfully
+
+malina141_sylius_wishlist_shop_share_show:
+    path: /{_locale}/wishlist/share/{token}
+    methods: [GET]
+    controller: malina141_sylius_wishlist.controller.wishlist::showAction
+    defaults:
+        _sylius:
+            permission: false
+            repository:
+                method: findOneByShareTokenAndChannel
+                arguments:
+                    - $token
+                    - expr:service('sylius.context.channel').getChannel()
+            template: '@Malina141SyliusWishlistPlugin/shop/account/wishlist/share/show.html.twig'

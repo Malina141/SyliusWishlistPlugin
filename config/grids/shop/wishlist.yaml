@@ -1,5 +1,7 @@
 sylius_grid:
     templates:
+        action:
+            shop_share: '@Malina141SyliusWishlistPlugin/shop/account/wishlist/grid/action/share.html.twig'
         bulk_action:
             malina141_bulk_delete: '@Malina141SyliusWishlistPlugin/shop/account/wishlist/grid/bulk_action/malina141_bulk_delete.html.twig'
             shop_bulk_add_to_cart: '@Malina141SyliusWishlistPlugin/shop/account/wishlist/grid/bulk_action/shop_bulk_add_to_cart.html.twig'
@@ -33,6 +35,14 @@ sylius_grid:
                     options:
                         template: '@Malina141SyliusWishlistPlugin/shop/account/wishlist/grid/field/price.html.twig'
             actions:
+                main:
+                    share:
+                        type: shop_share
+                        label: sylius_wishlist.ui.share
+                        options:
+                            link:
+                                route: malina141_sylius_wishlist_shop_share
+                            wishlist: expr:service('malina141_sylius_wishlist.context.wishlist').getWishlist()
                 item:
                     delete:
                         type: shop_delete

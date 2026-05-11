@@ -32,4 +32,14 @@ interface WishlistInterface extends ResourceInterface, ChannelAwareInterface
     public function getToken(): ?string;
 
     public function setToken(?string $token): void;
+
+    public function getShareToken(): ?string;
+
+    public function setShareToken(?string $shareToken): void;
+
+    public function getShareState(): string;
+
+    public function setShareState(string $shareState): void;
+
+    public function isShared(): bool;
 }

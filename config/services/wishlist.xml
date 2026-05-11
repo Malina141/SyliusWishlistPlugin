@@ -151,5 +151,25 @@
         <service id="Malina141\SyliusWishlistPlugin\Context\WishlistContextInterface"
                  alias="malina141_sylius_wishlist.context.wishlist"/>
 
+        <service id="malina141_sylius_wishlist.provider.wishlist_share_token"
+                 class="Malina141\SyliusWishlistPlugin\Provider\WishlistShareTokenProvider">
+            <argument type="service" id="Sylius\Resource\Generator\RandomnessGeneratorInterface"/>
+            <argument>%malina141_sylius_wishlist.share_token.length%</argument>
+        </service>
+
+        <service id="Malina141\SyliusWishlistPlugin\Provider\WishlistShareTokenProviderInterface"
+                 alias="malina141_sylius_wishlist.provider.wishlist_share_token"/>
+
+        <service id="malina141_sylius_wishlist.event_listener.workflow.provide_wishlist_share_token"
+                 class="Malina141\SyliusWishlistPlugin\EventListener\Workflow\ProvideWishlistShareTokenListener">
+            <argument type="service" id="malina141_sylius_wishlist.provider.wishlist_share_token"/>
+            <tag name="kernel.event_listener" event="workflow.sylius_wishlist.completed.share"/>
+        </service>
+
+        <service id="malina141_sylius_wishlist.event_listener.workflow.clear_wishlist_share_token"
+                 class="Malina141\SyliusWishlistPlugin\EventListener\Workflow\ClearWishlistShareTokenListener">
+            <tag name="kernel.event_listener" event="workflow.sylius_wishlist.completed.unshare"/>
+        </service>
+
     </services>
 </container>

@@ -8,8 +8,8 @@
     <input type="hidden" name="_csrf_token" value="{{ csrf_token('bulk_delete') }}">
     <input type="hidden" name="_method" value="DELETE">
 
-    <button type="submit" class="btn btn-outline-danger d-flex align-items-center gap-2" disabled {{ sylius_test_html_attribute('bulk-delete-button') }}>
-        {{ ux_icon('tabler:trash', { class: 'icon' }) }}
+    <button type="submit" class="btn btn-sm btn-outline-danger" disabled {{ sylius_test_html_attribute('bulk-delete-button') }}>
+        {{ ux_icon('tabler:trash', { class: 'icon icon-sm' }) }}
         {{ action.label|default('sylius.ui.delete')|trans }}
     </button>
 </form>

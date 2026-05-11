@@ -6,6 +6,7 @@ namespace Malina141\SyliusWishlistPlugin\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Malina141\SyliusWishlistPlugin\SM\WishlistShareStates;
 use Sylius\Component\Channel\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
@@ -22,6 +23,10 @@ class Wishlist implements WishlistInterface
     private ?ChannelInterface $channel = null;
 
     private ?string $token = null;
+
+    private ?string $shareToken = null;
+
+    private string $shareState = WishlistShareStates::STATE_UNSHARED;
 
     public function __construct()
     {
@@ -100,5 +105,30 @@ class Wishlist implements WishlistInterface
     public function setToken(?string $token): void
     {
         $this->token = $token;
+    }
+
+    public function getShareToken(): ?string
+    {
+        return $this->shareToken;
+    }
+
+    public function setShareToken(?string $shareToken): void
+    {
+        $this->shareToken = $shareToken;
+    }
+
+    public function getShareState(): string
+    {
+        return $this->shareState;
+    }
+
+    public function setShareState(string $shareState): void
+    {
+        $this->shareState = $shareState;
+    }
+
+    public function isShared(): bool
+    {
+        return $this->shareState === WishlistShareStates::STATE_SHARED;
     }
 }

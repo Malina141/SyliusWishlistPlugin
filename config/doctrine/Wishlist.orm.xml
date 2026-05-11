@@ -8,6 +8,7 @@
         <unique-constraints>
             <unique-constraint columns="owner_id,channel_id" name="UNQ_wishlist_owner_channel" />
             <unique-constraint columns="token,channel_id" name="UNQ_wishlist_token_channel" />
+            <unique-constraint columns="share_token,channel_id" name="UNQ_wishlist_share_token_channel" />
         </unique-constraints>
 
         <id name="id" column="id" type="integer">
@@ -23,6 +24,8 @@
         </many-to-one>
 
         <field name="token" column="token" type="string" length="32" nullable="true" />
+        <field name="shareToken" column="share_token" type="string" length="32" nullable="true" />
+        <field name="shareState" column="share_state" type="string" length="255" nullable="false" />
 
         <one-to-many field="items" target-entity="Malina141\SyliusWishlistPlugin\Entity\WishlistItemInterface" mapped-by="wishlist" orphan-removal="true">
             <cascade>
