@@ -12,7 +12,7 @@ sylius_grid:
                     repository:
                         method: createShopWishlistItemQueryBuilder
                         arguments:
-                            wishlistId: expr:service('malina141_sylius_wishlist.context.wishlist').getWishlist().getId()
+                            wishlist: expr:service('malina141_sylius_wishlist.context.wishlist').getWishlist()
             fields:
                 productVariant.product.name:
                     type: twig

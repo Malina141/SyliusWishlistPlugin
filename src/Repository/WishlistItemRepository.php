@@ -5,18 +5,23 @@ declare(strict_types=1);
 namespace Malina141\SyliusWishlistPlugin\Repository;
 
 use Doctrine\ORM\QueryBuilder;
+use Malina141\SyliusWishlistPlugin\Entity\Wishlist;
 use Malina141\SyliusWishlistPlugin\Entity\WishlistInterface;
 use Malina141\SyliusWishlistPlugin\Entity\WishlistItemInterface;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
 class WishlistItemRepository extends EntityRepository implements WishlistItemRepositoryInterface
 {
-    public function createShopWishlistItemQueryBuilder(?int $wishlistId): QueryBuilder
+    public function createShopWishlistItemQueryBuilder(Wishlist $wishlist): QueryBuilder
     {
+        if(null === $wishlist->getId()){
+            return $this->createQueryBuilder('wi');
+        }
+
         return $this->createQueryBuilder('wi')
             ->innerJoin('wi.wishlist', 'w')
             ->andWhere('w.id = :wishlistId')
-            ->setParameter('wishlistId', $wishlistId)
+            ->setParameter('wishlistId', $wishlist)
         ;
     }
 
