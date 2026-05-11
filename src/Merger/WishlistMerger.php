@@ -40,15 +40,14 @@ final readonly class WishlistMerger implements WishlistMergerInterface
 
     private function mergeItems(WishlistInterface $guestWishlist, WishlistInterface $userWishlist): void
     {
-        foreach ($guestWishlist->getItems()->toArray() as $item) {
+        foreach ($guestWishlist->getItems() as $item) {
             $variant = $item->getProductVariant();
 
             if (null === $variant || $userWishlist->hasProductVariant($variant)) {
                 continue;
             }
 
-            $guestWishlist->removeItem($item);
-            $userWishlist->addItem($item);
+            $item->setWishlist($userWishlist);
         }
     }
 }
