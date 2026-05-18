@@ -14,14 +14,15 @@ class WishlistItemRepository extends EntityRepository implements WishlistItemRep
 {
     public function createShopWishlistItemQueryBuilder(Wishlist $wishlist): QueryBuilder
     {
+        $qb = $this->createQueryBuilder('wi');
+
         if (null === $wishlist->getId()) {
-            return $this->createQueryBuilder('wi');
+            return $qb->where('1 = 0');
         }
 
-        return $this->createQueryBuilder('wi')
-            ->innerJoin('wi.wishlist', 'w')
-            ->andWhere('w.id = :wishlistId')
-            ->setParameter('wishlistId', $wishlist)
+        return $qb
+            ->andWhere('wi.wishlist = :wishlist')
+            ->setParameter('wishlist', $wishlist)
         ;
     }
 
