@@ -8,11 +8,11 @@ use Sylius\Component\Core\Model\ProductVariantInterface;
 
 class WishlistItem implements WishlistItemInterface
 {
-    private ?int $id = null;
+    protected ?int $id = null;
 
-    private ?WishlistInterface $wishlist = null;
+    protected ?WishlistInterface $wishlist = null;
 
-    private ?ProductVariantInterface $productVariant = null;
+    protected ?ProductVariantInterface $productVariant = null;
 
     public function getId(): ?int
     {

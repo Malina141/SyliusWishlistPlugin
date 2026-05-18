@@ -13,22 +13,22 @@ use Sylius\Component\Core\Model\ShopUserInterface;
 
 class Wishlist implements WishlistInterface
 {
-    private ?int $id = null;
+    protected ?int $id = null;
 
-    private ?ShopUserInterface $owner = null;
+    protected ?ShopUserInterface $owner = null;
 
     /** @var Collection <int, WishlistItemInterface> */
-    private Collection $items;
+    protected Collection $items;
 
-    private ?ChannelInterface $channel = null;
+    protected ?ChannelInterface $channel = null;
 
-    private ?string $token = null;
+    protected ?string $token = null;
 
-    private ?string $shareToken = null;
+    protected ?string $shareToken = null;
 
-    private string $shareState = WishlistShareStates::STATE_UNSHARED;
+    protected string $shareState = WishlistShareStates::STATE_UNSHARED;
 
-    private ?string $name = null;
+    protected ?string $name = null;
 
     public function __construct()
     {
