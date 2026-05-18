@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Malina141\SyliusWishlistPlugin\Adder;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Malina141\SyliusWishlistPlugin\Entity\WishlistItem;
+use Malina141\SyliusWishlistPlugin\Entity\WishlistItemInterface;
 use Malina141\SyliusWishlistPlugin\Validator\AddToCartCommandValidatorInterface;
 use Sylius\Bundle\OrderBundle\Factory\AddToCartCommandFactoryInterface;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -31,7 +31,7 @@ final readonly class WishlistItemsToCartAdder implements WishlistItemsToCartAdde
 
     public function add(array $wishlistItems, OrderInterface $cart): void
     {
-        /** @var WishlistItem $wishlistItem */
+        /** @var WishlistItemInterface $wishlistItem */
         foreach ($wishlistItems as $wishlistItem) {
             $productVariant = $wishlistItem->getProductVariant();
             if (null === $productVariant) {
