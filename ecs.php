@@ -12,4 +12,5 @@ return static function (ECSConfig $ecsConfig): void {
     ]);
 
     $ecsConfig->import('vendor/sylius-labs/coding-standard/ecs.php');
+    $ecsConfig->import('vendor/bitbag/coding-standard/ecs.php');
 };

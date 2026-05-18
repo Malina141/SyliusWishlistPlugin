@@ -85,7 +85,7 @@ class Wishlist implements WishlistInterface
 
     public function hasProductVariant(ProductVariantInterface $productVariant): bool
     {
-        return $this->getItemByProductVariant($productVariant) !== null;
+        return null !== $this->getItemByProductVariant($productVariant);
     }
 
     public function getItemByProductVariant(ProductVariantInterface $productVariant): ?WishlistItemInterface
@@ -131,7 +131,7 @@ class Wishlist implements WishlistInterface
 
     public function isShared(): bool
     {
-        return $this->shareState === WishlistShareStates::STATE_SHARED;
+        return WishlistShareStates::STATE_SHARED === $this->shareState;
     }
 
     public function getName(): ?string
