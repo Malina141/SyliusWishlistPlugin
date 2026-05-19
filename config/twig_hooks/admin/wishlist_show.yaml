@@ -1,0 +1,33 @@
+sylius_twig_hooks:
+    hooks:
+        'sylius_admin.wishlist.show.content.header.title_block':
+            title:
+                template: '@Malina141SyliusWishlistPlugin/admin/wishlist/show/content/header/title_block/title.html.twig'
+                priority: 100
+            actions:
+                template: '@Malina141SyliusWishlistPlugin/admin/wishlist/show/content/header/title_block/actions.html.twig'
+                priority: 0
+
+        'sylius_admin.wishlist.show.content':
+            body:
+                template: '@Malina141SyliusWishlistPlugin/admin/wishlist/show/content/body.html.twig'
+                priority: 0
+
+        'sylius_admin.wishlist.show.content.sections':
+            general:
+                template: '@Malina141SyliusWishlistPlugin/admin/wishlist/show/content/sections/general.html.twig'
+                priority: 100
+            items:
+                template: '@Malina141SyliusWishlistPlugin/admin/wishlist/show/content/sections/items.html.twig'
+                priority: 0
+
+        'sylius_admin.wishlist.show.content.sections.general':
+            name:
+                template: '@Malina141SyliusWishlistPlugin/admin/wishlist/show/content/sections/general/name.html.twig'
+                priority: 100
+            owner:
+                template: '@Malina141SyliusWishlistPlugin/admin/wishlist/show/content/sections/general/owner.html.twig'
+                priority: 90
+            channel:
+                template: '@Malina141SyliusWishlistPlugin/admin/wishlist/show/content/sections/general/channel.html.twig'
+                priority: 80

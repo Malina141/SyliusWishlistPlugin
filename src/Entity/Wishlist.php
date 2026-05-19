@@ -143,4 +143,9 @@ class Wishlist implements WishlistInterface
     {
         $this->name = $name;
     }
+
+    public function __toString(): string
+    {
+        return $this->name ?? 'Wishlist #' . $this->id;
+    }
 }

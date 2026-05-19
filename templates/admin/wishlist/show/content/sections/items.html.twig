@@ -1,0 +1,44 @@
+{% set wishlist = hookable_metadata.context.resource %}
+
+<div class="card mb-3">
+    <div class="card-header">
+        <h3 class="card-title">
+            {{ 'sylius_wishlist.ui.items'|trans }}
+            <span class="badge ms-2">{{ wishlist.items|length }}</span>
+        </h3>
+    </div>
+    <div class="card-body">
+        {% if wishlist.items|length > 0 %}
+            <div class="table-responsive">
+                <table class="table table-vcenter card-table">
+                    <thead>
+                        <tr>
+                            <th>{{ 'sylius.ui.product'|trans }}</th>
+                            <th>{{ 'sylius.ui.variant'|trans }}</th>
+                            <th>{{ 'sylius.ui.code'|trans }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in wishlist.items %}
+                            <tr>
+                                <td>
+                                    {% if item.productVariant.product %}
+                                        <a href="{{ path('sylius_admin_product_show', {'id': item.productVariant.product.id}) }}">
+                                            {{ item.productVariant.product.name }}
+                                        </a>
+                                    {% else %}
+                                        -
+                                    {% endif %}
+                                </td>
+                                <td>{{ item.productVariant.name|default('-') }}</td>
+                                <td><code>{{ item.productVariant.code|default('-') }}</code></td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <p class="text-secondary">{{ 'sylius_wishlist.ui.no_items'|trans }}</p>
+        {% endif %}
+    </div>
+</div>

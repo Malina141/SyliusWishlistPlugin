@@ -1,0 +1,5 @@
+{% import "@SyliusAdmin/shared/helper/header.html.twig" as header %}
+
+{{ header.h1(
+    hookable_metadata.context.resource.name|default('sylius_wishlist.ui.wishlist'|trans)
+) }}

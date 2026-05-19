@@ -1,0 +1,5 @@
+{% set wishlist = hookable_metadata.context.wishlist %}
+<div class="row py-2">
+    <div class="col-12 col-md-4 fw-bold">{{ 'sylius_wishlist.ui.name'|trans }}</div>
+    <div class="col-12 col-md-8">{{ wishlist.name|default('sylius_wishlist.ui.default_name'|trans) }}</div>
+</div>

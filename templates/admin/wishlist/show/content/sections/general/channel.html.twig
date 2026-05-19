@@ -1,0 +1,7 @@
+{% set wishlist = hookable_metadata.context.wishlist %}
+<div class="row py-2">
+    <div class="col-12 col-md-4 fw-bold">{{ 'sylius.ui.channel'|trans }}</div>
+    <div class="col-12 col-md-8">
+        {% include '@SyliusAdmin/shared/grid/field/channel.html.twig' with {'data': wishlist.channel} %}
+    </div>
+</div>

@@ -1,0 +1,64 @@
+sylius_grid:
+    templates:
+        filter:
+            malina141_exists: "@SyliusAdmin/shared/grid/filter/select.html.twig"
+    grids:
+        sylius_admin_wishlist:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%malina141_sylius_wishlist.model.wishlist.class%"
+            sorting:
+                id: desc
+            fields:
+                id:
+                    type: string
+                    label: sylius.ui.id
+                    sortable: ~
+                name:
+                    type: twig
+                    label: sylius_wishlist.ui.name
+                    options:
+                        template: "@Malina141SyliusWishlistPlugin/admin/wishlist/grid/field/name.html.twig"
+                owner:
+                    type: twig
+                    label: sylius_wishlist.ui.owner
+                    options:
+                        template: "@Malina141SyliusWishlistPlugin/admin/wishlist/grid/field/owner.html.twig"
+                channel:
+                    type: twig
+                    label: sylius.ui.channel
+                    options:
+                        template: "@SyliusAdmin/shared/grid/field/channel.html.twig"
+                itemsCount:
+                    type: twig
+                    label: sylius_wishlist.ui.items_count
+                    path: .
+                    options:
+                        template: "@Malina141SyliusWishlistPlugin/admin/wishlist/grid/field/items_count.html.twig"
+            filters:
+                search:
+                    type: string
+                    label: sylius.ui.search
+                    options:
+                        fields: [name, id]
+                channel:
+                    type: entity
+                    label: sylius.ui.channel
+                    options:
+                        fields: [channel]
+                    form_options:
+                        class: "%sylius.model.channel.class%"
+                owner:
+                    type: malina141_exists
+                    label: sylius_wishlist.ui.registered_customer
+                    options:
+                        field: owner
+                    form_options:
+                        choices:
+                            sylius.ui.yes_label: "1"
+                            sylius.ui.no_label: "0"
+            actions:
+                item:
+                    show:
+                        type: show

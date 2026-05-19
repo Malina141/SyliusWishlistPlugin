@@ -1,0 +1,7 @@
+{% if data is not null and data.customer is not null %}
+    <a href="{{ path('sylius_admin_customer_show', {'id': data.customer.id}) }}">
+        {{ data.customer.email }}
+    </a>
+{% else %}
+    <span class="badge bg-secondary-lt">{{ 'sylius_wishlist.ui.guest'|trans }}</span>
+{% endif %}

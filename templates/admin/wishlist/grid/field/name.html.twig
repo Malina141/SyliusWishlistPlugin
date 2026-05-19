@@ -1,0 +1,5 @@
+{% if data is not null %}
+    <span class="fw-medium">{{ data }}</span>
+{% else %}
+    <span class="text-secondary">{{ 'sylius_wishlist.ui.default_name'|trans }}</span>
+{% endif %}

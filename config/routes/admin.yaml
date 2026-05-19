@@ -1,1 +1,9 @@
-# Define your own admin routes here
+sylius_admin_wishlist:
+    resource: |
+        alias: malina141_sylius_wishlist.wishlist
+        section: admin
+        templates: "@SyliusAdmin\\shared\\crud"
+        grid: sylius_admin_wishlist
+        only: [index, show]
+    type: sylius.resource
+    prefix: '/%sylius_admin.path_name%'

@@ -1,0 +1,13 @@
+{% set wishlist = hookable_metadata.context.wishlist %}
+<div class="row py-2">
+    <div class="col-12 col-md-4 fw-bold">{{ 'sylius_wishlist.ui.owner'|trans }}</div>
+    <div class="col-12 col-md-8">
+        {% if wishlist.owner and wishlist.owner.customer %}
+            <a href="{{ path('sylius_admin_customer_show', {'id': wishlist.owner.customer.id}) }}">
+                {{ wishlist.owner.customer.email }}
+            </a>
+        {% else %}
+            <span class="badge bg-secondary-lt">{{ 'sylius_wishlist.ui.guest'|trans }}</span>
+        {% endif %}
+    </div>
+</div>
