@@ -39,7 +39,7 @@ malina141_sylius_wishlist_shop_item_bulk_delete:
 malina141_sylius_wishlist_shop_item_bulk_add_to_cart:
     path: /{_locale}/wishlist/item-add-to-cart
     methods: [POST]
-    controller: malina141_sylius_wishlist.controller.wishlist_item::addItemsToCartAction
+    controller: malina141_sylius_wishlist.controller.action.add_wishlist_items_to_cart
 
 malina141_sylius_wishlist_shop_share:
     path: /{_locale}/wishlist/share

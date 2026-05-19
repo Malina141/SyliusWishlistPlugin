@@ -31,6 +31,8 @@ final class Malina141SyliusWishlistExtension extends AbstractResourceExtension i
         $container->setParameter('malina141_sylius_wishlist.cookie.same_site', $config['cookie']['same_site']);
         $container->setParameter('malina141_sylius_wishlist.token.length', $config['token']['length']);
         $container->setParameter('malina141_sylius_wishlist.share_token.length', $config['share_token']['length']);
+        $container->setParameter('malina141_sylius_wishlist.bulk_add_to_cart.redirect_route', $config['bulk_add_to_cart']['redirect_route']);
+        $container->setParameter('malina141_sylius_wishlist.bulk_add_to_cart.csrf_token_id', $config['bulk_add_to_cart']['csrf_token_id']);
 
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../../config'));
 

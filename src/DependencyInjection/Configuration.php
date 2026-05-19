@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Malina141\SyliusWishlistPlugin\DependencyInjection;
 
-use Malina141\SyliusWishlistPlugin\Controller\WishlistItemController;
 use Malina141\SyliusWishlistPlugin\Entity\Wishlist;
 use Malina141\SyliusWishlistPlugin\Entity\WishlistInterface;
 use Malina141\SyliusWishlistPlugin\Entity\WishlistItem;
@@ -51,6 +50,13 @@ final class Configuration implements ConfigurationInterface
                         ->integerNode('length')->defaultValue(32)->min(16)->max(32)->end()
                     ->end()
                 ->end()
+                ->arrayNode('bulk_add_to_cart')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('redirect_route')->defaultValue('sylius_shop_cart_summary')->cannotBeEmpty()->end()
+                        ->scalarNode('csrf_token_id')->defaultValue('bulk_wishlist_add_to_cart')->cannotBeEmpty()->end()
+                    ->end()
+                ->end()
                 ->arrayNode('resources')
                     ->addDefaultsIfNotSet()
                     ->children()
@@ -80,7 +86,7 @@ final class Configuration implements ConfigurationInterface
                                         ->scalarNode('model')->defaultValue(WishlistItem::class)->cannotBeEmpty()->end()
                                         ->scalarNode('interface')->defaultValue(WishlistItemInterface::class)->cannotBeEmpty()->end()
                                         ->scalarNode('repository')->defaultValue(WishlistItemRepository::class)->cannotBeEmpty()->end()
-                                        ->scalarNode('controller')->defaultValue(WishlistItemController::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
                                         ->scalarNode('factory')->defaultValue(Factory::class)->cannotBeEmpty()->end()
                                     ->end()
                                 ->end()

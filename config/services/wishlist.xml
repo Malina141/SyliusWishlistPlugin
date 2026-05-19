@@ -147,9 +147,18 @@
             <argument type="service" id="malina141_sylius_wishlist.validator.add_to_cart_command"/>
         </service>
 
-        <service id="Malina141\SyliusWishlistPlugin\Adder\WishlistItemsToCartAdderInterface"
-                 alias="malina141_sylius_wishlist.adder.wishlist_items_to_cart"
-                 public="true"/>
+        <service id="malina141_sylius_wishlist.controller.action.add_wishlist_items_to_cart"
+                 class="Malina141\SyliusWishlistPlugin\Controller\Action\AddWishlistItemsToCartAction"
+                 public="true">
+            <argument type="service" id="malina141_sylius_wishlist.adder.wishlist_items_to_cart"/>
+            <argument type="service" id="malina141_sylius_wishlist.context.wishlist"/>
+            <argument type="service" id="sylius.context.cart"/>
+            <argument type="service" id="malina141_sylius_wishlist.repository.wishlist_item"/>
+            <argument type="service" id="security.csrf.token_manager"/>
+            <argument type="service" id="router"/>
+            <argument>%malina141_sylius_wishlist.bulk_add_to_cart.redirect_route%</argument>
+            <argument>%malina141_sylius_wishlist.bulk_add_to_cart.csrf_token_id%</argument>
+        </service>
 
         <service id="malina141_sylius_wishlist.validator.add_to_cart_command"
                  class="Malina141\SyliusWishlistPlugin\Validator\AddToCartCommandValidator">
@@ -159,21 +168,11 @@
             </argument>
         </service>
 
-        <service id="Malina141\SyliusWishlistPlugin\Validator\AddToCartCommandValidatorInterface"
-                 alias="malina141_sylius_wishlist.validator.add_to_cart_command"
-                 public="true"/>
-
-        <service id="Malina141\SyliusWishlistPlugin\Context\WishlistContextInterface"
-                 alias="malina141_sylius_wishlist.context.wishlist"/>
-
         <service id="malina141_sylius_wishlist.provider.wishlist_share_token"
                  class="Malina141\SyliusWishlistPlugin\Provider\WishlistShareTokenProvider">
             <argument type="service" id="Sylius\Resource\Generator\RandomnessGeneratorInterface"/>
             <argument>%malina141_sylius_wishlist.share_token.length%</argument>
         </service>
-
-        <service id="Malina141\SyliusWishlistPlugin\Provider\WishlistShareTokenProviderInterface"
-                 alias="malina141_sylius_wishlist.provider.wishlist_share_token"/>
 
         <service id="malina141_sylius_wishlist.event_listener.workflow.provide_wishlist_share_token"
                  class="Malina141\SyliusWishlistPlugin\EventListener\Workflow\ProvideWishlistShareTokenListener">
