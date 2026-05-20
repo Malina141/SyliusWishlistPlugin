@@ -34,14 +34,7 @@ final readonly class NewWishlistContext implements WishlistContextInterface
         $wishlist->setChannel($channel);
 
         $customer = $this->customerContext->getCustomer();
-        if (!$customer instanceof CustomerInterface) {
-            $token = $this->wishlistTokenProvider->provideToken();
-            $wishlist->setToken($token);
-
-            return $wishlist;
-        }
-
-        $user = $customer->getUser();
+        $user = $customer instanceof CustomerInterface ? $customer->getUser() : null;
 
         if ($user instanceof ShopUserInterface) {
             $wishlist->setOwner($user);
