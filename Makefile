@@ -63,6 +63,9 @@ ecs:
 phpunit:
 	@ENV=$(ENV) DOCKER_USER=$(DOCKER_USER) $(DOCKER_COMPOSE) run --rm php vendor/bin/phpunit
 
+phpunit-coverage:
+	@ENV=$(ENV) DOCKER_USER=$(DOCKER_USER) PHP_IMAGE="ghcr.io/sylius/sylius-php:8.3-xdebug-alpine" $(DOCKER_COMPOSE) run --rm -e XDEBUG_MODE=coverage php vendor/bin/phpunit --coverage-text --coverage-html coverage/html --coverage-clover coverage/clover.xml
+
 behat:
 	@ENV=$(ENV) DOCKER_USER=root $(DOCKER_COMPOSE) run --rm php vendor/bin/behat
 
