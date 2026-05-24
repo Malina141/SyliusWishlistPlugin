@@ -58,7 +58,7 @@ final class WishlistMergerTest extends TestCase
         $this->wishlistMerger->merge($shopUser, $wishlist);
 
         $this->assertSame($shopUser, $wishlist->getOwner());
-        $this->assertNull($wishlist->getToken());
+        $this->assertSame('TEST_TOKEN', $wishlist->getToken());
     }
 
     public function test_it_moves_items_and_removes_guest_wishlist_if_user_already_has_wishlist(): void

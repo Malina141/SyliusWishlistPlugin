@@ -28,7 +28,6 @@ final readonly class WishlistMerger implements WishlistMergerInterface
 
         if (!$userWishlist instanceof WishlistInterface) {
             $guestWishlist->setOwner($user);
-            $guestWishlist->setToken(null);
 
             return;
         }

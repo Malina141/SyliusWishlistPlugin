@@ -38,8 +38,6 @@ final readonly class NewWishlistContext implements WishlistContextInterface
 
         if ($user instanceof ShopUserInterface) {
             $wishlist->setOwner($user);
-
-            return $wishlist;
         }
 
         $token = $this->wishlistTokenProvider->provideToken();

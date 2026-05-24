@@ -70,6 +70,8 @@ final class NewWishlistContextTest extends TestCase
         $wishlist->expects($this->once())->method('setChannel')->with($channel);
         $this->customerContext->expects($this->once())->method('getCustomer')->willReturn($customer);
         $wishlist->expects($this->once())->method('setOwner')->with($user);
+        $this->wishlistTokenProvider->expects($this->once())->method('provideToken')->willReturn('test-token');
+        $wishlist->expects($this->once())->method('setToken')->with('test-token');
 
         $this->assertSame($wishlist, $this->context->getWishlist());
     }
