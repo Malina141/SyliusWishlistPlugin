@@ -4,17 +4,16 @@ declare(strict_types=1);
 
 namespace Malina141\SyliusWishlistPlugin\Provider;
 
-use Sylius\Resource\Generator\RandomnessGeneratorInterface;
+use Malina141\SyliusWishlistPlugin\Generator\WishlistTokenGeneratorInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Webmozart\Assert\Assert;
 
-final readonly class WishlistCookieTokenProvider implements WishlistTokenProviderInterface
+final readonly class CookieBasedGuestWishlistTokenProvider implements GuestWishlistTokenProviderInterface
 {
     public function __construct(
         private RequestStack $requestStack,
         private string $wishlistCookieName,
-        private RandomnessGeneratorInterface $randomnessGenerator,
-        private int $tokenLength = 32,
+        private WishlistTokenGeneratorInterface $wishlistTokenGenerator,
     ) {
     }
 
@@ -30,7 +29,7 @@ final readonly class WishlistCookieTokenProvider implements WishlistTokenProvide
 
         $token = $request->cookies->getString($this->wishlistCookieName);
         if ('' === $token) {
-            $token = $this->randomnessGenerator->generateUriSafeString($this->tokenLength);
+            $token = $this->wishlistTokenGenerator->generate();
         }
 
         $request->attributes->set($this->wishlistCookieName, $token);

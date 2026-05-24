@@ -22,12 +22,29 @@
             <argument type="service" id="clock"/>
         </service>
 
-        <service id="malina141_sylius_wishlist.provider.wishlist_token"
-                 class="Malina141\SyliusWishlistPlugin\Provider\WishlistCookieTokenProvider">
+        <service id="malina141_sylius_wishlist.provider.guest_wishlist_token"
+                 class="Malina141\SyliusWishlistPlugin\Provider\CookieBasedGuestWishlistTokenProvider">
             <argument type="service" id="request_stack"/>
             <argument>%malina141_sylius_wishlist.cookie.name%</argument>
+            <argument type="service" id="malina141_sylius_wishlist.generator.wishlist_token"/>
+        </service>
+
+        <service id="malina141_sylius_wishlist.checker.wishlist_token_uniqueness"
+                 class="Sylius\Component\User\Security\Checker\TokenUniquenessChecker">
+            <argument type="service" id="malina141_sylius_wishlist.repository.wishlist"/>
+            <argument>token</argument>
+        </service>
+
+        <service id="malina141_sylius_wishlist.sylius_generator.wishlist_token"
+                 class="Sylius\Component\User\Security\Generator\UniqueTokenGenerator">
             <argument type="service" id="Sylius\Resource\Generator\RandomnessGeneratorInterface"/>
+            <argument type="service" id="malina141_sylius_wishlist.checker.wishlist_token_uniqueness"/>
             <argument>%malina141_sylius_wishlist.token.length%</argument>
+        </service>
+
+        <service id="malina141_sylius_wishlist.generator.wishlist_token"
+                 class="Malina141\SyliusWishlistPlugin\Generator\UniqueWishlistTokenGenerator">
+            <argument type="service" id="malina141_sylius_wishlist.sylius_generator.wishlist_token"/>
         </service>
 
         <service id="malina141_sylius_wishlist.context.wishlist.customer_based"
@@ -41,7 +58,7 @@
 
         <service id="malina141_sylius_wishlist.context.wishlist.token_and_channel_based"
                  class="Malina141\SyliusWishlistPlugin\Context\TokenAndChannelBasedWishlistContext">
-            <argument type="service" id="malina141_sylius_wishlist.provider.wishlist_token"/>
+            <argument type="service" id="malina141_sylius_wishlist.provider.guest_wishlist_token"/>
             <argument type="service" id="sylius.context.channel"/>
             <argument type="service" id="malina141_sylius_wishlist.repository.wishlist"/>
 
@@ -53,7 +70,7 @@
             <argument type="service" id="malina141_sylius_wishlist.factory.wishlist"/>
             <argument type="service" id="sylius.context.customer"/>
             <argument type="service" id="sylius.context.channel"/>
-            <argument type="service" id="malina141_sylius_wishlist.provider.wishlist_token"/>
+            <argument type="service" id="malina141_sylius_wishlist.provider.guest_wishlist_token"/>
 
             <tag name="malina141_sylius_wishlist.wishlist_context" priority="-10"/>
         </service>

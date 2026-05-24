@@ -7,7 +7,7 @@ namespace Tests\Malina141\SyliusWishlistPlugin\Unit\Context;
 use Malina141\SyliusWishlistPlugin\Context\TokenAndChannelBasedWishlistContext;
 use Malina141\SyliusWishlistPlugin\Entity\WishlistInterface;
 use Malina141\SyliusWishlistPlugin\Exception\WishlistNotFoundException;
-use Malina141\SyliusWishlistPlugin\Provider\WishlistTokenProviderInterface;
+use Malina141\SyliusWishlistPlugin\Provider\GuestWishlistTokenProviderInterface;
 use Malina141\SyliusWishlistPlugin\Repository\WishlistRepositoryInterface;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\MockObject\Stub;
@@ -17,7 +17,7 @@ use Sylius\Component\Channel\Model\ChannelInterface;
 
 final class TokenAndChannelBasedWishlistContextTest extends TestCase
 {
-    private WishlistTokenProviderInterface&Stub $wishlistTokenProvider;
+    private GuestWishlistTokenProviderInterface&Stub $guestWishlistTokenProvider;
 
     private ChannelContextInterface&Stub $channelContext;
 
@@ -27,12 +27,12 @@ final class TokenAndChannelBasedWishlistContextTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->wishlistTokenProvider = $this->createStub(WishlistTokenProviderInterface::class);
+        $this->guestWishlistTokenProvider = $this->createStub(GuestWishlistTokenProviderInterface::class);
         $this->channelContext = $this->createStub(ChannelContextInterface::class);
         $this->wishlistRepository = $this->createMock(WishlistRepositoryInterface::class);
 
         $this->context = new TokenAndChannelBasedWishlistContext(
-            $this->wishlistTokenProvider,
+            $this->guestWishlistTokenProvider,
             $this->channelContext,
             $this->wishlistRepository,
         );
@@ -43,7 +43,7 @@ final class TokenAndChannelBasedWishlistContextTest extends TestCase
         $channel = $this->createMock(ChannelInterface::class);
         $wishlist = $this->createMock(WishlistInterface::class);
 
-        $this->wishlistTokenProvider->method('provideToken')->willReturn('token-123');
+        $this->guestWishlistTokenProvider->method('provideToken')->willReturn('token-123');
         $this->channelContext->method('getChannel')->willReturn($channel);
         $this->wishlistRepository
             ->expects($this->once())
@@ -59,7 +59,7 @@ final class TokenAndChannelBasedWishlistContextTest extends TestCase
     {
         $channel = $this->createMock(ChannelInterface::class);
 
-        $this->wishlistTokenProvider->method('provideToken')->willReturn('token-123');
+        $this->guestWishlistTokenProvider->method('provideToken')->willReturn('token-123');
         $this->channelContext->method('getChannel')->willReturn($channel);
         $this->wishlistRepository
             ->expects($this->once())

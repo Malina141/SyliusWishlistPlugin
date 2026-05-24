@@ -4,33 +4,38 @@ declare(strict_types=1);
 
 namespace Tests\Malina141\SyliusWishlistPlugin\Unit\Provider;
 
-use Malina141\SyliusWishlistPlugin\Provider\WishlistCookieTokenProvider;
+use Malina141\SyliusWishlistPlugin\Generator\WishlistTokenGeneratorInterface;
+use Malina141\SyliusWishlistPlugin\Provider\CookieBasedGuestWishlistTokenProvider;
 use Override;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
-use Sylius\Resource\Generator\RandomnessGeneratorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Webmozart\Assert\InvalidArgumentException;
 
-final class WishlistCookieTokenProviderTest extends TestCase
+final class CookieBasedGuestWishlistTokenProviderTest extends TestCase
 {
     private const string COOKIE_NAME = 'COOKIE_NAME';
     private const string TOKEN_VALUE = 'COOKIE_TOKEN';
 
-    private WishlistCookieTokenProvider $wishlistCookieTokenProvider;
+    private CookieBasedGuestWishlistTokenProvider $guestWishlistTokenProvider;
 
     private RequestStack&Stub $requestStack;
 
-    private RandomnessGeneratorInterface&Stub $randomnessGenerator;
+    private WishlistTokenGeneratorInterface&MockObject $wishlistTokenGenerator;
 
     #[Override]
     public function setUp(): void
     {
-        $this->requestStack =  $this->createStub(RequestStack::class);
-        $this->randomnessGenerator = $this->createStub(RandomnessGeneratorInterface::class);
+        $this->requestStack = $this->createStub(RequestStack::class);
+        $this->wishlistTokenGenerator = $this->createMock(WishlistTokenGeneratorInterface::class);
 
-        $this->wishlistCookieTokenProvider = new WishlistCookieTokenProvider($this->requestStack, self::COOKIE_NAME, $this->randomnessGenerator);
+        $this->guestWishlistTokenProvider = new CookieBasedGuestWishlistTokenProvider(
+            $this->requestStack,
+            self::COOKIE_NAME,
+            $this->wishlistTokenGenerator,
+        );
     }
 
     public function test_it_throws_exception_if_main_request_is_null(): void
@@ -39,7 +44,7 @@ final class WishlistCookieTokenProviderTest extends TestCase
 
         $this->expectException(InvalidArgumentException::class);
 
-        $this->wishlistCookieTokenProvider->provideToken();
+        $this->guestWishlistTokenProvider->provideToken();
     }
 
     public function test_it_returns_token_from_request_attributes(): void
@@ -49,8 +54,9 @@ final class WishlistCookieTokenProviderTest extends TestCase
         $request->attributes->set(self::COOKIE_NAME, self::TOKEN_VALUE);
 
         $this->requestStack->method('getMainRequest')->willReturn($request);
+        $this->wishlistTokenGenerator->expects($this->never())->method('generate');
 
-        $this->assertSame(self::TOKEN_VALUE, $this->wishlistCookieTokenProvider->provideToken());
+        $this->assertSame(self::TOKEN_VALUE, $this->guestWishlistTokenProvider->provideToken());
     }
 
     public function test_it_returns_token_from_cookie_and_sets_it_in_attribute(): void
@@ -60,8 +66,9 @@ final class WishlistCookieTokenProviderTest extends TestCase
         $request->cookies->set(self::COOKIE_NAME, self::TOKEN_VALUE);
 
         $this->requestStack->method('getMainRequest')->willReturn($request);
+        $this->wishlistTokenGenerator->expects($this->never())->method('generate');
 
-        $this->assertSame(self::TOKEN_VALUE, $this->wishlistCookieTokenProvider->provideToken());
+        $this->assertSame(self::TOKEN_VALUE, $this->guestWishlistTokenProvider->provideToken());
         $this->assertSame(self::TOKEN_VALUE, $request->attributes->get(self::COOKIE_NAME));
     }
 
@@ -70,10 +77,13 @@ final class WishlistCookieTokenProviderTest extends TestCase
         $request = new Request();
 
         $this->requestStack->method('getMainRequest')->willReturn($request);
-        $this->randomnessGenerator->method('generateUriSafeString')->willReturn(self::TOKEN_VALUE);
+        $this->wishlistTokenGenerator
+            ->expects($this->once())
+            ->method('generate')
+            ->willReturn(self::TOKEN_VALUE)
+        ;
 
-        $this->assertSame(self::TOKEN_VALUE, $this->wishlistCookieTokenProvider->provideToken());
+        $this->assertSame(self::TOKEN_VALUE, $this->guestWishlistTokenProvider->provideToken());
         $this->assertSame(self::TOKEN_VALUE, $request->attributes->get(self::COOKIE_NAME));
     }
-
 }
