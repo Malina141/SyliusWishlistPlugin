@@ -70,6 +70,14 @@
             <argument type="service" id="malina141_sylius_wishlist.manager.wishlist"/>
         </service>
 
+        <service id="malina141_sylius_wishlist.merger.guest_wishlist_login"
+                 class="Malina141\SyliusWishlistPlugin\Merger\GuestWishlistLoginMerger">
+            <argument type="service" id="sylius.context.channel"/>
+            <argument type="service" id="malina141_sylius_wishlist.repository.wishlist"/>
+            <argument type="service" id="malina141_sylius_wishlist.merger.wishlist"/>
+            <argument type="service" id="malina141_sylius_wishlist.manager.wishlist"/>
+        </service>
+
         <service id="malina141_sylius_wishlist.event_subscriber.attach_wishlist_cookie_token"
                  class="Malina141\SyliusWishlistPlugin\EventSubscriber\AttachWishlistCookieTokenSubscriber">
             <argument type="service" id="malina141_sylius_wishlist.factory.wishlist_cookie"/>
@@ -80,10 +88,7 @@
         <service id="malina141_sylius_wishlist.event_subscriber.merge_wishlist_on_login"
                  class="Malina141\SyliusWishlistPlugin\EventSubscriber\MergeWishlistOnLoginSubscriber">
             <argument type="service" id="malina141_sylius_wishlist.options.wishlist_cookie"/>
-            <argument type="service" id="malina141_sylius_wishlist.repository.wishlist"/>
-            <argument type="service" id="malina141_sylius_wishlist.manager.wishlist"/>
-            <argument type="service" id="sylius.context.channel"/>
-            <argument type="service" id="malina141_sylius_wishlist.merger.wishlist"/>
+            <argument type="service" id="malina141_sylius_wishlist.merger.guest_wishlist_login"/>
             <tag name="kernel.event_subscriber"/>
         </service>
 
