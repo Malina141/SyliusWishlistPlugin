@@ -38,4 +38,10 @@ class WishlistItem implements WishlistItemInterface
     {
         $this->productVariant = $productVariant;
     }
+
+    public function __clone(): void
+    {
+        $this->id = null;
+        $this->wishlist = null;
+    }
 }

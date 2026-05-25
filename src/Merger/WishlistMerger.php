@@ -46,7 +46,7 @@ final readonly class WishlistMerger implements WishlistMergerInterface
                 continue;
             }
 
-            $item->setWishlist($userWishlist);
+            $userWishlist->addItem(clone $item);
         }
     }
 }
