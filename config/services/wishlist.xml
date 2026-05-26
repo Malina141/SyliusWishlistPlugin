@@ -212,6 +212,22 @@
             <tag name="kernel.event_subscriber"/>
         </service>
 
+        <service id="malina141_sylius_wishlist.api.command_handler.shop.wishlist.create"
+                 class="Malina141\SyliusWishlistPlugin\Api\CommandHandler\Shop\Wishlist\CreateWishlistHandler">
+            <argument type="service" id="sylius.repository.channel"/>
+            <argument type="service" id="malina141_sylius_wishlist.factory.wishlist"/>
+            <argument type="service" id="malina141_sylius_wishlist.manager.wishlist"/>
+            <argument type="service" id="malina141_sylius_wishlist.generator.wishlist_token"/>
+            <tag name="messenger.message_handler" bus="sylius.command_bus"/>
+        </service>
+
+        <service id="malina141_sylius_wishlist.api.state_provider.shop.wishlist.item"
+                 class="Malina141\SyliusWishlistPlugin\Api\StateProvider\Shop\Wishlist\ItemProvider">
+            <argument type="service" id="sylius.context.channel"/>
+            <argument type="service" id="malina141_sylius_wishlist.repository.wishlist"/>
+            <tag name="api_platform.state_provider" priority="10"/>
+        </service>
+
         <service id="malina141_sylius_wishlist.grid_filter.exists" 
                 class="Malina141\SyliusWishlistPlugin\Grid\Filter\ExistsFilter">
             <tag name="sylius.grid_filter" type="malina141_exists" form_type="Sylius\Bundle\GridBundle\Form\Type\Filter\SelectFilterType" />

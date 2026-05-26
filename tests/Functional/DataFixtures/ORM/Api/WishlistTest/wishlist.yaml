@@ -1,0 +1,50 @@
+Sylius\Component\Currency\Model\Currency:
+    currency_usd:
+        code: 'USD'
+
+Sylius\Component\Locale\Model\Locale:
+    locale_en_us:
+        code: 'en_US'
+
+Sylius\Component\Core\Model\Channel:
+    channel_fashion_web:
+        code: 'FASHION_WEB'
+        name: 'Fashion Web'
+        hostname: 'localhost'
+        baseCurrency: '@currency_usd'
+        currencies:
+            - '@currency_usd'
+        defaultLocale: '@locale_en_us'
+        locales:
+            - '@locale_en_us'
+        taxCalculationStrategy: 'order_items_based'
+        enabled: true
+
+    channel_wishlist_api_other:
+        code: 'WISHLIST_API_OTHER'
+        name: 'Wishlist API Other'
+        hostname: 'wishlist-api-other.localhost'
+        baseCurrency: '@currency_usd'
+        currencies:
+            - '@currency_usd'
+        defaultLocale: '@locale_en_us'
+        locales:
+            - '@locale_en_us'
+        taxCalculationStrategy: 'order_items_based'
+        enabled: true
+
+Malina141\SyliusWishlistPlugin\Entity\Wishlist:
+    api_wishlist:
+        token: 'api-wishlist-token'
+        channel: '@channel_fashion_web'
+        name: null
+
+    api_existing_wishlist:
+        token: 'api-existing-token'
+        channel: '@channel_fashion_web'
+        name: null
+
+    other_channel_wishlist:
+        token: 'other-channel-wishlist-token'
+        channel: '@channel_wishlist_api_other'
+        name: null

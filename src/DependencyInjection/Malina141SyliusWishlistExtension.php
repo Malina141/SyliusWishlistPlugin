@@ -8,7 +8,6 @@ use Malina141\SyliusWishlistPlugin\SM\WishlistShareStates;
 use Malina141\SyliusWishlistPlugin\SM\WishlistShareTransitions;
 use Sylius\Bundle\CoreBundle\DependencyInjection\PrependDoctrineMigrationsTrait;
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
-use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
@@ -42,6 +41,7 @@ final class Malina141SyliusWishlistExtension extends AbstractResourceExtension i
     public function prepend(ContainerBuilder $container): void
     {
         $this->prependDoctrineMigrations($container);
+        $this->prependApiPlatformMapping($container);
 
         $config = $this->getCurrentConfiguration($container);
         $this->registerResources('malina141_sylius_wishlist', 'doctrine/orm', $config['resources'], $container);
@@ -94,10 +94,18 @@ final class Malina141SyliusWishlistExtension extends AbstractResourceExtension i
 
     private function getCurrentConfiguration(ContainerBuilder $container): array
     {
-        /** @var ConfigurationInterface $configuration */
         $configuration = $this->getConfiguration([], $container);
         $configs = $container->getExtensionConfig($this->getAlias());
 
         return $this->processConfiguration($configuration, $configs);
+    }
+
+    private function prependApiPlatformMapping(ContainerBuilder $container): void
+    {
+        /** @var array<string, array{path: string}> $bundlesMetadata */
+        $bundlesMetadata = $container->getParameter('kernel.bundles_metadata');
+        $path = $bundlesMetadata['Malina141SyliusWishlistPlugin']['path'] . '/config/api_platform';
+
+        $container->prependExtensionConfig('api_platform', ['mapping' => ['paths' => [$path]]]);
     }
 }

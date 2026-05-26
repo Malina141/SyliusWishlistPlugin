@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<resources
+    xmlns="https://api-platform.com/schema/metadata/resources-3.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://api-platform.com/schema/metadata/resources-3.0 https://api-platform.com/schema/metadata/resources-3.0.xsd"
+>
+    <resource class="%malina141_sylius_wishlist.model.wishlist.class%">
+        <operations>
+            <operation
+                name="malina141_sylius_wishlist_api_shop_wishlist_get"
+                class="ApiPlatform\Metadata\Get"
+                uriTemplate="/shop/wishlists/{token}"
+                provider="malina141_sylius_wishlist.api.state_provider.shop.wishlist.item"
+            >
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>malina141:shop:wishlist:show</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+            </operation>
+
+            <operation
+                name="malina141_sylius_wishlist_api_shop_wishlist_post"
+                class="ApiPlatform\Metadata\Post"
+                uriTemplate="/shop/wishlists"
+                itemUriTemplate="/shop/wishlists/{token}"
+                messenger="input"
+                input="Malina141\SyliusWishlistPlugin\Api\Command\Shop\Wishlist\CreateWishlist"
+            >
+                <denormalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>malina141:shop:wishlist:create</value>
+                            </values>
+                        </value>
+                    </values>
+                </denormalizationContext>
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>malina141:shop:wishlist:show</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+            </operation>
+        </operations>
+    </resource>
+</resources>

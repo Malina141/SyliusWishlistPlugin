@@ -1,0 +1,8 @@
+{
+    "@context": "/api/v2/contexts/Wishlist",
+    "@id": "@string@.startsWith('/api/v2/shop/wishlists/')",
+    "@type": "Wishlist",
+    "items": [],
+    "token": "@string@.isNotEmpty()",
+    "name": null
+}
