@@ -11,6 +11,7 @@
         </attribute>
         <attribute name="name">
             <group>malina141:shop:wishlist:show</group>
+            <group>malina141:shop:wishlist:patch</group>
         </attribute>
         <attribute name="items">
             <group>malina141:shop:wishlist:show</group>

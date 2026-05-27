@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Malina141\SyliusWishlistPlugin\Functional\Api\Shop;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use Symfony\Component\HttpFoundation\Response;
 use Tests\Malina141\SyliusWishlistPlugin\Functional\FunctionalTestCase;
 
@@ -135,5 +136,38 @@ final class WishlistTest extends FunctionalTestCase
         $response = $this->client->getResponse();
 
         $this->assertSame(Response::HTTP_NOT_FOUND, $response->getStatusCode());
+    }
+
+    public function test_guest_can_update_wishlist_name(): void
+    {
+        $response = $this->requestJson('PATCH', '/api/v2/shop/wishlists/api-wishlist-token', [
+            'name' => 'asd'
+        ]);
+
+        $this->assertResponse($response, 'Api/WishlistTest/update_wishlist_name_response');
+    }
+
+    /**
+     * @return iterable<string, array{name: string}>
+     */
+    public static function invalidWishlistNameProvider(): iterable
+    {
+        yield 'empty name' => [
+            'name' => '',
+        ];
+
+        yield 'name over 255 characters' => [
+            'name' => str_repeat('a', 256),
+        ];
+    }
+
+    #[DataProvider('invalidWishlistNameProvider')]
+    public function test_wishlist_name_is_validated(string $name): void
+    {
+        $response = $this->requestJson('PATCH', '/api/v2/shop/wishlists/api-wishlist-token', [
+            'name' => $name,
+        ]);
+
+        $this->assertResponseCode($response, Response::HTTP_UNPROCESSABLE_ENTITY);
     }
 }

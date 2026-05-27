@@ -14,6 +14,11 @@ abstract class FunctionalTestCase extends JsonApiTestCase
         'HTTP_ACCEPT' => 'application/ld+json',
     ];
 
+    public const UPDATE_CONTENT_TYPE_HEADER = [
+        'CONTENT_TYPE' => 'application/merge-patch+json',
+        'HTTP_ACCEPT'   => 'application/ld+json',
+    ];
+
     public function __construct(
         ?string $name = null,
         array $data = [],
@@ -27,7 +32,7 @@ abstract class FunctionalTestCase extends JsonApiTestCase
 
     protected function requestJson(string $method, string $uri, array $content = []): Response
     {
-        $this->client->request($method, $uri, [], [], self::CONTENT_TYPE_HEADER, \json_encode($content));
+        $this->client->request($method, $uri, [], [], $method === 'PATCH' ? self::UPDATE_CONTENT_TYPE_HEADER : self::CONTENT_TYPE_HEADER, \json_encode($content));
 
         return $this->client->getResponse();
     }
