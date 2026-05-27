@@ -1,0 +1,15 @@
+{
+    "@context": "/api/v2/contexts/Wishlist",
+    "@id": "/api/v2/shop/wishlists/api-existing-token",
+    "@type": "Wishlist",
+    "items": [
+        {
+            "@type": "WishlistItem",
+            "@id": "@string@.startsWith('/api/v2/.well-known/genid/')",
+            "id": "@integer@",
+            "productVariant": "/api/v2/shop/product-variants/API_PRODUCT_VARIANT"
+        }
+    ],
+    "token": "api-existing-token",
+    "name": null
+}

@@ -51,6 +51,50 @@
                     </values>
                 </normalizationContext>
             </operation>
+
+            <operation
+                name="malina141_sylius_wishlist_api_shop_wishlist_item_post"
+                class="ApiPlatform\Metadata\Post"
+                uriTemplate="/shop/wishlists/{token}/items"
+                messenger="input"
+                input="Malina141\SyliusWishlistPlugin\Api\Command\Shop\Wishlist\AddItemToWishlist"
+            >
+                <uriVariables>
+                    <uriVariable parameterName="token" fromClass="%malina141_sylius_wishlist.model.wishlist.class%"/>
+                </uriVariables>
+
+                <denormalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>malina141:shop:wishlist:add_item</value>
+                            </values>
+                        </value>
+                    </values>
+                </denormalizationContext>
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>malina141:shop:wishlist:show</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+            </operation>
+
+            <operation
+                name="malina141_sylius_wishlist_api_shop_wishlist_item_delete"
+                class="ApiPlatform\Metadata\Delete"
+                uriTemplate="/shop/wishlists/{token}/items/{variantCode}"
+                provider="malina141_sylius_wishlist.api.state_provider.shop.wishlist.item"
+                processor="malina141_sylius_wishlist.api.state_processor.shop.wishlist.remove_item"
+            >
+                <uriVariables>
+                    <uriVariable parameterName="token" fromClass="%malina141_sylius_wishlist.model.wishlist.class%"/>
+                    <uriVariable parameterName="variantCode" fromClass="%sylius.model.product_variant.class%"/>
+                </uriVariables>
+            </operation>
         </operations>
     </resource>
 </resources>

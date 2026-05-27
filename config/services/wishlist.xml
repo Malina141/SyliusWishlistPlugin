@@ -221,11 +221,38 @@
             <tag name="messenger.message_handler" bus="sylius.command_bus"/>
         </service>
 
+        <service id="malina141_sylius_wishlist.api.command_handler.shop.wishlist.add_item"
+                 class="Malina141\SyliusWishlistPlugin\Api\CommandHandler\Shop\Wishlist\AddItemToWishlistHandler">
+            <argument type="service" id="malina141_sylius_wishlist.repository.wishlist"/>
+            <argument type="service" id="sylius.repository.product_variant"/>
+            <argument type="service" id="sylius.repository.channel"/>
+            <argument type="service" id="malina141_sylius_wishlist.modifier.wishlist"/>
+            <tag name="messenger.message_handler" bus="sylius.command_bus"/>
+        </service>
+
         <service id="malina141_sylius_wishlist.api.state_provider.shop.wishlist.item"
                  class="Malina141\SyliusWishlistPlugin\Api\StateProvider\Shop\Wishlist\ItemProvider">
             <argument type="service" id="sylius.context.channel"/>
             <argument type="service" id="malina141_sylius_wishlist.repository.wishlist"/>
             <tag name="api_platform.state_provider" priority="10"/>
+        </service>
+
+        <service id="malina141_sylius_wishlist.api.state_processor.shop.wishlist.remove_item"
+                 class="Malina141\SyliusWishlistPlugin\Api\StateProcessor\Shop\Wishlist\RemoveItemFromWishlistProcessor">
+            <argument type="service" id="sylius.repository.product_variant"/>
+            <argument type="service" id="malina141_sylius_wishlist.modifier.wishlist"/>
+            <argument type="service" id="malina141_sylius_wishlist.manager.wishlist"/>
+            <tag name="api_platform.state_processor"/>
+        </service>
+
+        <service id="malina141_sylius_wishlist.api.context_builder.token_aware.add_item_to_wishlist"
+                 class="Sylius\Bundle\ApiBundle\Serializer\ContextBuilder\UriVariablesAwareContextBuilder"
+                 decorates="api_platform.serializer.context_builder"
+                 decoration-priority="64">
+            <argument type="service" id=".inner"/>
+            <argument>Sylius\Bundle\ApiBundle\Attribute\TokenAware</argument>
+            <argument>wishlistToken</argument>
+            <argument>Malina141\SyliusWishlistPlugin\Entity\WishlistInterface</argument>
         </service>
 
         <service id="malina141_sylius_wishlist.grid_filter.exists" 

@@ -1,0 +1,8 @@
+{
+    "@context": "/api/v2/contexts/Wishlist",
+    "@id": "/api/v2/shop/wishlists/api-existing-token",
+    "@type": "Wishlist",
+    "items": [],
+    "token": "api-existing-token",
+    "name": null
+}
