@@ -4,5 +4,6 @@
     "@type": "Wishlist",
     "items": [],
     "token": "api-wishlist-token",
+    "shareToken": null,
     "name": null
 }

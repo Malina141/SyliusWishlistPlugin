@@ -1,0 +1,82 @@
+Sylius\Component\Currency\Model\Currency:
+    currency_usd:
+        code: 'USD'
+
+Sylius\Component\Locale\Model\Locale:
+    locale_en_us:
+        code: 'en_US'
+
+Sylius\Component\Core\Model\Channel:
+    channel_fashion_web:
+        code: 'FASHION_WEB'
+        name: 'Fashion Web'
+        hostname: 'localhost'
+        baseCurrency: '@currency_usd'
+        currencies:
+            - '@currency_usd'
+        defaultLocale: '@locale_en_us'
+        locales:
+            - '@locale_en_us'
+        taxCalculationStrategy: 'order_items_based'
+        enabled: true
+
+    channel_wishlist_api_other:
+        code: 'WISHLIST_API_OTHER'
+        name: 'Wishlist API Other'
+        hostname: 'wishlist-api-other.localhost'
+        baseCurrency: '@currency_usd'
+        currencies:
+            - '@currency_usd'
+        defaultLocale: '@locale_en_us'
+        locales:
+            - '@locale_en_us'
+        taxCalculationStrategy: 'order_items_based'
+        enabled: true
+
+Sylius\Component\Core\Model\Product:
+    api_product:
+        code: 'API_PRODUCT'
+        enabled: true
+        channels:
+            - '@channel_fashion_web'
+
+Sylius\Component\Core\Model\ProductVariant:
+    api_product_variant:
+        code: 'API_PRODUCT_VARIANT'
+        product: '@api_product'
+        enabled: true
+        position: 0
+
+Malina141\SyliusWishlistPlugin\Entity\Wishlist:
+    unshared_wishlist:
+        token: 'unshared-token'
+        channel: '@channel_fashion_web'
+        name: 'My Unshared Wishlist'
+        shareState: not_shared
+        shareToken: null
+
+    unshared_wishlist_with_stale_share_token:
+        token: 'unshared-token-with-stale-share'
+        channel: '@channel_fashion_web'
+        name: 'My Unshared Wishlist With Stale Share Token'
+        shareState: not_shared
+        shareToken: 'stale-share-token'
+
+    shared_wishlist:
+        token: 'shared-token'
+        channel: '@channel_fashion_web'
+        name: 'My Shared Wishlist'
+        shareState: shared
+        shareToken: 'public-share-token-abc'
+
+    other_channel_wishlist:
+        token: 'other-channel-token'
+        channel: '@channel_wishlist_api_other'
+        name: 'Other Channel Wishlist'
+        shareState: shared
+        shareToken: 'other-channel-share-token-xyz'
+
+Malina141\SyliusWishlistPlugin\Entity\WishlistItem:
+    shared_wishlist_item:
+        wishlist: '@shared_wishlist'
+        productVariant: '@api_product_variant'

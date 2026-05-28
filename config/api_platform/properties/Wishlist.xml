@@ -7,4 +7,5 @@
 >
     <property resource="%malina141_sylius_wishlist.model.wishlist.class%" name="id" identifier="false" writable="false"/>
     <property resource="%malina141_sylius_wishlist.model.wishlist.class%" name="token" identifier="true" writable="false"/>
+    <property resource="%malina141_sylius_wishlist.model.wishlist.class%" name="shareToken" identifier="false" writable="false"/>
 </properties>

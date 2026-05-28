@@ -9,12 +9,17 @@
         <attribute name="token">
             <group>malina141:shop:wishlist:show</group>
         </attribute>
+        <attribute name="shareToken">
+            <group>malina141:shop:wishlist:show</group>
+        </attribute>
         <attribute name="name">
             <group>malina141:shop:wishlist:show</group>
             <group>malina141:shop:wishlist:patch</group>
+            <group>malina141:shop:wishlist:shared:show</group>
         </attribute>
         <attribute name="items">
             <group>malina141:shop:wishlist:show</group>
+            <group>malina141:shop:wishlist:shared:show</group>
         </attribute>
     </class>
 </serializer>

@@ -1,6 +1,6 @@
 {
     "@context": "/api/v2/contexts/Wishlist",
-    "@id": "/api/v2/shop/wishlists/api-existing-token",
+    "@id": "/api/v2/shop/wishlists/shared-token/unshare",
     "@type": "Wishlist",
     "items": [
         {
@@ -10,7 +10,7 @@
             "productVariant": "/api/v2/shop/product-variants/API_PRODUCT_VARIANT"
         }
     ],
-    "token": "api-existing-token",
+    "token": "shared-token",
     "shareToken": null,
-    "name": null
+    "name": "My Shared Wishlist"
 }

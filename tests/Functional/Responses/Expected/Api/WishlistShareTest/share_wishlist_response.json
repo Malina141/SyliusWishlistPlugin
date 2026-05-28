@@ -1,0 +1,9 @@
+{
+    "@context": "/api/v2/contexts/Wishlist",
+    "@id": "/api/v2/shop/wishlists/unshared-token/share",
+    "@type": "Wishlist",
+    "items": [],
+    "token": "unshared-token",
+    "shareToken": "@string@",
+    "name": "My Unshared Wishlist"
+}

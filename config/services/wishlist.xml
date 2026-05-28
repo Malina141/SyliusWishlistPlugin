@@ -255,7 +255,20 @@
             <argument>Malina141\SyliusWishlistPlugin\Entity\WishlistInterface</argument>
         </service>
 
-        <service id="malina141_sylius_wishlist.grid_filter.exists" 
+        <service id="malina141_sylius_wishlist.api.applicator.wishlist_share"
+                 class="Malina141\SyliusWishlistPlugin\Api\Applicator\WishlistShareStateMachineTransitionApplicator"
+                 public="true">
+            <argument type="service" id="sylius_abstraction.state_machine"/>
+        </service>
+
+        <service id="malina141_sylius_wishlist.api.state_provider.shop.shared_wishlist.item"
+                 class="Malina141\SyliusWishlistPlugin\Api\StateProvider\Shop\SharedWishlist\ItemProvider">
+            <argument type="service" id="sylius.context.channel"/>
+            <argument type="service" id="malina141_sylius_wishlist.repository.wishlist"/>
+            <tag name="api_platform.state_provider" priority="10"/>
+        </service>
+
+        <service id="malina141_sylius_wishlist.grid_filter.exists"
                 class="Malina141\SyliusWishlistPlugin\Grid\Filter\ExistsFilter">
             <tag name="sylius.grid_filter" type="malina141_exists" form_type="Sylius\Bundle\GridBundle\Form\Type\Filter\SelectFilterType" />
         </service>

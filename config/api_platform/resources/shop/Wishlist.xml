@@ -140,6 +140,82 @@
                     </values>
                 </denormalizationContext>
             </operation>
+
+            <operation
+                name="malina141_sylius_wishlist_api_shop_wishlist_share"
+                class="ApiPlatform\Metadata\Patch"
+                uriTemplate="/shop/wishlists/{token}/share"
+                input="false"
+                provider="malina141_sylius_wishlist.api.state_provider.shop.wishlist.item"
+                controller="malina141_sylius_wishlist.api.applicator.wishlist_share::share"
+            >
+                <uriVariables>
+                    <uriVariable parameterName="token"
+                        fromClass="%malina141_sylius_wishlist.model.wishlist.class%" />
+                </uriVariables>
+
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>malina141:shop:wishlist:show</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+            </operation>
+
+            <operation
+                name="malina141_sylius_wishlist_api_shop_wishlist_unshare"
+                class="ApiPlatform\Metadata\Patch"
+                uriTemplate="/shop/wishlists/{token}/unshare"
+                input="false"
+                provider="malina141_sylius_wishlist.api.state_provider.shop.wishlist.item"
+                controller="malina141_sylius_wishlist.api.applicator.wishlist_share::unshare"
+            >
+                <uriVariables>
+                    <uriVariable parameterName="token"
+                        fromClass="%malina141_sylius_wishlist.model.wishlist.class%" />
+                </uriVariables>
+
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>malina141:shop:wishlist:show</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+            </operation>
+
+            <operation
+                name="malina141_sylius_wishlist_api_shop_shared_wishlist_get"
+                class="ApiPlatform\Metadata\Get"
+                uriTemplate="/shop/shared-wishlists/{shareToken}"
+                provider="malina141_sylius_wishlist.api.state_provider.shop.shared_wishlist.item"
+            >
+                <uriVariables>
+                    <uriVariable parameterName="shareToken"
+                        fromClass="%malina141_sylius_wishlist.model.wishlist.class%">
+                        <identifiers>
+                            <values>
+                                <value>shareToken</value>
+                            </values>
+                        </identifiers>
+                    </uriVariable>
+                </uriVariables>
+
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>malina141:shop:wishlist:shared:show</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+            </operation>
         </operations>
     </resource>
 </resources>
