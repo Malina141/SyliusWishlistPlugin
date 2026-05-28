@@ -142,6 +142,39 @@
             </operation>
 
             <operation
+                name="malina141_sylius_wishlist_api_shop_wishlist_add_to_cart"
+                class="ApiPlatform\Metadata\Post"
+                uriTemplate="/shop/wishlists/{token}/add-to-cart"
+                itemUriTemplate="/shop/orders/{tokenValue}"
+                messenger="input"
+                input="Malina141\SyliusWishlistPlugin\Api\Command\Shop\Wishlist\AddWishlistItemsToCart"
+            >
+                <uriVariables>
+                    <uriVariable parameterName="token"
+                        fromClass="%malina141_sylius_wishlist.model.wishlist.class%" />
+                </uriVariables>
+
+                <denormalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>malina141:shop:wishlist:add_to_cart</value>
+                            </values>
+                        </value>
+                    </values>
+                </denormalizationContext>
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:shop:cart:show</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+            </operation>
+
+            <operation
                 name="malina141_sylius_wishlist_api_shop_wishlist_share"
                 class="ApiPlatform\Metadata\Patch"
                 uriTemplate="/shop/wishlists/{token}/share"

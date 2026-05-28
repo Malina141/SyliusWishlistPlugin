@@ -212,6 +212,17 @@
             <tag name="kernel.event_subscriber"/>
         </service>
 
+        <service id="malina141_sylius_wishlist.api.command_handler.shop.wishlist.add_to_cart"
+                 class="Malina141\SyliusWishlistPlugin\Api\CommandHandler\Shop\Wishlist\AddWishlistItemsToCartHandler">
+            <argument type="service" id="malina141_sylius_wishlist.repository.wishlist"/>
+            <argument type="service" id="sylius.repository.channel"/>
+            <argument type="service" id="malina141_sylius_wishlist.repository.wishlist_item"/>
+            <argument type="service" id="sylius.repository.order"/>
+            <argument type="service" id="malina141_sylius_wishlist.adder.wishlist_items_to_cart"/>
+            <argument type="service" id="sylius_api.context.user.token_based"/>
+            <tag name="messenger.message_handler" bus="sylius.command_bus"/>
+        </service>
+
         <service id="malina141_sylius_wishlist.api.command_handler.shop.wishlist.create"
                  class="Malina141\SyliusWishlistPlugin\Api\CommandHandler\Shop\Wishlist\CreateWishlistHandler">
             <argument type="service" id="sylius.repository.channel"/>

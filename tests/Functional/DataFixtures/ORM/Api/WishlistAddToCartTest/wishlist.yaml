@@ -1,0 +1,114 @@
+Sylius\Component\Currency\Model\Currency:
+    currency_usd:
+        code: 'USD'
+
+Sylius\Component\Locale\Model\Locale:
+    locale_en_us:
+        code: 'en_US'
+
+Sylius\Component\Core\Model\Channel:
+    channel_fashion_web:
+        code: 'FASHION_WEB'
+        name: 'Fashion Web'
+        hostname: 'localhost'
+        baseCurrency: '@currency_usd'
+        currencies:
+            - '@currency_usd'
+        defaultLocale: '@locale_en_us'
+        locales:
+            - '@locale_en_us'
+        taxCalculationStrategy: 'order_items_based'
+        enabled: true
+
+    channel_wishlist_api_other:
+        code: 'WISHLIST_API_OTHER'
+        name: 'Wishlist API Other'
+        hostname: 'wishlist-api-other.localhost'
+        baseCurrency: '@currency_usd'
+        currencies:
+            - '@currency_usd'
+        defaultLocale: '@locale_en_us'
+        locales:
+            - '@locale_en_us'
+        taxCalculationStrategy: 'order_items_based'
+        enabled: true
+
+Sylius\Component\Core\Model\Product:
+    api_product:
+        code: 'API_PRODUCT'
+        currentLocale: 'en_US'
+        fallbackLocale: 'en_US'
+        name: 'API product'
+        slug: 'api_product'
+        enabled: true
+        channels:
+            - '@channel_fashion_web'
+
+Sylius\Component\Core\Model\ProductVariant:
+    api_product_variant:
+        code: 'API_PRODUCT_VARIANT'
+        currentLocale: 'en_US'
+        fallbackLocale: 'en_US'
+        name: 'API product variant'
+        product: '@api_product'
+        enabled: true
+        position: 0
+
+    api_disabled_product_variant:
+        code: 'API_DISABLED_PRODUCT_VARIANT'
+        currentLocale: 'en_US'
+        fallbackLocale: 'en_US'
+        name: 'API disabled product variant'
+        product: '@api_product'
+        enabled: false
+        position: 1
+
+Sylius\Component\Core\Model\ChannelPricing:
+    api_product_variant_channel_pricing:
+        productVariant: '@api_product_variant'
+        channelCode: 'FASHION_WEB'
+        price: 1000
+
+    api_disabled_product_variant_channel_pricing:
+        productVariant: '@api_disabled_product_variant'
+        channelCode: 'FASHION_WEB'
+        price: 1000
+
+Malina141\SyliusWishlistPlugin\Entity\Wishlist:
+    api_wishlist:
+        token: 'api-wishlist-token'
+        channel: '@channel_fashion_web'
+        name: null
+
+    api_other_wishlist:
+        token: 'api-other-wishlist-token'
+        channel: '@channel_fashion_web'
+        name: null
+
+Malina141\SyliusWishlistPlugin\Entity\WishlistItem:
+    api_wishlist_item_variant:
+        wishlist: '@api_wishlist'
+        productVariant: '@api_product_variant'
+
+    api_wishlist_item_disabled:
+        wishlist: '@api_wishlist'
+        productVariant: '@api_disabled_product_variant'
+
+    api_other_wishlist_item:
+        wishlist: '@api_other_wishlist'
+        productVariant: '@api_product_variant'
+
+Sylius\Component\Core\Model\Order:
+    api_cart:
+        tokenValue: 'api-cart-token'
+        channel: '@channel_fashion_web'
+        state: 'cart'
+        currencyCode: 'USD'
+        localeCode: 'en_US'
+
+    api_other_channel_cart:
+        tokenValue: 'api-other-channel-cart-token'
+        channel: '@channel_wishlist_api_other'
+        state: 'cart'
+        currencyCode: 'USD'
+        localeCode: 'en_US'

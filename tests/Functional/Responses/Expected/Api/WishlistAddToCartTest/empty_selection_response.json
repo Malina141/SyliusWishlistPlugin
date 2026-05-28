@@ -1,0 +1,8 @@
+{
+    "@context": "/api/v2/contexts/Order",
+    "@id": "/api/v2/shop/orders/api-cart-token",
+    "@type": "Order",
+    "tokenValue": "api-cart-token",
+    "items": "@array@.count(0)",
+    "@*@": "@*@"
+}
