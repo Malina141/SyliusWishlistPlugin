@@ -2,3 +2,10 @@ malina141_sylius_wishlist:
     name:
         not_blank: 'Wishlist name cannot be blank.'
         max: 'Wishlist name is too long. It should have {{ limit }} characters or less.'
+    order_token_value:
+        not_blank: 'Cart token cannot be blank.'
+    wishlist_item_ids:
+        invalid_type: 'Wishlist item ids must be a list.'
+        item:
+            invalid: 'Wishlist item id must be an integer.'
+            invalid_type: 'Wishlist item id must be an integer-like scalar value.'

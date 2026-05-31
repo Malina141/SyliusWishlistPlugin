@@ -9,14 +9,14 @@
             <constraint name="NotBlank">
                 <option name="message">malina141_sylius_wishlist.name.not_blank</option>
                 <option name="groups">
-                    <value>sylius</value>
+                    <value>malina141:shop:wishlist:patch</value>
                 </option>
             </constraint>
             <constraint name="Length">
                 <option name="max">255</option>
                 <option name="maxMessage">malina141_sylius_wishlist.name.max</option>
                 <option name="groups">
-                    <value>sylius</value>
+                    <value>malina141:shop:wishlist:patch</value>
                 </option>
             </constraint>
         </property>

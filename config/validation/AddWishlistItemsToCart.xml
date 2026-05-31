@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<constraint-mapping
+    xmlns="http://symfony.com/schema/dic/constraint-mapping"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd"
+>
+    <class name="Malina141\SyliusWishlistPlugin\Api\Command\Shop\Wishlist\AddWishlistItemsToCart">
+        <property name="wishlistItemIds">
+            <constraint name="Type">
+                <option name="type">list</option>
+                <option name="message">malina141_sylius_wishlist.wishlist_item_ids.invalid_type</option>
+                <option name="groups">malina141:shop:wishlist:add_to_cart</option>
+            </constraint>
+            <constraint name="All">
+                <option name="groups">malina141:shop:wishlist:add_to_cart</option>
+                <option name="constraints">
+                    <constraint name="Sequentially">
+                        <constraint name="Type">
+                            <option name="type">numeric</option>
+                            <option name="message">malina141_sylius_wishlist.wishlist_item_ids.item.invalid_type</option>
+                            <option name="groups">malina141:shop:wishlist:add_to_cart</option>
+                        </constraint>
+                        <constraint name="Regex">
+                            <option name="pattern">/^\d+$/</option>
+                            <option name="message">malina141_sylius_wishlist.wishlist_item_ids.item.invalid</option>
+                            <option name="groups">malina141:shop:wishlist:add_to_cart</option>
+                        </constraint>
+                    </constraint>
+                </option>
+            </constraint>
+        </property>
+        <property name="orderTokenValue">
+            <constraint name="NotBlank">
+                <option name="message">malina141_sylius_wishlist.order_token_value.not_blank</option>
+                <option name="groups">malina141:shop:wishlist:add_to_cart</option>
+            </constraint>
+        </property>
+    </class>
+</constraint-mapping>

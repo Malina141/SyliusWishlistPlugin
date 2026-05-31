@@ -39,6 +39,46 @@ final class WishlistAddToCartTest extends FunctionalTestCase
         $this->assertResponse($response, 'Api/WishlistAddToCartTest/empty_selection_response', Response::HTTP_CREATED);
     }
 
+    public function test_nested_wishlist_item_ids_return_unprocessable_entity(): void
+    {
+        $response = $this->requestJson('POST', '/api/v2/shop/wishlists/api-wishlist-token/add-to-cart', [
+            'wishlistItemIds' => [[$this->getWishlistItemId('api_wishlist_item_variant')]],
+            'orderTokenValue' => 'api-cart-token',
+        ]);
+
+        $this->assertResponseCode($response, Response::HTTP_UNPROCESSABLE_ENTITY);
+    }
+
+    public function test_non_list_wishlist_item_ids_return_unprocessable_entity(): void
+    {
+        $response = $this->requestJson('POST', '/api/v2/shop/wishlists/api-wishlist-token/add-to-cart', [
+            'wishlistItemIds' => ['id' => $this->getWishlistItemId('api_wishlist_item_variant')],
+            'orderTokenValue' => 'api-cart-token',
+        ]);
+
+        $this->assertResponseCode($response, Response::HTTP_UNPROCESSABLE_ENTITY);
+    }
+
+    public function test_non_integer_wishlist_item_ids_return_unprocessable_entity(): void
+    {
+        $response = $this->requestJson('POST', '/api/v2/shop/wishlists/api-wishlist-token/add-to-cart', [
+            'wishlistItemIds' => ['invalid-id'],
+            'orderTokenValue' => 'api-cart-token',
+        ]);
+
+        $this->assertResponseCode($response, Response::HTTP_UNPROCESSABLE_ENTITY);
+    }
+
+    public function test_blank_order_token_value_returns_unprocessable_entity(): void
+    {
+        $response = $this->requestJson('POST', '/api/v2/shop/wishlists/api-wishlist-token/add-to-cart', [
+            'wishlistItemIds' => [$this->getWishlistItemId('api_wishlist_item_variant')],
+            'orderTokenValue' => '',
+        ]);
+
+        $this->assertResponseCode($response, Response::HTTP_UNPROCESSABLE_ENTITY);
+    }
+
     public function test_unknown_wishlist_token_returns_not_found(): void
     {
         $response = $this->requestJson('POST', '/api/v2/shop/wishlists/unknown-token/add-to-cart', [

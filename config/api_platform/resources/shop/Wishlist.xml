@@ -114,7 +114,7 @@
                     <values>
                         <value name="groups">
                             <values>
-                                <value>sylius</value>
+                                <value>malina141:shop:wishlist:patch</value>
                             </values>
                         </value>
                     </values>
@@ -153,6 +153,16 @@
                     <uriVariable parameterName="token"
                         fromClass="%malina141_sylius_wishlist.model.wishlist.class%" />
                 </uriVariables>
+
+                <validationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>malina141:shop:wishlist:add_to_cart</value>
+                            </values>
+                        </value>
+                    </values>
+                </validationContext>
 
                 <denormalizationContext>
                     <values>
