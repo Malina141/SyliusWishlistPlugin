@@ -4,7 +4,7 @@
 {% if wishlist.isShared %}
     <div class="d-flex align-items-center" data-controller="malina141--sylius-wishlist-plugin--clipboard-copy">
         <span class="badge bg-success-subtle text-success me-2">
-            {{ 'sylius_wishlist.ui.shared'|trans }}
+            {{ 'malina141_sylius_wishlist.ui.shared'|trans }}
         </span>
 
         {% set share_url = absolute_url(path('malina141_sylius_wishlist_shop_share_show', {token: wishlist.shareToken})) %}
@@ -16,11 +16,11 @@
             class="btn btn-sm btn-outline-gray me-2"
             data-action="click->malina141--sylius-wishlist-plugin--clipboard-copy#copy"
             data-malina141--sylius-wishlist-plugin--clipboard-copy-target="label"
-            data-clipboard-default-label="{{ 'sylius_wishlist.ui.copy_link'|trans }}"
-            data-clipboard-success-label="{{ 'sylius_wishlist.ui.link_copied'|trans }}"
+            data-clipboard-default-label="{{ 'malina141_sylius_wishlist.ui.copy_link'|trans }}"
+            data-clipboard-success-label="{{ 'malina141_sylius_wishlist.ui.link_copied'|trans }}"
         >
             {{ ux_icon('tabler:link', { class: 'icon icon-sm' }) }}
-            {{ 'sylius_wishlist.ui.copy_link'|trans }}
+            {{ 'malina141_sylius_wishlist.ui.copy_link'|trans }}
         </button>
     </div>
 
@@ -28,7 +28,7 @@
         <input type="hidden" name="_csrf_token" value="{{ csrf_token(wishlist.id) }}">
         <button type="submit" class="btn btn-sm btn-outline-danger">
             {{ ux_icon('tabler:link-off', { class: 'icon icon-sm' }) }}
-            {{ 'sylius_wishlist.ui.unshare'|trans }}
+            {{ 'malina141_sylius_wishlist.ui.unshare'|trans }}
         </button>
     </form>
 {% else %}
@@ -36,7 +36,7 @@
         <input type="hidden" name="_csrf_token" value="{{ csrf_token(wishlist.id) }}">
         <button type="submit" class="btn btn-sm btn-outline-gray">
             {{ ux_icon('tabler:share', { class: 'icon icon-sm' }) }}
-            {{ 'sylius_wishlist.ui.share'|trans }}
+            {{ 'malina141_sylius_wishlist.ui.share'|trans }}
         </button>
     </form>
 {% endif %}

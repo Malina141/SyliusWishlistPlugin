@@ -32,7 +32,7 @@ final readonly class AdminMenuBuilder implements EventSubscriberInterface
                     ['route' => 'malina141_sylius_wishlist_admin_wishlist_show'],
                 ]],
             ])
-            ->setLabel('sylius_wishlist.ui.wishlists')
+            ->setLabel('malina141_sylius_wishlist.ui.wishlists')
             ->setLabelAttribute('icon', 'tabler:heart')
         ;
     }

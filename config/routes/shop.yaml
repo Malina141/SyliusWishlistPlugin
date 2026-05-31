@@ -52,11 +52,11 @@ malina141_sylius_wishlist_shop_share:
                 arguments:
                     - expr:service('malina141_sylius_wishlist.context.wishlist').getWishlist().getId()
             state_machine:
-                graph: sylius_wishlist
+                graph: malina141_sylius_wishlist
                 transition: share
             redirect:
                 route: malina141_sylius_wishlist_shop_index
-            flash: sylius_wishlist.ui.shared_successfully
+            flash: malina141_sylius_wishlist.ui.shared_successfully
 
 malina141_sylius_wishlist_shop_unshare:
     path: /{_locale}/wishlist/unshare
@@ -69,11 +69,11 @@ malina141_sylius_wishlist_shop_unshare:
                 arguments:
                     - expr:service('malina141_sylius_wishlist.context.wishlist').getWishlist().getId()
             state_machine:
-                graph: sylius_wishlist
+                graph: malina141_sylius_wishlist
                 transition: unshare
             redirect:
                 route: malina141_sylius_wishlist_shop_index
-            flash: sylius_wishlist.ui.unshared_successfully
+            flash: malina141_sylius_wishlist.ui.unshared_successfully
 
 malina141_sylius_wishlist_shop_share_show:
     path: /{_locale}/wishlist/share/{token}

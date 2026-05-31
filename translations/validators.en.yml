@@ -1,4 +1,4 @@
-sylius_wishlist:
+malina141_sylius_wishlist:
     name:
         not_blank: 'Wishlist name cannot be blank.'
         max: 'Wishlist name is too long. It should have {{ limit }} characters or less.'

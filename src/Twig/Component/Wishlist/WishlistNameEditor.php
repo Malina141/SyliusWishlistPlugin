@@ -53,7 +53,7 @@ final class WishlistNameEditor
         $this->submitForm();
 
         $this->isEditing = false;
-        $this->flashMessage = 'sylius_wishlist.ui.saved';
+        $this->flashMessage = 'malina141_sylius_wishlist.ui.saved';
 
         $this->entityManager->flush();
     }

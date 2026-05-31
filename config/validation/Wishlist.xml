@@ -7,14 +7,14 @@
     <class name="Malina141\SyliusWishlistPlugin\Entity\Wishlist">
         <property name="name">
             <constraint name="NotBlank">
-                <option name="message">sylius_wishlist.name.not_blank</option>
+                <option name="message">malina141_sylius_wishlist.name.not_blank</option>
                 <option name="groups">
                     <value>sylius</value>
                 </option>
             </constraint>
             <constraint name="Length">
                 <option name="max">255</option>
-                <option name="maxMessage">sylius_wishlist.name.max</option>
+                <option name="maxMessage">malina141_sylius_wishlist.name.max</option>
                 <option name="groups">
                     <value>sylius</value>
                 </option>

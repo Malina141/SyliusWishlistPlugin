@@ -17,7 +17,7 @@ final class WishlistNameType extends AbstractType
         $builder
             ->add('name', TextType::class, [
                 'required' => true,
-                'label' => 'sylius_wishlist.ui.name',
+                'label' => 'malina141_sylius_wishlist.ui.name',
             ])
         ;
     }

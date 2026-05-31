@@ -216,12 +216,12 @@
         <service id="malina141_sylius_wishlist.event_listener.workflow.provide_wishlist_share_token"
                  class="Malina141\SyliusWishlistPlugin\EventListener\Workflow\ProvideWishlistShareTokenListener">
             <argument type="service" id="malina141_sylius_wishlist.provider.wishlist_share_token"/>
-            <tag name="kernel.event_listener" event="workflow.sylius_wishlist.completed.share"/>
+            <tag name="kernel.event_listener" event="workflow.malina141_sylius_wishlist.completed.share"/>
         </service>
 
         <service id="malina141_sylius_wishlist.event_listener.workflow.clear_wishlist_share_token"
                  class="Malina141\SyliusWishlistPlugin\EventListener\Workflow\ClearWishlistShareTokenListener">
-            <tag name="kernel.event_listener" event="workflow.sylius_wishlist.completed.unshare"/>
+            <tag name="kernel.event_listener" event="workflow.malina141_sylius_wishlist.completed.unshare"/>
         </service>
 
         <service id="malina141_sylius_wishlist.event_subscriber.admin_menu_builder"

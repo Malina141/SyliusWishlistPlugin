@@ -12,7 +12,7 @@
                             {{ form_widget(form.name, {
                                 'attr': {
                                     'class': 'form-control form-control-lg' ~ (form.name.vars.errors|length > 0 ? ' is-invalid' : ''),
-                                    'placeholder': ('sylius_wishlist.ui.name'|trans),
+                                    'placeholder': ('malina141_sylius_wishlist.ui.name'|trans),
                                     'autofocus': true
                                 }
                             }) }}
@@ -31,18 +31,18 @@
                             type="submit"
                             class="btn btn-outline-{{ form.name.vars.errors|length > 0 ? 'danger' : 'secondary' }} h-100"
                         >
-                            {{ 'sylius_wishlist.ui.save'|trans }}
+                            {{ 'malina141_sylius_wishlist.ui.save'|trans }}
                         </button>
                     </div>
                 </div>
             {{ form_end(form) }}
         {% else %}
-            <h2>{{ wishlist.name ?: ('sylius_wishlist.ui.default_name'|trans) }}</h2>
+            <h2>{{ wishlist.name ?: ('malina141_sylius_wishlist.ui.default_name'|trans) }}</h2>
             <button
                 data-action="live#action"
                 data-live-action-param="activateEditing"
                 class="btn btn-link"
-                title="{{ 'sylius_wishlist.ui.edit_name'|trans }}"
+                title="{{ 'malina141_sylius_wishlist.ui.edit_name'|trans }}"
             >
                 {{ ux_icon('tabler:edit') }}
             </button>

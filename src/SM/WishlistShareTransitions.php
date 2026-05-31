@@ -6,7 +6,7 @@ namespace Malina141\SyliusWishlistPlugin\SM;
 
 interface WishlistShareTransitions
 {
-    public const string GRAPH = 'sylius_wishlist';
+    public const string GRAPH = 'malina141_sylius_wishlist';
 
     public const string TRANSITION_SHARE = 'share';
 

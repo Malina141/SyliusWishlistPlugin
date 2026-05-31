@@ -17,12 +17,12 @@ sylius_grid:
                     sortable: ~
                 name:
                     type: twig
-                    label: sylius_wishlist.ui.name
+                    label: malina141_sylius_wishlist.ui.name
                     options:
                         template: "@Malina141SyliusWishlistPlugin/admin/wishlist/grid/field/name.html.twig"
                 owner:
                     type: twig
-                    label: sylius_wishlist.ui.owner
+                    label: malina141_sylius_wishlist.ui.owner
                     options:
                         template: "@Malina141SyliusWishlistPlugin/admin/wishlist/grid/field/owner.html.twig"
                 channel:
@@ -32,7 +32,7 @@ sylius_grid:
                         template: "@SyliusAdmin/shared/grid/field/channel.html.twig"
                 itemsCount:
                     type: twig
-                    label: sylius_wishlist.ui.items_count
+                    label: malina141_sylius_wishlist.ui.items_count
                     path: .
                     options:
                         template: "@Malina141SyliusWishlistPlugin/admin/wishlist/grid/field/items_count.html.twig"
@@ -51,7 +51,7 @@ sylius_grid:
                         class: "%sylius.model.channel.class%"
                 owner:
                     type: malina141_exists
-                    label: sylius_wishlist.ui.registered_customer
+                    label: malina141_sylius_wishlist.ui.registered_customer
                     options:
                         field: owner
                     form_options:

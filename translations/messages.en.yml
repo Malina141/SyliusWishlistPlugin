@@ -1,4 +1,4 @@
-sylius_wishlist:
+malina141_sylius_wishlist:
     ui:
         title: 'Wishlist'
         add_to_wishlist: 'Add to wishlist'
@@ -30,6 +30,3 @@ sylius_wishlist:
         no_items: 'This wishlist is currently empty.'
         view_in_store: 'View in store'
         registered_customer: 'Registered customer'
-malina141_sylius_wishlist:
-    ui:
-        wishlists: 'Wishlists'

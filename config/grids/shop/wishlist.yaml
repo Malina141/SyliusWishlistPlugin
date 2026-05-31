@@ -38,7 +38,7 @@ sylius_grid:
                 main:
                     share:
                         type: shop_share
-                        label: sylius_wishlist.ui.share
+                        label: malina141_sylius_wishlist.ui.share
                         options:
                             link:
                                 route: malina141_sylius_wishlist_shop_share
