@@ -5,24 +5,24 @@ declare(strict_types=1);
 namespace Tests\Malina141\SyliusWishlistPlugin\Unit\Provider;
 
 use Malina141\SyliusWishlistPlugin\Entity\Wishlist;
+use Malina141\SyliusWishlistPlugin\Generator\WishlistTokenGeneratorInterface;
 use Malina141\SyliusWishlistPlugin\Provider\WishlistShareTokenProvider;
 use Override;
 use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
-use Sylius\Resource\Generator\RandomnessGeneratorInterface;
 
 final class WishlistShareTokenProviderTest extends TestCase
 {
     private WishlistShareTokenProvider $wishlistShareTokenProvider;
 
-    private RandomnessGeneratorInterface&Stub $randomnessGenerator;
+    private WishlistTokenGeneratorInterface&Stub $tokenGenerator;
 
     #[Override]
     protected function setUp(): void
     {
-        $this->randomnessGenerator = $this->createStub(RandomnessGeneratorInterface::class);
+        $this->tokenGenerator = $this->createStub(WishlistTokenGeneratorInterface::class);
 
-        $this->wishlistShareTokenProvider = new WishlistShareTokenProvider($this->randomnessGenerator);
+        $this->wishlistShareTokenProvider = new WishlistShareTokenProvider($this->tokenGenerator);
     }
 
     public function test_it_returns_existing_share_token(): void
@@ -41,7 +41,7 @@ final class WishlistShareTokenProviderTest extends TestCase
 
         $wishlist = new Wishlist();
 
-        $this->randomnessGenerator->method('generateUriSafeString')->willReturn($shareToken);
+        $this->tokenGenerator->method('generate')->willReturn($shareToken);
 
         $this->assertSame($shareToken, $this->wishlistShareTokenProvider->provideShareToken($wishlist));
         $this->assertSame($shareToken, $wishlist->getShareToken());

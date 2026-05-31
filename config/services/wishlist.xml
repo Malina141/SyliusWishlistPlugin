@@ -190,10 +190,27 @@
             </argument>
         </service>
 
+        <service id="malina141_sylius_wishlist.checker.wishlist_share_token_uniqueness"
+                 class="Sylius\Component\User\Security\Checker\TokenUniquenessChecker">
+            <argument type="service" id="malina141_sylius_wishlist.repository.wishlist"/>
+            <argument>shareToken</argument>
+        </service>
+
+        <service id="malina141_sylius_wishlist.sylius_generator.wishlist_share_token"
+                 class="Sylius\Component\User\Security\Generator\UniqueTokenGenerator">
+            <argument type="service" id="Sylius\Resource\Generator\RandomnessGeneratorInterface"/>
+            <argument type="service" id="malina141_sylius_wishlist.checker.wishlist_share_token_uniqueness"/>
+            <argument>%malina141_sylius_wishlist.share_token.length%</argument>
+        </service>
+
+        <service id="malina141_sylius_wishlist.generator.wishlist_share_token"
+                 class="Malina141\SyliusWishlistPlugin\Generator\UniqueWishlistTokenGenerator">
+            <argument type="service" id="malina141_sylius_wishlist.sylius_generator.wishlist_share_token"/>
+        </service>
+
         <service id="malina141_sylius_wishlist.provider.wishlist_share_token"
                  class="Malina141\SyliusWishlistPlugin\Provider\WishlistShareTokenProvider">
-            <argument type="service" id="Sylius\Resource\Generator\RandomnessGeneratorInterface"/>
-            <argument>%malina141_sylius_wishlist.share_token.length%</argument>
+            <argument type="service" id="malina141_sylius_wishlist.generator.wishlist_share_token"/>
         </service>
 
         <service id="malina141_sylius_wishlist.event_listener.workflow.provide_wishlist_share_token"

@@ -5,13 +5,12 @@ declare(strict_types=1);
 namespace Malina141\SyliusWishlistPlugin\Provider;
 
 use Malina141\SyliusWishlistPlugin\Entity\WishlistInterface;
-use Sylius\Resource\Generator\RandomnessGeneratorInterface;
+use Malina141\SyliusWishlistPlugin\Generator\WishlistTokenGeneratorInterface;
 
 final readonly class WishlistShareTokenProvider implements WishlistShareTokenProviderInterface
 {
     public function __construct(
-        private RandomnessGeneratorInterface $randomnessGenerator,
-        private int $tokenLength = 32,
+        private WishlistTokenGeneratorInterface $tokenGenerator,
     ) {
     }
 
@@ -22,7 +21,7 @@ final readonly class WishlistShareTokenProvider implements WishlistShareTokenPro
             return $shareToken;
         }
 
-        $shareToken = $this->randomnessGenerator->generateUriSafeString($this->tokenLength);
+        $shareToken = $this->tokenGenerator->generate();
         $wishlist->setShareToken($shareToken);
 
         return $shareToken;
