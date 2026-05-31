@@ -56,7 +56,7 @@ final class WishlistAddToCartTest extends FunctionalTestCase
             'orderTokenValue' => 'non-existent-cart-token',
         ]);
 
-        $this->assertResponseCode($response, Response::HTTP_UNPROCESSABLE_ENTITY);
+        $this->assertResponseCode($response, Response::HTTP_NOT_FOUND);
     }
 
     public function test_cross_channel_cart_token_returns_unprocessable_entity(): void
@@ -66,7 +66,7 @@ final class WishlistAddToCartTest extends FunctionalTestCase
             'orderTokenValue' => 'api-other-channel-cart-token',
         ]);
 
-        $this->assertResponseCode($response, Response::HTTP_UNPROCESSABLE_ENTITY);
+        $this->assertResponseCode($response, Response::HTTP_NOT_FOUND);
     }
 
     public function test_item_ids_from_another_wishlist_are_ignored(): void

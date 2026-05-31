@@ -1,0 +1,188 @@
+Sylius\Component\Currency\Model\Currency:
+    currency_usd:
+        code: 'USD'
+
+Sylius\Component\Locale\Model\Locale:
+    locale_en_us:
+        code: 'en_US'
+
+Sylius\Component\Core\Model\Channel:
+    channel_fashion_web:
+        code: 'FASHION_WEB'
+        name: 'Fashion Web'
+        hostname: 'localhost'
+        baseCurrency: '@currency_usd'
+        currencies:
+            - '@currency_usd'
+        defaultLocale: '@locale_en_us'
+        locales:
+            - '@locale_en_us'
+        taxCalculationStrategy: 'order_items_based'
+        enabled: true
+
+    channel_wishlist_api_other:
+        code: 'WISHLIST_API_OTHER'
+        name: 'Wishlist API Other'
+        hostname: 'wishlist-api-other.localhost'
+        baseCurrency: '@currency_usd'
+        currencies:
+            - '@currency_usd'
+        defaultLocale: '@locale_en_us'
+        locales:
+            - '@locale_en_us'
+        taxCalculationStrategy: 'order_items_based'
+        enabled: true
+
+Sylius\Component\Core\Model\Product:
+    api_product:
+        code: 'API_PRODUCT'
+        currentLocale: 'en_US'
+        fallbackLocale: 'en_US'
+        name: 'API product'
+        slug: 'api_product'
+        enabled: true
+        channels:
+            - '@channel_fashion_web'
+
+Sylius\Component\Core\Model\ProductVariant:
+    api_product_variant:
+        code: 'API_PRODUCT_VARIANT'
+        currentLocale: 'en_US'
+        fallbackLocale: 'en_US'
+        name: 'API product variant'
+        product: '@api_product'
+        enabled: true
+        position: 0
+
+    api_other_product_variant:
+        code: 'API_OTHER_PRODUCT_VARIANT'
+        currentLocale: 'en_US'
+        fallbackLocale: 'en_US'
+        name: 'API other product variant'
+        product: '@api_product'
+        enabled: true
+        position: 1
+
+    api_disabled_product_variant:
+        code: 'API_DISABLED_PRODUCT_VARIANT'
+        currentLocale: 'en_US'
+        fallbackLocale: 'en_US'
+        name: 'API disabled product variant'
+        product: '@api_product'
+        enabled: false
+        position: 2
+
+Sylius\Component\Core\Model\ChannelPricing:
+    api_product_variant_channel_pricing:
+        productVariant: '@api_product_variant'
+        channelCode: 'FASHION_WEB'
+        price: 1000
+
+    api_other_product_variant_channel_pricing:
+        productVariant: '@api_other_product_variant'
+        channelCode: 'FASHION_WEB'
+        price: 1000
+
+    api_disabled_product_variant_channel_pricing:
+        productVariant: '@api_disabled_product_variant'
+        channelCode: 'FASHION_WEB'
+        price: 1000
+
+Sylius\Component\Core\Model\Customer:
+    customer_a:
+        firstName: 'Customer'
+        lastName: 'A'
+        email: 'customer-a@example.com'
+        emailCanonical: 'customer-a@example.com'
+
+    customer_b:
+        firstName: 'Customer'
+        lastName: 'B'
+        email: 'customer-b@example.com'
+        emailCanonical: 'customer-b@example.com'
+
+    customer_c:
+        firstName: 'Customer'
+        lastName: 'C'
+        email: 'customer-c@example.com'
+        emailCanonical: 'customer-c@example.com'
+
+Sylius\Component\Core\Model\ShopUser:
+    shop_user_a:
+        plainPassword: 'testPassword'
+        roles: []
+        enabled: true
+        customer: '@customer_a'
+
+    shop_user_b:
+        plainPassword: 'testPassword'
+        roles: []
+        enabled: true
+        customer: '@customer_b'
+
+    shop_user_c:
+        plainPassword: 'testPassword'
+        roles: []
+        enabled: true
+        customer: '@customer_c'
+
+Malina141\SyliusWishlistPlugin\Entity\Wishlist:
+    guest_wishlist:
+        token: 'guest-wishlist-token'
+        channel: '@channel_fashion_web'
+        name: 'Guest Wishlist'
+
+    customer_a_wishlist:
+        token: 'customer-a-wishlist-token'
+        channel: '@channel_fashion_web'
+        name: 'Customer A Wishlist'
+        owner: '@shop_user_a'
+
+    customer_b_wishlist:
+        token: 'customer-b-wishlist-token'
+        channel: '@channel_fashion_web'
+        name: 'Customer B Wishlist'
+        owner: '@shop_user_b'
+
+    customer_a_other_channel_wishlist:
+        token: 'cust-a-other-channel-token'
+        channel: '@channel_wishlist_api_other'
+        name: 'Customer A Other Channel Wishlist'
+        owner: '@shop_user_a'
+
+Malina141\SyliusWishlistPlugin\Entity\WishlistItem:
+    guest_wishlist_item:
+        wishlist: '@guest_wishlist'
+        productVariant: '@api_product_variant'
+
+    customer_a_wishlist_item:
+        wishlist: '@customer_a_wishlist'
+        productVariant: '@api_product_variant'
+
+    customer_b_wishlist_item:
+        wishlist: '@customer_b_wishlist'
+        productVariant: '@api_product_variant'
+
+Sylius\Component\Core\Model\Order:
+    guest_cart:
+        tokenValue: 'guest-cart-token'
+        channel: '@channel_fashion_web'
+        state: 'cart'
+        currencyCode: 'USD'
+        localeCode: 'en_US'
+
+    customer_a_cart:
+        tokenValue: 'customer-a-cart-token'
+        channel: '@channel_fashion_web'
+        state: 'cart'
+        currencyCode: 'USD'
+        localeCode: 'en_US'
+        customer: '@customer_a'
+
+    customer_b_cart:
+        tokenValue: 'customer-b-cart-token'
+        channel: '@channel_fashion_web'
+        state: 'cart'
+        currencyCode: 'USD'
+        localeCode: 'en_US'
+        customer: '@customer_b'

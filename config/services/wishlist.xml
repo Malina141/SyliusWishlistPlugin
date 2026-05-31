@@ -212,6 +212,16 @@
             <tag name="kernel.event_subscriber"/>
         </service>
 
+        <service id="malina141_sylius_wishlist.api.security.wishlist_access_checker"
+                 class="Malina141\SyliusWishlistPlugin\Api\Security\WishlistAccessChecker">
+            <argument type="service" id="sylius_api.context.user.token_based"/>
+        </service>
+
+        <service id="malina141_sylius_wishlist.api.security.cart_access_checker"
+                 class="Malina141\SyliusWishlistPlugin\Api\Security\CartAccessChecker">
+            <argument type="service" id="sylius_api.context.user.token_based"/>
+        </service>
+
         <service id="malina141_sylius_wishlist.api.command_handler.shop.wishlist.add_to_cart"
                  class="Malina141\SyliusWishlistPlugin\Api\CommandHandler\Shop\Wishlist\AddWishlistItemsToCartHandler">
             <argument type="service" id="malina141_sylius_wishlist.repository.wishlist"/>
@@ -219,7 +229,8 @@
             <argument type="service" id="malina141_sylius_wishlist.repository.wishlist_item"/>
             <argument type="service" id="sylius.repository.order"/>
             <argument type="service" id="malina141_sylius_wishlist.adder.wishlist_items_to_cart"/>
-            <argument type="service" id="sylius_api.context.user.token_based"/>
+            <argument type="service" id="malina141_sylius_wishlist.api.security.wishlist_access_checker"/>
+            <argument type="service" id="malina141_sylius_wishlist.api.security.cart_access_checker"/>
             <tag name="messenger.message_handler" bus="sylius.command_bus"/>
         </service>
 
@@ -229,6 +240,8 @@
             <argument type="service" id="malina141_sylius_wishlist.factory.wishlist"/>
             <argument type="service" id="malina141_sylius_wishlist.manager.wishlist"/>
             <argument type="service" id="malina141_sylius_wishlist.generator.wishlist_token"/>
+            <argument type="service" id="sylius_api.context.user.token_based"/>
+            <argument type="service" id="malina141_sylius_wishlist.repository.wishlist"/>
             <tag name="messenger.message_handler" bus="sylius.command_bus"/>
         </service>
 
@@ -238,6 +251,7 @@
             <argument type="service" id="sylius.repository.product_variant"/>
             <argument type="service" id="sylius.repository.channel"/>
             <argument type="service" id="malina141_sylius_wishlist.modifier.wishlist"/>
+            <argument type="service" id="malina141_sylius_wishlist.api.security.wishlist_access_checker"/>
             <tag name="messenger.message_handler" bus="sylius.command_bus"/>
         </service>
 
@@ -245,6 +259,7 @@
                  class="Malina141\SyliusWishlistPlugin\Api\StateProvider\Shop\Wishlist\ItemProvider">
             <argument type="service" id="sylius.context.channel"/>
             <argument type="service" id="malina141_sylius_wishlist.repository.wishlist"/>
+            <argument type="service" id="malina141_sylius_wishlist.api.security.wishlist_access_checker"/>
             <tag name="api_platform.state_provider" priority="10"/>
         </service>
 

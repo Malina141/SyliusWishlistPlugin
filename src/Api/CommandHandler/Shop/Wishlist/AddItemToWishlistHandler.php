@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Malina141\SyliusWishlistPlugin\Api\CommandHandler\Shop\Wishlist;
 
 use Malina141\SyliusWishlistPlugin\Api\Command\Shop\Wishlist\AddItemToWishlist;
+use Malina141\SyliusWishlistPlugin\Api\Security\WishlistAccessCheckerInterface;
 use Malina141\SyliusWishlistPlugin\Entity\WishlistInterface;
 use Malina141\SyliusWishlistPlugin\Modifier\WishlistModifierInterface;
 use Malina141\SyliusWishlistPlugin\Repository\WishlistRepositoryInterface;
@@ -23,6 +24,7 @@ final readonly class AddItemToWishlistHandler
         private ProductVariantRepositoryInterface $productVariantRepository,
         private ChannelRepositoryInterface $channelRepository,
         private WishlistModifierInterface $wishlistModifier,
+        private WishlistAccessCheckerInterface $accessChecker,
     ) {
     }
 
@@ -31,14 +33,18 @@ final readonly class AddItemToWishlistHandler
         $channel = $this->channelRepository->findOneByCode($command->channelCode);
         Assert::isInstanceOf($channel, ChannelInterface::class);
 
-        $productVariant = $this->productVariantRepository->findOneBy(['code' => $command->productVariantCode, 'enabled' => true]);
-        if (!$productVariant instanceof ProductVariantInterface) {
-            throw new UnprocessableEntityHttpException(\sprintf('Product variant with code "%s" was not found ', $command->productVariantCode));
-        }
-
         $wishlist = $this->wishlistRepository->findOneByTokenAndChannel($command->wishlistToken, $channel);
         if (!$wishlist instanceof WishlistInterface) {
             throw new NotFoundHttpException('Wishlist not found');
+        }
+
+        if (!$this->accessChecker->canAccessPrivateToken($wishlist)) {
+            throw new NotFoundHttpException('Wishlist not found');
+        }
+
+        $productVariant = $this->productVariantRepository->findOneBy(['code' => $command->productVariantCode, 'enabled' => true]);
+        if (!$productVariant instanceof ProductVariantInterface) {
+            throw new UnprocessableEntityHttpException(\sprintf('Product variant with code "%s" was not found ', $command->productVariantCode));
         }
 
         $this->wishlistModifier->addVariant($wishlist, $productVariant);
