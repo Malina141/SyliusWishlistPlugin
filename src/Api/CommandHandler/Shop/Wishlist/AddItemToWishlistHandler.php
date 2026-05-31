@@ -11,6 +11,7 @@ use Malina141\SyliusWishlistPlugin\Modifier\WishlistModifierInterface;
 use Malina141\SyliusWishlistPlugin\Repository\WishlistRepositoryInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -45,6 +46,13 @@ final readonly class AddItemToWishlistHandler
         $productVariant = $this->productVariantRepository->findOneBy(['code' => $command->productVariantCode, 'enabled' => true]);
         if (!$productVariant instanceof ProductVariantInterface) {
             throw new UnprocessableEntityHttpException(\sprintf('Product variant with code "%s" was not found ', $command->productVariantCode));
+        }
+
+        $product = $productVariant->getProduct();
+        Assert::isInstanceOf($product, ProductInterface::class);
+
+        if (!$product->isEnabled() || !$product->hasChannel($channel)) {
+            throw new NotFoundHttpException('Product not found');
         }
 
         $this->wishlistModifier->addVariant($wishlist, $productVariant);
