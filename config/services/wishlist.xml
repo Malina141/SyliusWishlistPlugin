@@ -75,10 +75,19 @@
             <tag name="malina141_sylius_wishlist.wishlist_context" priority="-10"/>
         </service>
 
-        <service id="malina141_sylius_wishlist.context.wishlist"
+        <service id="malina141_sylius_wishlist.context.wishlist.composite"
                  class="Malina141\SyliusWishlistPlugin\Context\CompositeWishlistContext"
                  public="true">
             <argument type="tagged_iterator" tag="malina141_sylius_wishlist.wishlist_context"/>
+        </service>
+
+        <service id="malina141_sylius_wishlist.context.wishlist"
+                 class="Malina141\SyliusWishlistPlugin\Context\CachedWishlistContext"
+                 public="true"
+                 decorates="malina141_sylius_wishlist.context.wishlist.composite">
+            <argument type="service" id="malina141_sylius_wishlist.context.wishlist.inner"/>
+
+            <tag name="kernel.reset" method="reset"/>
         </service>
 
         <service id="malina141_sylius_wishlist.merger.wishlist"
