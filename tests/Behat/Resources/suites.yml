@@ -1,10 +1,25 @@
-# Put your Behat suites definitions here
+default:
+    suites:
+        ui_wishlist:
+          contexts:
+              - sylius.behat.context.hook.bad_gateway
+              - sylius.behat.context.hook.doctrine_orm
+              - sylius.behat.context.hook.session
 
-# default:
-#     suites:
-#         your_suite_name:
-#             contexts:
-#                 - malina141_sylius_wishlist.context.ui.shop.your_context
-#
-#             filters:
-#                 tags: "@your_tag"
+              - sylius.behat.context.transform.channel
+              - sylius.behat.context.transform.currency
+              - sylius.behat.context.transform.lexical
+              - sylius.behat.context.transform.product
+              - sylius.behat.context.transform.shared_storage
+
+              - sylius.behat.context.setup.channel
+              - sylius.behat.context.setup.currency
+              - sylius.behat.context.setup.product
+              - sylius.behat.context.setup.shop_security
+              - malina141_sylius_wishlist.behat.context.setup.wishlist
+
+              - sylius.behat.context.ui.channel
+              - malina141_sylius_wishlist.behat.context.ui.shop.wishlist
+
+          filters:
+              tags: "@wishlist&&@shop&&@ui"

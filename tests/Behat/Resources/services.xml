@@ -1,8 +1,38 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 
-<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+<container
+    xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+>
     <services>
         <defaults public="true" />
-        <!-- Put your Behat services here -->
+
+        <service
+            id="malina141_sylius_wishlist.behat.context.setup.wishlist"
+            class="Tests\Malina141\SyliusWishlistPlugin\Behat\Context\Setup\WishlistContext"
+        >
+            <argument type="service" id="sylius.behat.shared_storage" />
+            <argument type="service" id="malina141_sylius_wishlist.factory.wishlist" />
+            <argument type="service" id="malina141_sylius_wishlist.modifier.wishlist" />
+            <argument type="service" id="sylius.resolver.product_variant.default" />
+            <argument type="service" id="malina141_sylius_wishlist.manager.wishlist" />
+            <argument type="service" id="sylius.behat.cookie_setter" />
+            <argument>%malina141_sylius_wishlist.cookie.name%</argument>
+        </service>
+
+        <service
+            id="malina141_sylius_wishlist.behat.context.ui.shop.wishlist"
+            class="Tests\Malina141\SyliusWishlistPlugin\Behat\Context\Ui\Shop\WishlistContext"
+        >
+            <argument type="service" id="malina141_sylius_wishlist.behat.page.shop.wishlist.index" />
+        </service>
+
+        <service
+            id="malina141_sylius_wishlist.behat.page.shop.wishlist.index"
+            class="Tests\Malina141\SyliusWishlistPlugin\Behat\Page\Shop\Wishlist\IndexPage"
+            parent="sylius.behat.symfony_page"
+            public="false"
+        />
     </services>
 </container>
