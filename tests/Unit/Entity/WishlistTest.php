@@ -80,10 +80,7 @@ final class WishlistTest extends TestCase
         $wishlist = new Wishlist();
 
         $variantA = $this->createMock(ProductVariantInterface::class);
-        $variantA->method('getCode')->willReturn('VARIANT_A');
-
         $variantB = $this->createMock(ProductVariantInterface::class);
-        $variantB->method('getCode')->willReturn('VARIANT_B');
 
         $wishlistItemMock = $this->createMock(WishlistItemInterface::class);
         $wishlistItemMock->method('getProductVariant')->willReturn($variantA);
@@ -99,10 +96,7 @@ final class WishlistTest extends TestCase
         $wishlist = new Wishlist();
 
         $variantA = $this->createMock(ProductVariantInterface::class);
-        $variantA->method('getCode')->willReturn('VARIANT_A');
-
         $variantB = $this->createMock(ProductVariantInterface::class);
-        $variantB->method('getCode')->willReturn('VARIANT_B');
 
         $wishlistItemMock = $this->createMock(WishlistItemInterface::class);
         $wishlistItemMock->method('getProductVariant')->willReturn($variantA);

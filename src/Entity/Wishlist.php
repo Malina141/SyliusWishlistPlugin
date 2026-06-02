@@ -91,7 +91,7 @@ class Wishlist implements WishlistInterface
     public function getItemByProductVariant(ProductVariantInterface $productVariant): ?WishlistItemInterface
     {
         foreach ($this->items as $existingItem) {
-            if ($existingItem->getProductVariant()?->getCode() === $productVariant->getCode()) {
+            if ($existingItem->getProductVariant() === $productVariant) {
                 return $existingItem;
             }
         }
