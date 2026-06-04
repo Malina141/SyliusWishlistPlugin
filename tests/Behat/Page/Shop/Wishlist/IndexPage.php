@@ -32,6 +32,24 @@ final class IndexPage extends SyliusPage implements IndexPageInterface
         return $priceElement->getText();
     }
 
+    public function removeProduct(string $productName): void
+    {
+        $row = $this->getProductRow($productName);
+        $confirmButtonSelector = '[data-test-modal="delete"] [data-test-confirm-button]';
+        $confirmButton = $row->find('css', $confirmButtonSelector);
+
+        if (null === $confirmButton) {
+            throw new ElementNotFoundException(
+                $this->getSession(),
+                'Wishlist product delete confirmation button',
+                'css',
+                $confirmButtonSelector,
+            );
+        }
+
+        $confirmButton->press();
+    }
+
     public function countItems(): int
     {
         $tableBody = $this->getDocument()->find('css', '[data-test-grid-table-body]');
@@ -45,16 +63,15 @@ final class IndexPage extends SyliusPage implements IndexPageInterface
 
     public function hasNoResultsMessage(): bool
     {
-        $message = $this->getDocument()->find('css', '[data-test-sylius-flash-message]');
+        $messages = $this->getDocument()->findAll('css', '[data-test-sylius-flash-message]');
 
-        return null !== $message && str_contains($message->getText(), 'There are no results to display');
-    }
+        foreach ($messages as $message) {
+            if (str_contains($message->getText(), 'There are no results to display')) {
+                return true;
+            }
+        }
 
-    protected function getDefinedElements(): array
-    {
-        return array_merge(parent::getDefinedElements(), [
-            'product_name' => '[data-test-wishlist-product-name="%productName%"]',
-        ]);
+        return false;
     }
 
     private function getProductRow(string $productName): NodeElement

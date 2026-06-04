@@ -12,6 +12,8 @@ interface IndexPageInterface extends SymfonyPageInterface
 
     public function getProductPrice(string $productName): string;
 
+    public function removeProduct(string $productName): void;
+
     public function countItems(): int;
 
     public function hasNoResultsMessage(): bool;

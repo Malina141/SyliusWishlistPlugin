@@ -24,6 +24,12 @@ final readonly class WishlistContext implements Context
         $this->indexPage->open(['_locale' => 'en_US']);
     }
 
+    #[When('I remove product :product from my wishlist')]
+    public function iRemoveProductFromMyWishlist(ProductInterface $product): void
+    {
+        $this->indexPage->removeProduct($product->getName());
+    }
+
     #[Then('I should see product :product in my wishlist')]
     public function iShouldSeeProductInMyWishlist(ProductInterface $product): void
     {

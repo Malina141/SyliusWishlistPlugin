@@ -25,6 +25,24 @@ Feature: Viewing wishlist contents
         And I should see product "Toyota Celica" in my wishlist
         And my wishlist should contain 2 items
 
+    Scenario: Removing a product from my wishlist
+        Given the store has a product "Volvo S80 V8" priced at "$10.00"
+        And my wishlist contains product "Volvo S80 V8"
+        When I go to my wishlist page
+        And I remove product "Volvo S80 V8" from my wishlist
+        Then my wishlist should contain 0 items
+        And I should be notified that there are no wishlist items
+
+    Scenario: Removing one product from a wishlist with multiple products
+        Given the store has a product "Volvo S80 V8" priced at "$10.00"
+        And the store has a product "Toyota Celica" priced at "$20.00"
+        And my wishlist contains product "Volvo S80 V8"
+        And my wishlist contains product "Toyota Celica"
+        When I go to my wishlist page
+        And I remove product "Volvo S80 V8" from my wishlist
+        Then I should see product "Toyota Celica" in my wishlist
+        And my wishlist should contain 1 item
+
     Scenario: Viewing an empty wishlist
         When I go to my wishlist page
         Then my wishlist should contain 0 items
