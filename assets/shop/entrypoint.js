@@ -1,1 +1,1 @@
-// Add your shop JavaScript imports here
+// No shop entrypoint imports are required currently.

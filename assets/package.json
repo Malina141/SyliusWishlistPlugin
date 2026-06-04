@@ -16,13 +16,15 @@
         "controllers": {
             "clipboard-copy": {
                 "main": "shop/controllers/clipboard_copy_controller.js",
-                "webpackMode": "eager",
-                "fetch": "eager"
+                "enabled": true,
+                "webpackMode": "lazy",
+                "fetch": "lazy"
             },
             "wishlist-bulk-actions": {
                 "main": "shop/controllers/wishlist_bulk_actions_controller.js",
-                "webpackMode": "eager",
-                "fetch": "eager"
+                "enabled": true,
+                "webpackMode": "lazy",
+                "fetch": "lazy"
             }
         }
     },

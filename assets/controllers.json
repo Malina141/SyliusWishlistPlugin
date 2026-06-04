@@ -1,4 +1,15 @@
 {
-    "controllers": {},
+    "controllers": {
+        "@malina141/sylius-wishlist-plugin": {
+            "clipboard-copy": {
+                "enabled": true,
+                "fetch": "lazy"
+            },
+            "wishlist-bulk-actions": {
+                "enabled": true,
+                "fetch": "lazy"
+            }
+        }
+    },
     "entrypoints": []
 }

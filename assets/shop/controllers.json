@@ -3,11 +3,11 @@
         "@malina141/sylius-wishlist-plugin": {
             "clipboard-copy": {
                 "enabled": true,
-                "fetch": "eager"
+                "fetch": "lazy"
             },
             "wishlist-bulk-actions": {
                 "enabled": true,
-                "fetch": "eager"
+                "fetch": "lazy"
             }
         }
     },

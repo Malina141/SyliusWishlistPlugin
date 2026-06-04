@@ -1,0 +1,5 @@
+malina141_sylius_wishlist_admin:
+    resource: "routes/admin.yaml"
+
+malina141_sylius_wishlist_shop:
+    resource: "routes/shop.yaml"

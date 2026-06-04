@@ -1,0 +1,20 @@
+framework:
+    workflows:
+        !php/const Malina141\SyliusWishlistPlugin\SM\WishlistShareTransitions::GRAPH:
+            type: state_machine
+            marking_store:
+                type: method
+                property: shareState
+            supports:
+                - '%malina141_sylius_wishlist.model.wishlist.class%'
+            initial_marking: !php/const Malina141\SyliusWishlistPlugin\SM\WishlistShareStates::STATE_UNSHARED
+            places:
+                - !php/const Malina141\SyliusWishlistPlugin\SM\WishlistShareStates::STATE_UNSHARED
+                - !php/const Malina141\SyliusWishlistPlugin\SM\WishlistShareStates::STATE_SHARED
+            transitions:
+                !php/const Malina141\SyliusWishlistPlugin\SM\WishlistShareTransitions::TRANSITION_SHARE:
+                    from: !php/const Malina141\SyliusWishlistPlugin\SM\WishlistShareStates::STATE_UNSHARED
+                    to: !php/const Malina141\SyliusWishlistPlugin\SM\WishlistShareStates::STATE_SHARED
+                !php/const Malina141\SyliusWishlistPlugin\SM\WishlistShareTransitions::TRANSITION_UNSHARE:
+                    from: !php/const Malina141\SyliusWishlistPlugin\SM\WishlistShareStates::STATE_SHARED
+                    to: !php/const Malina141\SyliusWishlistPlugin\SM\WishlistShareStates::STATE_UNSHARED

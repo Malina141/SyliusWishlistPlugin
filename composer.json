@@ -1,13 +1,18 @@
 {
     "name": "malina141/sylius-wishlist-plugin",
     "type": "sylius-plugin",
-    "description": "SyliusWishlist plugin for Sylius",
+    "description": "Wishlist plugin for Sylius",
     "keywords": [
         "sylius",
         "sylius-plugin",
-        "test-appication"
+        "wishlist",
+        "symfony-ux"
     ],
     "license": "MIT",
+    "support": {
+        "issues": "https://github.com/Malina141/SyliusWishlistPlugin/issues",
+        "source": "https://github.com/Malina141/SyliusWishlistPlugin"
+    },
     "require": {
         "php": "^8.3",
         "sylius/sylius": "^2.0"
@@ -60,7 +65,7 @@
             "dev-master": "2.0-dev"
         },
         "symfony": {
-            "require": "^7.4"
+            "require": "^6.4 || ^7.4"
         },
         "public-dir": "vendor/sylius/test-application/public"
     },

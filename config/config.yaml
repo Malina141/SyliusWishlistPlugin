@@ -1,3 +1,4 @@
 imports:
     - { resource: "twig_hooks/**/*.yaml" }
     - { resource: "grids/**/*.yaml" }
+    - { resource: "workflows/**/*.yaml" }

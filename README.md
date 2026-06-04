@@ -1,129 +1,160 @@
-<p align="center">
-    <a href="https://sylius.com" target="_blank">
-        <picture>
-          <source media="(prefers-color-scheme: dark)" srcset="https://media.sylius.com/sylius-logo-800-dark.png">
-          <source media="(prefers-color-scheme: light)" srcset="https://media.sylius.com/sylius-logo-800.png">
-          <img alt="Sylius Logo." src="https://media.sylius.com/sylius-logo-800.png">
-        </picture>
-    </a>
-</p>
+# Sylius Wishlist Plugin
 
-<h1 align="center">Plugin Skeleton</h1>
+Wishlist plugin for Sylius 2 applications.
 
-<p align="center">Skeleton for starting Sylius plugins.</p>
+## Compatibility
 
-## Documentation
+Sylius version | Symfony version | PHP version |
+ --- | --- | --- |
+^2.0 | ^6.4 or ^7.4 | ^8.3 |
 
-For a comprehensive guide on Sylius Plugins development please go to Sylius documentation,
-there you will find the <a href="https://docs.sylius.com/plugins-development-guide/how-to-create-a-plugin-for-sylius">Plugin Development Guide</a> - it's a great place to start.
+## Manual Installation
 
-For more information about the **Test Application** included in the skeleton, please refer to the [Sylius documentation](https://docs.sylius.com/plugins-development-guide/test-application).
+### 1. Install the Plugin via Composer
 
-## Quickstart Installation
+```bash
+composer require malina141/sylius-wishlist-plugin
+```
 
-Run `composer create-project sylius/plugin-skeleton ProjectName`.
+### 2. Enable the Bundle
 
-### Traditional
+Symfony Flex should add this entry automatically. Check `config/bundles.php` after installation and add it manually if it is missing:
 
-1. From the plugin skeleton root directory, run the following commands:
+```php
+// config/bundles.php
 
-    ```bash
-    (cd vendor/sylius/test-application && yarn install)
-    (cd vendor/sylius/test-application && yarn build)
-    vendor/bin/console assets:install
-   
-    vendor/bin/console doctrine:database:create
-    vendor/bin/console doctrine:migrations:migrate -n
-    # Optionally load data fixtures
-    vendor/bin/console sylius:fixtures:load -n
-    ```
+return [
+    // ...
+    Malina141\SyliusWishlistPlugin\Malina141SyliusWishlistPlugin::class => ['all' => true],
+];
+```
 
-To be able to set up a plugin's database, remember to configure your database credentials in `tests/TestApplication/.env` and `tests/TestApplication/.env.test`.
+### 3. Import Configuration
 
-2. Run your local server:
+```yaml
+# config/packages/_sylius.yaml
 
-      ```bash
-      symfony server:ca:install
-      symfony server:start -d
-      ```
+imports:
+    # ...
+    - { resource: "@Malina141SyliusWishlistPlugin/config/config.yaml" }
+```
 
-3. Open your browser and navigate to `https://localhost:8000`.
+This imports the plugin Twig hooks, grids, and workflow metadata.
 
-### Docker
+### 4. Import routes
 
-1. Execute `make init` to initialize the container and install the dependencies.
+```yaml
+# config/routes.yaml
 
-2. Execute `make database-init` to create the database and run migrations.
+# ...
+malina141_sylius_wishlist:
+    resource: "@Malina141SyliusWishlistPlugin/config/routes.yaml"
+```
 
-3. (Optional) Execute `make load-fixtures` to load the fixtures.
+### 5. Register frontend controllers
 
-4. Your app is available at `http://localhost`.
+On Sylius Standard 2.1+ with Symfony Flex enabled, the plugin frontend package should get registered automatically by Symfony UX package synchronization.
 
-## Usage
+The generated controller configuration should contain:
 
-### Running plugin tests
+```json
+{
+    "controllers": {
+        "@malina141/sylius-wishlist-plugin": {
+            "clipboard-copy": {
+                "enabled": true,
+                "fetch": "lazy"
+            },
+            "wishlist-bulk-actions": {
+                "enabled": true,
+                "fetch": "lazy"
+            }
+        }
+    },
+    "entrypoints": []
+}
+```
 
-  - PHPUnit
+If your application does not use Flex package synchronization, install the frontend package manually:
 
-    ```bash
-    vendor/bin/phpunit
-    ```
+```bash
+yarn add @malina141/sylius-wishlist-plugin@file:vendor/malina141/sylius-wishlist-plugin/assets
+```
 
-  - Behat (non-JS scenarios)
+Then add the controller block above to the controllers file used by your shop Stimulus bridge. In Sylius Standard 2.1+ this is usually `assets/controllers.json`; in Sylius 2.0 it may be `assets/shop/controllers.json`.
 
-    ```bash
-    vendor/bin/behat --strict --tags="~@javascript&&~@mink:chromedriver"
-    ```
+Sylius Standard 2.0 uses a separate Sylius shop asset build that starts the shop Stimulus application. To register the wishlist controllers in that existing application, point the Sylius shop webpack config at your shop controllers file:
 
-  - Behat (JS scenarios)
- 
-    1. [Install Symfony CLI command](https://symfony.com/download).
- 
-    2. Start Headless Chrome:
-    
-      ```bash
-      google-chrome-stable --enable-automation --disable-background-networking --no-default-browser-check --no-first-run --disable-popup-blocking --disable-default-apps --allow-insecure-localhost --disable-translate --disable-extensions --no-sandbox --enable-features=Metal --headless --remote-debugging-port=9222 --window-size=2880,1800 --proxy-server='direct://' --proxy-bypass-list='*' http://127.0.0.1
-      ```
-    
-    3. Install SSL certificates (only once needed) and run test application's webserver on `127.0.0.1:8080`:
-    
-      ```bash
-      symfony server:ca:install
-      APP_ENV=test symfony server:start --port=8080 --daemon
-      ```
-    
-    4. Run Behat:
-    
-      ```bash
-      vendor/bin/behat --strict --tags="@javascript,@mink:chromedriver"
-      ```
-    
-  - Static Analysis
-      
-    - PHPStan
-    
-      ```bash
-      vendor/bin/phpstan analyse -c phpstan.neon -l max src/  
-      ```
+```js
+// webpack.config.js
 
-  - Coding Standard
-  
-    ```bash
-    vendor/bin/ecs check
-    ```
+const shopConfig = SyliusShop.getWebpackConfig(path.resolve(__dirname));
 
-### Opening Sylius with your plugin
+shopConfig.resolve.alias['@symfony/stimulus-bridge/controllers.json'] = path.resolve(__dirname, './assets/shop/controllers.json');
+```
 
-- Using `test` environment:
+### 6. Install and build assets
 
-    ```bash
-    APP_ENV=test vendor/bin/console sylius:fixtures:load -n
-    APP_ENV=test symfony server:start -d
-    ```
-    
-- Using `dev` environment:
+```bash
+bin/console assets:install
 
-    ```bash
-    vendor/bin/console sylius:fixtures:load -n
-    symfony server:start -d
-    ```
+yarn install --force
+yarn encore dev # or yarn encore prod
+```
+
+### 7. Run Doctrine Migrations
+
+The plugin comes with database changes. Check the migrations and then run:
+
+```bash
+bin/console doctrine:migrations:migrate # add `-e prod` for production
+```
+
+### 8. Clear the Symfony Cache
+
+Finally, clear the Symfony cache to ensure changes are applied:
+
+```bash
+bin/console cache:clear
+```
+
+## Docker Installation
+
+```bash
+docker compose exec php composer require malina141/sylius-wishlist-plugin
+docker compose exec php bin/console assets:install
+docker compose run --rm --entrypoint yarn nodejs install --force
+docker compose run --rm --entrypoint yarn nodejs encore dev
+docker compose exec php bin/console doctrine:migrations:migrate
+docker compose exec php bin/console cache:clear
+```
+
+Adjust service names if your project does not use `php` and `nodejs`.
+
+## Configuration
+
+Default configuration can be inspected with:
+
+```bash
+bin/console config:dump-reference malina141_sylius_wishlist
+```
+
+Example override:
+
+```yaml
+malina141_sylius_wishlist:
+    cookie:
+        secure: true
+    bulk_add_to_cart:
+        redirect_route: sylius_shop_cart_summary
+```
+
+## Features
+
+- Shop wishlist page for the current customer or guest wishlist.
+- Add-to-wishlist buttons for product list and product details pages.
+- Wishlist sharing and unsharing.
+- Bulk wishlist item deletion.
+- Bulk add-to-cart from wishlist.
+- Admin wishlist grid and wishlist details view.
+- Shop API resource for wishlist operations.
