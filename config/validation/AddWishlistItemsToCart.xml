@@ -7,7 +7,7 @@
     <class name="Malina141\SyliusWishlistPlugin\Api\Command\Shop\Wishlist\AddWishlistItemsToCart">
         <property name="wishlistItemIds">
             <constraint name="Type">
-                <option name="type">list</option>
+                <option name="type">array</option>
                 <option name="message">malina141_sylius_wishlist.wishlist_item_ids.invalid_type</option>
                 <option name="groups">malina141:shop:wishlist:add_to_cart</option>
             </constraint>
