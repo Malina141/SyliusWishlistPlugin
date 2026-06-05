@@ -51,6 +51,7 @@ final readonly class WishlistContext implements Context
             return $this->sharedStorage->get('wishlist');
         }
 
+        /** @var WishlistInterface $wishlist */
         $wishlist = $this->wishlistFactory->createNew();
         $wishlist->setChannel($this->getChannel());
 

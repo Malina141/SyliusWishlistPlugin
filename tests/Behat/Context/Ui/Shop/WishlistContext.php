@@ -27,12 +27,14 @@ final readonly class WishlistContext implements Context
     #[When('I remove product :product from my wishlist')]
     public function iRemoveProductFromMyWishlist(ProductInterface $product): void
     {
+        Assert::notNull($product->getName());
         $this->indexPage->removeProduct($product->getName());
     }
 
     #[Then('I should see product :product in my wishlist')]
     public function iShouldSeeProductInMyWishlist(ProductInterface $product): void
     {
+        Assert::notNull($product->getName());
         Assert::true(
             $this->indexPage->hasProduct($product->getName()),
             sprintf('Expected to see product "%s" in the wishlist.', $product->getName()),
@@ -42,6 +44,7 @@ final readonly class WishlistContext implements Context
     #[Then('/^I should see "([^"]+)" as the price of (product "[^"]+") in my wishlist$/')]
     public function iShouldSeeAsThePriceOfProductInMyWishlist(string $price, ProductInterface $product): void
     {
+        Assert::notNull($product->getName());
         Assert::same(
             $this->indexPage->getProductPrice($product->getName()),
             $price,

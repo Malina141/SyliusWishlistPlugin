@@ -94,7 +94,7 @@ final class IndexPage extends SyliusPage implements IndexPageInterface
         }
 
         $row = $productNameElement->getParent();
-        while (null !== $row && 'tr' !== $row->getTagName()) {
+        while ('tr' !== $row->getTagName()) {
             $row = $row->getParent();
         }
 
