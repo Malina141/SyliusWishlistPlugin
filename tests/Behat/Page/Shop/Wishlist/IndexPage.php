@@ -6,9 +6,9 @@ namespace Tests\Malina141\SyliusWishlistPlugin\Behat\Page\Shop\Wishlist;
 
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
-use Sylius\Behat\Page\SyliusPage;
+use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 
-final class IndexPage extends SyliusPage implements IndexPageInterface
+final class IndexPage extends SymfonyPage implements IndexPageInterface
 {
     public function getRouteName(): string
     {
