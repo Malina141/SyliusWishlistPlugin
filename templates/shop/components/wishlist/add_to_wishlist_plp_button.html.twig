@@ -7,7 +7,7 @@
             data-live-action-param="remove"
             title="{{ 'malina141_sylius_wishlist.ui.remove_from_wishlist'|trans }}"
         >
-            {{ ux_icon('tabler:heart-filled') }}
+            {{ ux_icon('tabler:heart-filled', { class: 'icon icon-xs' }) }}
         </button>
     {% else %}
         <button
@@ -17,7 +17,7 @@
             data-live-action-param="add"
             title="{{ 'malina141_sylius_wishlist.ui.add_to_wishlist'|trans }}"
         >
-            {{ ux_icon('tabler:heart') }}
+            {{ ux_icon('tabler:heart', { class: 'icon icon-xs' }) }}
         </button>
     {% endif %}
 </div>
