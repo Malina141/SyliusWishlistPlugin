@@ -50,6 +50,9 @@
         "symfony/web-profiler-bundle": "^6.4 || ^7.4",
         "symfony/webpack-encore-bundle": "^2.2"
     },
+    "conflict": {
+        "api-platform/symfony": ">=4.3.8 <4.4"
+    },
     "config": {
         "sort-packages": true,
         "allow-plugins": {
