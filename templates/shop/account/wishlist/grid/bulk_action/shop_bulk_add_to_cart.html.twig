@@ -2,7 +2,7 @@
 <form method="POST" action="{{ url }}" class="m-0" data-controller="malina141--sylius-wishlist-plugin--wishlist-bulk-actions">
     <input type="hidden" name="_csrf_token" value="{{ csrf_token('bulk_wishlist_add_to_cart') }}">
 
-    <button type="submit" class="btn btn-sm btn-outline-primary" disabled>
+    <button type="submit" class="btn btn-sm btn-outline-primary" disabled {{ sylius_test_html_attribute('bulk-add-to-cart-button') }}>
         {{ ux_icon('tabler:shopping-cart', { class: 'icon icon-sm' }) }}
         {{ action.label|default('sylius.ui.add_to_cart')|trans }}
     </button>

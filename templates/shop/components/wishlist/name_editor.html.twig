@@ -1,6 +1,6 @@
 <div {{ attributes }}>
     {% if flashMessage %}
-        <div class="alert alert-success">{{ flashMessage|trans }}</div>
+        <div class="alert alert-success" {{ sylius_test_html_attribute('wishlist-name-success-message') }}>{{ flashMessage|trans }}</div>
     {% endif %}
 
     <div class="d-inline-flex">
@@ -13,7 +13,8 @@
                                 'attr': {
                                     'class': 'form-control form-control-lg' ~ (form.name.vars.errors|length > 0 ? ' is-invalid' : ''),
                                     'placeholder': ('malina141_sylius_wishlist.ui.name'|trans),
-                                    'autofocus': true
+                                    'autofocus': true,
+                                    'data-test-wishlist-name-input': ''
                                 }
                             }) }}
                             {{ form_label(form.name) }}
@@ -30,6 +31,7 @@
                         <button
                             type="submit"
                             class="btn btn-outline-{{ form.name.vars.errors|length > 0 ? 'danger' : 'secondary' }} h-100"
+                            {{ sylius_test_html_attribute('wishlist-name-save-button') }}
                         >
                             {{ 'malina141_sylius_wishlist.ui.save'|trans }}
                         </button>
@@ -37,12 +39,13 @@
                 </div>
             {{ form_end(form) }}
         {% else %}
-            <h2>{{ wishlist.name ?: ('malina141_sylius_wishlist.ui.default_name'|trans) }}</h2>
+            <h2 {{ sylius_test_html_attribute('wishlist-name-display') }}>{{ wishlist.name ?: ('malina141_sylius_wishlist.ui.default_name'|trans) }}</h2>
             <button
                 data-action="live#action"
                 data-live-action-param="activateEditing"
                 class="btn btn-link"
                 title="{{ 'malina141_sylius_wishlist.ui.edit_name'|trans }}"
+                {{ sylius_test_html_attribute('wishlist-name-edit-button') }}
             >
                 {{ ux_icon('tabler:edit', { class: 'icon icon-sm' }) }}
             </button>

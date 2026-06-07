@@ -3,8 +3,6 @@ malina141_sylius_wishlist:
         title: 'Wishlist'
         add_to_wishlist: 'Add to wishlist'
         remove_from_wishlist: 'Remove from wishlist'
-        shared_successfully: 'Wishlist has been shared successfully!'
-        unshared_successfully: 'Wishlist has been unshared successfully!'
         share: 'Share wishlist'
         shared: 'Shared'
         shared_title: 'Shared wishlist'

@@ -2,6 +2,10 @@ imports:
     - { resource: "@Malina141SyliusWishlistPlugin/config/config.yaml" }
     - { resource: "services_test.php" }
 
+malina141_sylius_wishlist:
+    cookie:
+        secure: false
+
 twig:
     paths:
         '%kernel.project_dir%/../../../tests/TestApplication/templates': ~

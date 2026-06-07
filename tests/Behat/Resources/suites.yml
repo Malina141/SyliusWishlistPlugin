@@ -4,21 +4,34 @@ default:
           contexts:
               - sylius.behat.context.hook.bad_gateway
               - sylius.behat.context.hook.doctrine_orm
+              - sylius.behat.context.hook.guest_cart
               - sylius.behat.context.hook.session
 
               - sylius.behat.context.transform.channel
               - sylius.behat.context.transform.currency
+              - sylius.behat.context.transform.customer
               - sylius.behat.context.transform.lexical
               - sylius.behat.context.transform.product
+              - sylius.behat.context.transform.product_option
+              - sylius.behat.context.transform.product_option_value
+              - sylius.behat.context.transform.product_variant
               - sylius.behat.context.transform.shared_storage
+              - sylius.behat.context.transform.taxon
 
+              - sylius.behat.context.setup.cart
               - sylius.behat.context.setup.channel
               - sylius.behat.context.setup.currency
+              - sylius.behat.context.setup.customer
               - sylius.behat.context.setup.product
+              - sylius.behat.context.setup.product_option
               - sylius.behat.context.setup.shop_security
+              - sylius.behat.context.setup.taxonomy
               - malina141_sylius_wishlist.behat.context.setup.wishlist
 
               - sylius.behat.context.ui.channel
+              - sylius.behat.context.ui.shop.cart
+              - sylius.behat.context.ui.shop.login
+              - sylius.behat.context.ui.shop.product
               - malina141_sylius_wishlist.behat.context.ui.shop.wishlist
 
           filters:

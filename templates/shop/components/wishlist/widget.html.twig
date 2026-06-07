@@ -1,8 +1,8 @@
-<div class="col-auto position-relative" {{ attributes }}>
+<div class="col-auto position-relative" {{ attributes }} {{ sylius_test_html_attribute('wishlist-widget') }}>
     <a href="{{ path('malina141_sylius_wishlist_shop_index') }}" class="btn btn-icon btn-transparent px-0 position-relative" aria-label="wishlist">
         {{ ux_icon('tabler:heart', { class: 'icon' }) }}
         {% if this.wishlistCount > 0 %}
-            <span class="position-absolute top-0 start-0 badge rounded-pill bg-primary">
+            <span class="position-absolute top-0 start-0 badge rounded-pill bg-primary" {{ sylius_test_html_attribute('wishlist-widget-count') }}>
                 {{ this.wishlistCount }}
             </span>
         {% endif %}

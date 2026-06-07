@@ -56,7 +56,6 @@ malina141_sylius_wishlist_shop_share:
                 transition: share
             redirect:
                 route: malina141_sylius_wishlist_shop_index
-            flash: malina141_sylius_wishlist.ui.shared_successfully
 
 malina141_sylius_wishlist_shop_unshare:
     path: /{_locale}/wishlist/unshare
@@ -73,7 +72,6 @@ malina141_sylius_wishlist_shop_unshare:
                 transition: unshare
             redirect:
                 route: malina141_sylius_wishlist_shop_index
-            flash: malina141_sylius_wishlist.ui.unshared_successfully
 
 malina141_sylius_wishlist_shop_share_show:
     path: /{_locale}/wishlist/share/{token}

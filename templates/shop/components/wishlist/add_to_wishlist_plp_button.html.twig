@@ -1,4 +1,4 @@
-<div {{ attributes }} class="d-flex justify-content-end mt-2">
+<div {{ attributes }} class="d-flex justify-content-end mt-2" {{ sylius_test_html_attribute('wishlist-button') }}>
     {% if this.isInWishlist %}
         <button
             type="button"
@@ -6,6 +6,7 @@
             data-action="live#action"
             data-live-action-param="remove"
             title="{{ 'malina141_sylius_wishlist.ui.remove_from_wishlist'|trans }}"
+            {{ sylius_test_html_attribute('wishlist-remove-button') }}
         >
             {{ ux_icon('tabler:heart-filled', { class: 'icon icon-xs' }) }}
         </button>
@@ -16,6 +17,7 @@
             data-action="live#action"
             data-live-action-param="add"
             title="{{ 'malina141_sylius_wishlist.ui.add_to_wishlist'|trans }}"
+            {{ sylius_test_html_attribute('wishlist-add-button') }}
         >
             {{ ux_icon('tabler:heart', { class: 'icon icon-xs' }) }}
         </button>

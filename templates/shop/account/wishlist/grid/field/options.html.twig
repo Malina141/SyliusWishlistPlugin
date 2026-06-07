@@ -1,7 +1,7 @@
 {% if data.productVariant.optionValues|length > 0 %}
     {% for optionValue in data.productVariant.optionValues %}
-        <div class="small text-body-tertiary">
-            {{ optionValue.name }}: {{ optionValue.value }}
+        <div class="small text-body-tertiary" {{ sylius_test_html_attribute('wishlist-product-option') }}>
+            {{ optionValue.option.name }}: {{ optionValue.value }}
         </div>
     {% endfor %}
 {% else %}

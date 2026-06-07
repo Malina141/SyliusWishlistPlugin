@@ -9,7 +9,9 @@ use Sylius\Bundle\UiBundle\Twig\Component\TemplatePropTrait;
 use Sylius\TwigHooks\LiveComponent\HookableLiveComponentTrait;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 use Symfony\UX\LiveComponent\Attribute\LiveListener;
+use Symfony\UX\LiveComponent\Attribute\LiveProp;
 use Symfony\UX\LiveComponent\DefaultActionTrait;
+use Symfony\UX\TwigComponent\Attribute\PreMount;
 
 #[AsLiveComponent]
 final class WishlistWidgetComponent
@@ -18,13 +20,27 @@ final class WishlistWidgetComponent
     use HookableLiveComponentTrait;
     use TemplatePropTrait;
 
+    #[LiveProp]
+    public int $wishlistCount = 0;
+
     public function __construct(
         private readonly WishlistContextInterface $wishlistContext,
     ) {
     }
 
+    #[PreMount]
+    public function initializeWishlistCount(): void
+    {
+        $this->wishlistCount = $this->countWishlistItems();
+    }
+
     #[LiveListener('wishlist_updated')]
-    public function wishlistCount(): int
+    public function refreshWishlistCount(): void
+    {
+        $this->wishlistCount = $this->countWishlistItems();
+    }
+
+    private function countWishlistItems(): int
     {
         $wishlist = $this->wishlistContext->getWishlist();
 

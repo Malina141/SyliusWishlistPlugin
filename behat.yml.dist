@@ -27,7 +27,7 @@ default:
                     symfony: ~
                 chrome:
                     chrome:
-                        api_url: http://127.0.0.1:9222
+                        api_url: "%env(BEHAT_CHROME_API_URL)%"
                         validate_certificate: false
             show_auto: false
 

@@ -3,7 +3,7 @@
 {% block title %}{{ 'malina141_sylius_wishlist.ui.shared_title'|trans }} | {{ parent() }}{% endblock %}
 
 {% block content %}
-    <div class="container my-5">
+    <div class="container my-5" {{ sylius_test_html_attribute('shared-wishlist-page') }}>
         <div class="row">
             <div class="col-12">
                 <h1 class="mb-4">{{ 'malina141_sylius_wishlist.ui.shared_title'|trans }}</h1>

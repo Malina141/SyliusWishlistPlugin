@@ -3,6 +3,7 @@
 DOCKER_COMPOSE ?= docker compose
 DOCKER_USER ?= "$(shell id -u):$(shell id -g)"
 ENV ?= "dev"
+BEHAT_ENV ?= "test"
 
 init:
 	@make -s docker-compose-check
@@ -67,7 +68,8 @@ phpunit-coverage:
 	@ENV=$(ENV) DOCKER_USER=$(DOCKER_USER) PHP_IMAGE="ghcr.io/sylius/sylius-php:8.3-xdebug-alpine" $(DOCKER_COMPOSE) run --rm -e XDEBUG_MODE=coverage php vendor/bin/phpunit --coverage-text --coverage-html coverage/html --coverage-clover coverage/clover.xml
 
 behat:
-	@ENV=$(ENV) DOCKER_USER=root $(DOCKER_COMPOSE) run --rm php vendor/bin/behat
+	@ENV=$(BEHAT_ENV) DOCKER_USER=$(DOCKER_USER) $(DOCKER_COMPOSE) up -d php nginx chrome
+	@ENV=$(BEHAT_ENV) DOCKER_USER=root $(DOCKER_COMPOSE) run --rm php vendor/bin/behat
 
 rename:
 	@php bin/rename-plugin.php

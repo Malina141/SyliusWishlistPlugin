@@ -5,10 +5,14 @@ services:
         depends_on:
             mysql:
                 condition: service_healthy
+            chrome:
+                condition: service_healthy
         environment:
             # You can move these environment variables to your .env.local file
             APP_ENV: ${ENV:-prod}
             APP_SECRET: EDITME
+            BEHAT_BASE_URL: ${BEHAT_BASE_URL:-http://nginx/}
+            BEHAT_CHROME_API_URL: ${BEHAT_CHROME_API_URL:-http://chrome:9222}
             DATABASE_URL: "mysql://root@mysql/sylius_%kernel.environment%"
             MAILER_DSN: smtp://mailhog:1025
             MESSENGER_TRANSPORT_DSN: doctrine://default
@@ -66,6 +70,16 @@ services:
     mailhog:
         ports:
             - "8025:8025"
+    chrome:
+        image: chromedp/headless-shell:stable
+        healthcheck:
+            test: ["CMD-SHELL", "bash -ec 'exec 3<>/dev/tcp/127.0.0.1/9222; printf \"GET /json/version HTTP/1.1\\r\\nHost: 127.0.0.1\\r\\nConnection: close\\r\\n\\r\\n\" >&3; grep -q \"Browser\" <&3'"]
+            interval: 1s
+            timeout: 5s
+            retries: 30
+        shm_size: 2gb
+        ports:
+            - "9222:9222"
 
 volumes:
     mysql-data:
