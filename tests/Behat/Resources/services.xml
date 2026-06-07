@@ -38,6 +38,15 @@
         </service>
 
         <service
+            id="malina141_sylius_wishlist.behat.context.ui.admin.wishlist"
+            class="Tests\Malina141\SyliusWishlistPlugin\Behat\Context\Ui\Admin\WishlistContext"
+        >
+            <argument type="service" id="malina141_sylius_wishlist.behat.page.admin.wishlist.index" />
+            <argument type="service" id="malina141_sylius_wishlist.behat.page.admin.wishlist.show" />
+            <argument type="service" id="sylius.resolver.product_variant.default" />
+        </service>
+
+        <service
             id="malina141_sylius_wishlist.behat.element.shop.wishlist_widget"
             class="Tests\Malina141\SyliusWishlistPlugin\Behat\Element\Shop\WishlistWidgetElement"
             parent="sylius.behat.element"
@@ -63,6 +72,22 @@
         <service
             id="malina141_sylius_wishlist.behat.page.shop.wishlist.shared_show"
             class="Tests\Malina141\SyliusWishlistPlugin\Behat\Page\Shop\Wishlist\SharedShowPage"
+            parent="sylius.behat.symfony_page"
+            public="false"
+        />
+
+        <service
+            id="malina141_sylius_wishlist.behat.page.admin.wishlist.index"
+            class="Tests\Malina141\SyliusWishlistPlugin\Behat\Page\Admin\Wishlist\IndexPage"
+            parent="sylius.behat.symfony_page"
+            public="false"
+        >
+            <argument type="service" id="sylius.behat.table_accessor" />
+        </service>
+
+        <service
+            id="malina141_sylius_wishlist.behat.page.admin.wishlist.show"
+            class="Tests\Malina141\SyliusWishlistPlugin\Behat\Page\Admin\Wishlist\ShowPage"
             parent="sylius.behat.symfony_page"
             public="false"
         />
