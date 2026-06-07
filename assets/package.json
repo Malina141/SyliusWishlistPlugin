@@ -1,7 +1,7 @@
 {
     "name": "@malina141/sylius-wishlist-plugin",
     "license": "MIT",
-    "version": "2.0.0",
+    "version": "1.0.0",
     "description": "Frontend assets for Malina141 Sylius Wishlist Plugin",
     "keywords": [
         "symfony-ux"

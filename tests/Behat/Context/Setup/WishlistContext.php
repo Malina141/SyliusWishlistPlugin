@@ -176,7 +176,7 @@ final readonly class WishlistContext implements Context
 
     private function getCustomer(string $email): CustomerInterface
     {
-        $customer = $this->customerRepository->findOneByEmail($email);
+        $customer = $this->customerRepository->findOneBy(['email' => $email]);
 
         Assert::isInstanceOf($customer, CustomerInterface::class);
 

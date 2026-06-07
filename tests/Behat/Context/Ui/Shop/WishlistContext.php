@@ -354,7 +354,7 @@ final class WishlistContext extends RawMinkContext implements Context
 
     private function rememberPublicShareTokenFromWishlistPage(): void
     {
-        $path = parse_url($this->indexPage->getPublicWishlistLink(), PHP_URL_PATH);
+        $path = parse_url($this->indexPage->getPublicWishlistLink(), \PHP_URL_PATH);
         Assert::string($path);
 
         $token = basename($path);
@@ -381,5 +381,4 @@ final class WishlistContext extends RawMinkContext implements Context
             'token' => $this->sharedStorage->get($storageKey),
         ]);
     }
-
 }

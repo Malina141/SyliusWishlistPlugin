@@ -11,6 +11,7 @@ use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 use Sylius\Behat\Service\Accessor\TableAccessorInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Symfony\Component\Routing\RouterInterface;
+use Webmozart\Assert\Assert;
 
 final class IndexPage extends SymfonyPage implements IndexPageInterface
 {
@@ -51,7 +52,10 @@ final class IndexPage extends SymfonyPage implements IndexPageInterface
 
     public function filterByChannel(ChannelInterface $channel): void
     {
-        $this->getElement('channel_filter')->selectOption($channel->getName());
+        $channelName = $channel->getName();
+        Assert::string($channelName);
+
+        $this->getElement('channel_filter')->selectOption($channelName);
         $this->getElement('filter')->press();
     }
 

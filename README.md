@@ -2,11 +2,21 @@
 
 Wishlist plugin for Sylius 2 applications.
 
+## Features
+
+- Shop wishlist page for the current customer or guest wishlist.
+- Add-to-wishlist buttons for product list and product details pages.
+- Wishlist sharing and unsharing.
+- Bulk wishlist item deletion.
+- Bulk add-to-cart from wishlist.
+- Admin wishlist grid and wishlist details view.
+- Shop API resource for wishlist operations.
+
 ## Compatibility
 
 Sylius version | Symfony version | PHP version |
  --- | --- | --- |
-^2.0 | ^6.4 or ^7.4 | ^8.3 |
+^2.1 | ^6.4 or ^7.4 | ^8.3 |
 
 ## Manual Installation
 
@@ -149,12 +159,3 @@ malina141_sylius_wishlist:
         redirect_route: sylius_shop_cart_summary
 ```
 
-## Features
-
-- Shop wishlist page for the current customer or guest wishlist.
-- Add-to-wishlist buttons for product list and product details pages.
-- Wishlist sharing and unsharing.
-- Bulk wishlist item deletion.
-- Bulk add-to-cart from wishlist.
-- Admin wishlist grid and wishlist details view.
-- Shop API resource for wishlist operations.
