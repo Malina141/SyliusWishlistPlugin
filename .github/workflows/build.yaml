@@ -73,6 +73,8 @@ jobs:
 
         env:
             APP_ENV: test
+            BEHAT_BASE_URL: http://127.0.0.1:8080/
+            BEHAT_CHROME_API_URL: http://127.0.0.1:9222
 
         steps:
             -
