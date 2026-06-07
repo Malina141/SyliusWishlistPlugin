@@ -41,7 +41,7 @@ sylius_grid:
                     type: string
                     label: sylius.ui.search
                     options:
-                        fields: [name, id]
+                        fields: [name]
                 channel:
                     type: entity
                     label: sylius.ui.channel
